@@ -2,6 +2,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: var(--font-roboto);
 }
 
 body {
@@ -9,16 +10,36 @@ body {
 
 a {
 	text-decoration: none;
+	color: var(--black);
 }
 
 button,
 input {
 	border: none;
 	outline: none;
+	background: transparent;
 }
 
 ul,
 ol,
 li {
 	list-style: none;
+}
+
+.wrapper {
+	max-width: 1742px;
+	margin: 0 auto;
+
+	&.medium {
+		max-width: 1280px;
+	}
+
+	&.small {
+		max-width: 1120px;
+	}
+}
+
+:root {
+	--black: #222222;
+	--gray: #717171;
 }
