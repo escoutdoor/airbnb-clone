@@ -9,3 +9,61 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  email       String   @unique
+  name        String
+  password    String
+  role        Role     @default(USER)
+
+  reviews     Review[]
+}
+
+model Apartment {
+  id              String      @id @default(uuid())
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  name            String      @unique
+  images          String[]    @default([])
+
+  reviews         Review[]
+
+  category        Category    @relation(fields: [categoryName], references: [id])
+  categoryName    String      @map("category_name")
+}
+
+model Review {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  text          String
+  rating        Int
+
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String      @map("user_id")
+
+  apartment     Apartment   @relation(fields: [apartmentId], references: [id])
+  apartmentId   String      @map("apartment_id")
+}
+
+model Category {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt  @map("updated_at")
+
+  name          String      @unique
+  image         String 
+
+  apartments    Apartment[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
