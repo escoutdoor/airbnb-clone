@@ -1,14 +1,13 @@
 import styles from './header.module.scss'
-import { LayoutSize } from '../Layout'
 import Link from 'next/link'
 import Image from 'next/image'
 import SearchBar from './search-bar/SearchBar'
 import Actions from './actions/Actions'
 
-const Header = ({ size = 'large' }: { size: LayoutSize }) => {
+const Header = ({ isSearchPage }: { isSearchPage: boolean }) => {
 	return (
 		<div className={styles.header}>
-			<div className={`wrapper ${size !== 'large' ? styles[size] : ''}`}>
+			<div className="wrapper">
 				<div className={styles.content}>
 					<Link href={'/'}>
 						<Image
@@ -18,7 +17,7 @@ const Header = ({ size = 'large' }: { size: LayoutSize }) => {
 							alt="logo airbnb.svg"
 						/>
 					</Link>
-					<SearchBar />
+					{isSearchPage && <SearchBar />}
 					<Actions />
 				</div>
 			</div>

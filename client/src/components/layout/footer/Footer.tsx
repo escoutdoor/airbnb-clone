@@ -1,10 +1,9 @@
 import styles from './footer.module.scss'
-import { LayoutSize } from '../Layout'
 
-const Footer = ({ size = 'large' }: { size: LayoutSize }) => {
+const Footer = () => {
 	return (
 		<div className={styles.footer}>
-			<div className={`wrapper ${size !== 'large' ? styles[size] : ''}`}>
+			<div className="wrapper">
 				<p className={styles.text}>
 					Airbnb clone by Ivan Popov &copy; 2023 escoutdoor
 				</p>
