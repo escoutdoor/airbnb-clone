@@ -1,17 +1,25 @@
+'use client'
+
 import styles from './layout.module.scss'
 import { FC, ReactNode } from 'react'
 import Footer from './footer/Footer'
 import Header from './header/Header'
+import { ICategory } from '@/shared/interfaces/category.interface'
 
 export type LayoutSize = 'large' | 'medium' | 'small'
 
-const Layout: FC<{ children: ReactNode; size?: LayoutSize }> = ({
-	children,
-	size = 'large',
-}) => {
+interface ILayout {
+	size?: LayoutSize
+	children: ReactNode
+}
+
+const Layout: FC<ILayout> = ({ children, size = 'large' }) => {
 	return (
 		<div className={styles.layout}>
-			<Header size={size} />
+			<div className={styles.navbar}>
+				<Header size={size} />
+			</div>
+
 			<main>
 				<div
 					className={`wrapper ${

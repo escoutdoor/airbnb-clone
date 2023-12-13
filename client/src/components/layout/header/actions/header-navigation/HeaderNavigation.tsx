@@ -19,6 +19,7 @@ const HeaderNavigation: FC = () => {
 					? `${styles.navigation} ${styles.active}`
 					: styles.navigation
 			}
+			ref={ref}
 		>
 			<button
 				className={styles.button}
@@ -33,7 +34,7 @@ const HeaderNavigation: FC = () => {
 					alt="avatar"
 				/>
 			</button>
-			<ul ref={ref} className={styles.menu}>
+			<ul className={styles.menu}>
 				{headerMenu.map(item => (
 					<HeaderMenuItem key={item.id} item={item} />
 				))}

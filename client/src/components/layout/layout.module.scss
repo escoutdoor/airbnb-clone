@@ -1,4 +1,9 @@
 .layout {
+	.navbar {
+		position: sticky;
+		top: 0;
+	}
+
 	> main {
 		min-height: 100vh;
 	}

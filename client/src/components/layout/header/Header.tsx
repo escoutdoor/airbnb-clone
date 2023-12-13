@@ -1,8 +1,7 @@
-'use client'
-import Link from 'next/link'
 import styles from './header.module.scss'
-import Image from 'next/image'
 import { LayoutSize } from '../Layout'
+import Link from 'next/link'
+import Image from 'next/image'
 import SearchBar from './search-bar/SearchBar'
 import Actions from './actions/Actions'
 

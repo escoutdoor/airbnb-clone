@@ -1,6 +1,6 @@
+import './globals.scss'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import './globals.scss'
 import Provider from '@/utils/provider'
 import Layout from '@/components/layout/Layout'
 
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 	},
 }
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode
