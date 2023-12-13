@@ -20,9 +20,7 @@ const CategoryList: FC<{ categories: ICategory[] }> = ({ categories }) => {
 	return (
 		<ul
 			className={
-				scrollPosition > 40
-					? `${styles.list} ${styles.active}`
-					: styles.list
+				scrollPosition ? `${styles.list} ${styles.active}` : styles.list
 			}
 		>
 			<div className="wrapper">

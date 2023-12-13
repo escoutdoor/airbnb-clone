@@ -1,0 +1,9 @@
+.rating {
+	display: flex;
+	gap: 4px;
+	color: var(--black);
+
+	> svg {
+		font-size: 18px;
+	}
+}

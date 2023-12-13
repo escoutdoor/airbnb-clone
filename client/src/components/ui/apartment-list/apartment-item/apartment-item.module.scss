@@ -1,0 +1,30 @@
+.item {
+	.swiper {
+		.slide {
+			.image {
+				object-fit: cover;
+			}
+		}
+
+		overflow: hidden;
+		border-radius: 16px;
+	}
+
+	.card {
+		display: flex;
+
+		.text {
+			width: 100%;
+
+			.price {
+				margin-top: 6px;
+
+				> p {
+					display: inline;
+				}
+			}
+		}
+
+		margin-top: 12px;
+	}
+}

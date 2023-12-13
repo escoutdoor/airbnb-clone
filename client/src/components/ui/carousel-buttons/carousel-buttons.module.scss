@@ -1,0 +1,44 @@
+.buttons {
+	display: flex;
+	position: absolute;
+	justify-content: space-between;
+	z-index: 99;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+
+	.button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		background-color: #fff;
+		border-radius: 50%;
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		transition: 0.2s ease;
+		z-index: 100;
+		cursor: pointer;
+
+		&:disabled {
+			opacity: 0.8;
+			cursor: auto;
+		}
+
+		&.prev {
+			margin-left: 5px;
+		}
+
+		&.next {
+			margin-right: 5px;
+		}
+
+		&:hover {
+			background-color: #f3f3f3;
+		}
+
+		.icon {
+			font-size: 16px;
+		}
+	}
+}
