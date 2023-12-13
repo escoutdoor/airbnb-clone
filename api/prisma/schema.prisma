@@ -21,6 +21,20 @@ model User {
   role        Role     @default(USER)
 
   reviews     Review[]
+  wishlists   Wishlist[]
+}
+
+model Wishlist {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  name          String
+
+  apartments    Apartment[]
+
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String      @map("user_id")
 }
 
 model Apartment {
@@ -32,6 +46,7 @@ model Apartment {
   images          String[]    @default([])
 
   reviews         Review[]
+  wishlists       Wishlist[]
 
   category        Category    @relation(fields: [categoryName], references: [id])
   categoryName    String      @map("category_name")
