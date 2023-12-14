@@ -1,3 +1,16 @@
-export default function ApartmentPage() {
-	return 'Apartment'
+'use client'
+
+import Apartment from '@/components/pages/apartment/Apartment'
+import { useApartment } from '@/hooks/useApartment'
+
+export default function ApartmentPage({
+	params: { id },
+}: {
+	params: { id: string }
+}) {
+	const { apartment, isLoading } = useApartment(id)
+
+	if (apartment) {
+		return <Apartment apartment={apartment} />
+	}
 }
