@@ -1,7 +1,32 @@
 .item {
+	position: relative;
+
+	.wishlist__button {
+		cursor: pointer;
+		width: 32px;
+		height: 32px;
+
+		top: 12px;
+		right: 12px;
+		z-index: 10;
+		position: absolute;
+
+		.icon {
+			font-size: 22px;
+			color: #fff;
+
+			&.active {
+				color: #ff6b6c;
+			}
+		}
+	}
+
 	.swiper {
 		.slide {
+			width: 100%;
+
 			.image {
+				width: 100%;
 				object-fit: cover;
 			}
 		}

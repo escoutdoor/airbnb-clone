@@ -21,6 +21,7 @@ const ImageCarousel: FC<{ images: string[] }> = ({ images }) => {
 						height={256}
 						alt={img}
 						className={styles.image}
+						draggable={false}
 					/>
 				</SwiperSlide>
 			))}

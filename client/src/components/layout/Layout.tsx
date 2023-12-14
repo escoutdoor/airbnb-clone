@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { ICategory } from '@/shared/interfaces/category.interface'
 import Footer from './footer/Footer'
 import Header from './header/Header'
-import CategoryList from '../ui/category-list/CategoryList'
+import FilterBar from './filter-bar/FilterBar'
 
 interface ILayout {
 	children: ReactNode
@@ -19,10 +19,10 @@ const Layout: FC<ILayout> = ({ children, categories }) => {
 	const isSearchPage = pathname.includes('/search') || pathname === '/'
 
 	return (
-		<div className={styles.layout}>
+		<div className={styles.container}>
 			<div className={styles.navbar}>
 				<Header isSearchPage={isSearchPage} />
-				{isSearchPage ? <CategoryList categories={categories} /> : null}
+				{isSearchPage ? <FilterBar categories={categories} /> : null}
 			</div>
 
 			<main>{children}</main>

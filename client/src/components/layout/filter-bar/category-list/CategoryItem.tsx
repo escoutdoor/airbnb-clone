@@ -1,7 +1,7 @@
 import styles from './category-list.module.scss'
 import { FC } from 'react'
 import { ICategory } from '@/shared/interfaces/category.interface'
-import SmallText from '../small-text/SmallText'
+import SmallText from '../../../ui/small-text/SmallText'
 import Image from 'next/image'
 
 interface ICategoryItemProps {

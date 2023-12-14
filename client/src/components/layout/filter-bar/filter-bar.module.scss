@@ -1,0 +1,30 @@
+.bar {
+	transition: box-shadow 0.2s ease-in-out;
+
+	&.active {
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px,
+			rgba(0, 0, 0, 0.13) 0px 2px 4px;
+	}
+
+	.content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+
+		.button {
+			padding: 12px 20px;
+			cursor: pointer;
+			border: 1px solid #ddd;
+			border-radius: 12px;
+
+			display: flex;
+			align-items: center;
+			gap: 4px;
+
+			.icon {
+				font-size: 14px;
+			}
+		}
+	}
+}

@@ -6,7 +6,7 @@ import { NextPage } from 'next'
 
 const Home: NextPage = () => {
 	return (
-		<div className={styles.home}>
+		<div className={styles.page}>
 			<div className="wrapper">
 				<div className={styles.content}>
 					<ApartmentList
