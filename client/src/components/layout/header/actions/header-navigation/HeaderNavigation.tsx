@@ -27,7 +27,7 @@ const HeaderNavigation: FC = () => {
 			>
 				<GiHamburgerMenu className={styles.icon} />
 				<Image
-					src={`/avatars/${profile.avatarPath || 'default.jpg'}`}
+					src={`/avatars/${profile.avatar || 'default.jpg'}`}
 					width={32}
 					height={32}
 					className={styles.avatar}
