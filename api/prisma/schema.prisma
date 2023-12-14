@@ -11,17 +11,41 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id            String    @id @default(uuid())
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
 
-  email       String   @unique
-  name        String
-  password    String
-  role        Role     @default(USER)
+  firstName     String    @map("first_name")
+  surName       String    @map("sur_name")
+  dateOfBirth   DateTime  @map("date_of_birth")
+  avatar        String    @default("https://avatars.githubusercontent.com/u/116205876?s=400&u=af8933ecc5b56551e632bb8b600e941f86c1a261&v=4")
 
-  reviews     Review[]
-  wishlists   Wishlist[]
+  phoneNumber   String    @map("phone_number")
+  email         String    @unique
+  password      String
+  role          Role      @default(USER)
+
+  reviews       Review[]
+  wishlists     Wishlist[]
+  reservations  Reservation[]
+}
+
+model Reservation {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  startDate     DateTime    @map("start_date")
+  endDate       DateTime    @map("end_date")
+
+  totalPrice    Int         @map("total_price")
+  guests        Int
+
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String      @map("user_id")
+
+  apartment     Apartment   @relation(fields: [apartmentId], references: [id])
+  apartmentId   String      @map("apartment_id")
 }
 
 model Wishlist {
@@ -44,12 +68,38 @@ model Apartment {
 
   name            String      @unique
   images          String[]    @default([])
+  description     String[]
+
+  type            String
+  price           Int         
+
+  beds            Int         
+  bedrooms        Int        
+  bathrooms       Int         
+  maxGuests       Int         @map("max_guests")
+
+  hostLanguages   String[]    @default([]) @map("host_languages")
+
+  location        Location?
 
   reviews         Review[]
   wishlists       Wishlist[]
+  reservations    Reservation[]
 
   category        Category    @relation(fields: [categoryName], references: [id])
   categoryName    String      @map("category_name")
+}
+
+model Location {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  latitude      Float
+  longitude     Float
+
+  apartment     Apartment @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
+  apartmentId   String @unique @map("apartment_id")
 }
 
 model Review {
@@ -58,7 +108,7 @@ model Review {
   updatedAt     DateTime    @updatedAt @map("updated_at")
 
   text          String
-  rating        Int
+  rating        Int         @default(0)
 
   user          User        @relation(fields: [userId], references: [id])
   userId        String      @map("user_id")
@@ -82,3 +132,4 @@ enum Role {
   USER
   ADMIN
 }
+
