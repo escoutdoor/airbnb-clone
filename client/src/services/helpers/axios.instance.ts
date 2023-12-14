@@ -6,7 +6,3 @@ export const instance = axios.create({
 		'Content-Type': 'application/json',
 	},
 })
-
-export const defaultInstance = axios.create({
-	baseURL: process.env.API_URL,
-})

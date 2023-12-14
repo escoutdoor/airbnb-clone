@@ -1,5 +1,14 @@
 import { IUser } from '@/shared/interfaces/user.interface'
 
 export const useProfile = () => {
-	return { profile: {} as IUser }
+	return {
+		profile: {
+			wishlists: [
+				{
+					id: '1',
+					apartments: [{ id: '1', images: ['asa'], name: '' }],
+				},
+			],
+		} as IUser,
+	}
 }

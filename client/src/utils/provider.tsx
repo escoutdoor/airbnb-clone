@@ -1,6 +1,7 @@
 'use client'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
 import { FC, PropsWithChildren } from 'react'
 
 const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
