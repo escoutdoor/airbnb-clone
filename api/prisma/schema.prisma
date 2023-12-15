@@ -66,7 +66,7 @@ model Apartment {
   createdAt       DateTime    @default(now()) @map("created_at")
   updatedAt       DateTime    @updatedAt @map("updated_at")
 
-  name            String      @unique
+  name            String
   images          String[]    @default([])
   description     String[]
 
@@ -86,8 +86,8 @@ model Apartment {
   wishlists       Wishlist[]
   reservations    Reservation[]
 
-  category        Category    @relation(fields: [categoryName], references: [id])
-  categoryName    String      @map("category_name")
+  category        Category    @relation(fields: [categoryId], references: [id])
+  categoryId      String      @map("category_id")
 }
 
 model Location {
