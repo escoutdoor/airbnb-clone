@@ -1,6 +1,7 @@
 import {
 	IsDateString,
 	IsEmail,
+	IsJWT,
 	IsOptional,
 	IsPhoneNumber,
 	IsString,
@@ -59,4 +60,14 @@ export class RegisterDto extends LoginDto {
 	})
 	@IsPhoneNumber()
 	phoneNumber: string
+}
+
+export class AccessTokenDto {
+	@IsString({
+		message: 'Refresh token must be a string',
+	})
+	@IsJWT({
+		message: 'Refresh token must be a JWT',
+	})
+	refreshToken: string
 }
