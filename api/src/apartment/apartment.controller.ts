@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common'
 import { ApartmentService } from './apartment.service'
 import { ApartmentDto } from './apartment.dto'
+import { Auth } from 'src/auth/decorators/auth.decorator'
 
 @Controller('apartments')
 export class ApartmentController {
@@ -27,12 +28,14 @@ export class ApartmentController {
 		return await this.apartmentService.getAll()
 	}
 
+	@Auth('ADMIN')
 	@UsePipes(new ValidationPipe())
 	@Post()
 	async create(@Body() dto: ApartmentDto) {
 		return await this.apartmentService.create(dto)
 	}
 
+	@Auth('ADMIN')
 	@Put(':id')
 	async update(@Param('id') id: string, @Body() dto: ApartmentDto) {
 		return await this.apartmentService.update(id, dto)
