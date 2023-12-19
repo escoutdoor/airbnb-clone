@@ -1,0 +1,9 @@
+requirements details: 
+
+User
+
+Category
+
+Wishlist
+
+Apartment
