@@ -15,13 +15,13 @@ import { UserDto } from './user.dto'
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
-	@Auth('USER')
+	@Auth()
 	@Get('')
 	async getProfile(@CurrentUser('id') id: string) {
 		return await this.userService.getProfile(id)
 	}
 
-	@Auth('USER')
+	@Auth()
 	@UsePipes(new ValidationPipe())
 	@Put('')
 	async update(@CurrentUser('id') id: string, @Body() dto: UserDto) {

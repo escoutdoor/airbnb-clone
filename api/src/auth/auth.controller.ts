@@ -29,7 +29,7 @@ export class AuthController {
 		return this.authService.register(dto)
 	}
 
-	@Auth('USER')
+	@Auth()
 	@UsePipes(new ValidationPipe())
 	@HttpCode(HttpStatus.OK)
 	@Post('access-token')

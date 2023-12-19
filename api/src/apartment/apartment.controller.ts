@@ -6,7 +6,6 @@ import {
 	Param,
 	Post,
 	Put,
-	Query,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common'
@@ -28,14 +27,14 @@ export class ApartmentController {
 		return await this.apartmentService.getAll()
 	}
 
-	@Auth('ADMIN')
+	@Auth()
 	@UsePipes(new ValidationPipe())
 	@Post()
 	async create(@Body() dto: ApartmentDto) {
 		return await this.apartmentService.create(dto)
 	}
 
-	@Auth('ADMIN')
+	@Auth()
 	@Put(':id')
 	async update(@Param('id') id: string, @Body() dto: ApartmentDto) {
 		return await this.apartmentService.update(id, dto)
