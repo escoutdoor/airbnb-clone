@@ -1,7 +1,15 @@
 import { AbilityBuilder, ExtractSubjectType, PureAbility } from '@casl/ability'
 import { PrismaQuery, Subjects, createPrismaAbility } from '@casl/prisma'
 import { Injectable } from '@nestjs/common'
-import { Category, User } from '@prisma/client'
+import {
+	Apartment,
+	Category,
+	Location,
+	Reservation,
+	Review,
+	User,
+	Wishlist,
+} from '@prisma/client'
 
 export enum Action {
 	Manage = 'manage',
@@ -16,6 +24,11 @@ export type AppSubjects =
 	| Subjects<{
 			User: User
 			Category: Category
+			Apartment: Apartment
+			Reservation: Reservation
+			Wishlist: Wishlist
+			Location: Location
+			Review: Review
 	  }>
 
 export type AppAbility = PureAbility<[Action, AppSubjects], PrismaQuery>
@@ -32,13 +45,33 @@ export class AbilityFactory {
 		if (iAdmin) {
 			can(Action.Manage, 'all')
 		} else {
-			can(Action.Read, 'User')
-			can(Action.Update, 'User', { id: user.id })
+			can([Action.Read, Action.Update], 'User')
 
+			can(Action.Read, 'Category')
 			cannot(
-				[Action.Create, Action.Update, Action.Delete],
+				[Action.Update, Action.Create, Action.Delete],
 				'Category'
-			).because('Only admins can do it')
+			).because('Only admin can do this')
+
+			can([Action.Read, Action.Create], 'Apartment')
+			can([Action.Update, Action.Delete], 'Apartment', {
+				userId: user.id,
+			})
+
+			can([Action.Read, Action.Create], 'Reservation')
+			can([Action.Update, Action.Delete], 'Reservation', {
+				userId: user.id,
+			})
+
+			can([Action.Read, Action.Create], 'Wishlist')
+			can([Action.Update, Action.Delete], 'Wishlist', {
+				userId: user.id,
+			})
+
+			can([Action.Read, Action.Create], 'Review')
+			can([Action.Update], 'Review', {
+				userId: user.id,
+			})
 		}
 
 		return build({

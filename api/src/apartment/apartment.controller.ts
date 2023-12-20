@@ -12,6 +12,9 @@ import {
 import { ApartmentService } from './apartment.service'
 import { ApartmentDto } from './apartment.dto'
 import { Auth } from 'src/auth/decorators/auth.decorator'
+import { CheckAbilities } from 'src/ability/abilities.decorator'
+import { Action } from 'src/ability/ability.factory'
+import { CurrentUser } from 'src/auth/decorators/user.decorator'
 
 @Controller('apartments')
 export class ApartmentController {
@@ -28,18 +31,22 @@ export class ApartmentController {
 	}
 
 	@Auth()
+	@CheckAbilities({ action: Action.Create, subject: 'Apartment' })
 	@UsePipes(new ValidationPipe())
 	@Post()
-	async create(@Body() dto: ApartmentDto) {
-		return await this.apartmentService.create(dto)
+	async create(@CurrentUser('id') userId: string, @Body() dto: ApartmentDto) {
+		return await this.apartmentService.create(userId, dto)
 	}
 
 	@Auth()
+	@CheckAbilities({ action: Action.Update, subject: 'Apartment' })
 	@Put(':id')
 	async update(@Param('id') id: string, @Body() dto: ApartmentDto) {
 		return await this.apartmentService.update(id, dto)
 	}
 
+	@Auth()
+	@CheckAbilities({ action: Action.Delete, subject: 'Apartment' })
 	@Delete(':id')
 	async delete(@Param('id') id: string) {
 		return await this.apartmentService.delete(id)

@@ -5,15 +5,12 @@ import {
 	Param,
 	Post,
 	Put,
-	UseGuards,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common'
 import { CategoryService } from './category.service'
 import { CategoryDto } from './category.dto'
 import { Auth } from 'src/auth/decorators/auth.decorator'
-import { AbilitiesGuard } from 'src/ability/abilities.guard'
-import { AuthGuard } from '@nestjs/passport'
 import { CheckAbilities } from 'src/ability/abilities.decorator'
 import { Action } from 'src/ability/ability.factory'
 
@@ -33,7 +30,6 @@ export class CategoryController {
 	}
 
 	@Auth()
-	@UseGuards(AuthGuard('jwt'), AbilitiesGuard)
 	@CheckAbilities({ action: Action.Create, subject: 'Category' })
 	@UsePipes(new ValidationPipe())
 	@Post()
@@ -42,7 +38,6 @@ export class CategoryController {
 	}
 
 	@Auth()
-	@UseGuards(AuthGuard('jwt'), AbilitiesGuard)
 	@CheckAbilities({ action: Action.Update, subject: 'Category' })
 	@Put('/:id')
 	async update(@Param('id') id: string, @Body() dto: CategoryDto) {

@@ -26,13 +26,14 @@ export class ApartmentService {
 		})
 	}
 
-	async create(dto: ApartmentDto) {
+	async create(userId: string, dto: ApartmentDto) {
 		return await this.prisma.apartment.create({
 			data: {
 				...dto,
 				location: {
 					create: dto.location,
 				},
+				userId,
 			},
 			select: apartmentSelect,
 		})

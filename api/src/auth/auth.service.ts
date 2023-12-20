@@ -9,7 +9,7 @@ import { LoginDto, RegisterDto } from './auth.dto'
 import { User } from '@prisma/client'
 import { userSelect } from 'src/user/user.select'
 import { JwtService } from '@nestjs/jwt'
-import { verify } from 'argon2'
+import { hash, verify } from 'argon2'
 
 @Injectable()
 export class AuthService {
@@ -33,6 +33,7 @@ export class AuthService {
 		const user = await this.prisma.user.create({
 			data: {
 				...dto,
+				password: await hash(dto.password),
 			},
 			select: userSelect,
 		})
