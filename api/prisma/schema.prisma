@@ -28,6 +28,7 @@ model User {
   reviews       Review[]
   wishlists     Wishlist[]
   reservations  Reservation[]
+  apartments    Apartment[]
 }
 
 model Reservation {
@@ -57,7 +58,7 @@ model Wishlist {
 
   apartments    Apartment[]
 
-  user          User        @relation(fields: [userId], references: [id])
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String      @map("user_id")
 }
 
@@ -86,6 +87,9 @@ model Apartment {
   wishlists       Wishlist[]
   reservations    Reservation[]
 
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String      @map("user_id")
+
   category        Category    @relation(fields: [categoryId], references: [id])
   categoryId      String      @map("category_id")
 }
@@ -110,7 +114,7 @@ model Review {
   text          String
   rating        Int         @default(0)
 
-  user          User        @relation(fields: [userId], references: [id])
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String      @map("user_id")
 
   apartment     Apartment   @relation(fields: [apartmentId], references: [id])
