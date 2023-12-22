@@ -5,8 +5,9 @@ import { CategoryModule } from './category/category.module'
 import { ApartmentModule } from './apartment/apartment.module'
 import { UserModule } from './user/user.module'
 import { AuthModule } from './auth/auth.module'
-import { AbilityModule } from './ability/ability.module'
 import { WishlistModule } from './wishlist/wishlist.module'
+import { CaslModule } from './casl/casl.module';
+import { AbilityModule } from './ability/ability.module';
 
 @Module({
 	imports: [
@@ -14,8 +15,9 @@ import { WishlistModule } from './wishlist/wishlist.module'
 		ApartmentModule,
 		UserModule,
 		AuthModule,
-		AbilityModule,
 		WishlistModule,
+		CaslModule,
+		AbilityModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

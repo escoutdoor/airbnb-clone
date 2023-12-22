@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
-import { AbilityFactory } from './ability.factory'
 
 @Module({
-	providers: [AbilityFactory],
-	exports: [AbilityFactory],
+	controllers: [],
+	providers: [],
+	exports: [],
 })
 export class AbilityModule {}

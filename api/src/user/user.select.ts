@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client'
+import { wishlistSelect } from 'src/wishlist/wishlist.select'
 
 export const userSelect: Prisma.UserSelect = {
 	id: true,
@@ -9,4 +10,7 @@ export const userSelect: Prisma.UserSelect = {
 	email: true,
 	phoneNumber: true,
 	role: true,
+	wishlists: {
+		select: wishlistSelect,
+	},
 }
