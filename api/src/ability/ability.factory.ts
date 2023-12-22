@@ -45,7 +45,7 @@ export class AbilityFactory {
 		if (isAdmin) {
 			can(Action.Manage, 'all')
 		} else {
-			can(Action.Read, 'Category')
+			cannot(Action.Read, 'Wishlist').because('You must be an admin')
 		}
 
 		const ability = build({

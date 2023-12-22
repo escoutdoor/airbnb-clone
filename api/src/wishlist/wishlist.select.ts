@@ -7,4 +7,5 @@ export const wishlistSelect: Prisma.WishlistSelect = {
 	apartments: {
 		select: apartmentSelect,
 	},
+	userId: true,
 }
