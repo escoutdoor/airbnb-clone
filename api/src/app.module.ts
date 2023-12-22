@@ -6,8 +6,7 @@ import { ApartmentModule } from './apartment/apartment.module'
 import { UserModule } from './user/user.module'
 import { AuthModule } from './auth/auth.module'
 import { WishlistModule } from './wishlist/wishlist.module'
-import { CaslModule } from './casl/casl.module';
-import { AbilityModule } from './ability/ability.module';
+import { AbilityModule } from './ability/ability.module'
 
 @Module({
 	imports: [
@@ -16,7 +15,6 @@ import { AbilityModule } from './ability/ability.module';
 		UserModule,
 		AuthModule,
 		WishlistModule,
-		CaslModule,
 		AbilityModule,
 	],
 	controllers: [AppController],
