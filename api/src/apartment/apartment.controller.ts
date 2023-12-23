@@ -38,13 +38,17 @@ export class ApartmentController {
 
 	@Auth()
 	@Put(':id')
-	async update(@Param('id') id: string, @Body() dto: ApartmentDto) {
-		return await this.apartmentService.update(id, dto)
+	async update(
+		@Param('id') id: string,
+		@Body() dto: ApartmentDto,
+		@CurrentUser('id') userId: string
+	) {
+		return await this.apartmentService.update(id, userId, dto)
 	}
 
 	@Auth()
 	@Delete(':id')
-	async delete(@Param('id') id: string) {
-		return await this.apartmentService.delete(id)
+	async delete(@Param('id') id: string, @CurrentUser('id') userId: string) {
+		return await this.apartmentService.delete(id, userId)
 	}
 }

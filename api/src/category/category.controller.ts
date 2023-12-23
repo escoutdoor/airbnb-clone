@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Param,
 	Post,
@@ -11,6 +12,8 @@ import {
 import { CategoryService } from './category.service'
 import { CategoryDto } from './category.dto'
 import { Auth } from 'src/auth/decorators/auth.decorator'
+import { CheckAbilities } from 'src/ability/ability.decorator'
+import { Action } from 'src/ability/ability.factory'
 
 @Controller('categories')
 export class CategoryController {
@@ -28,6 +31,7 @@ export class CategoryController {
 	}
 
 	@Auth()
+	@CheckAbilities({ action: Action.Create, subject: 'Category' })
 	@UsePipes(new ValidationPipe())
 	@Post()
 	async create(@Body() dto: CategoryDto) {
@@ -35,8 +39,16 @@ export class CategoryController {
 	}
 
 	@Auth()
+	@CheckAbilities({ action: Action.Update, subject: 'Category' })
 	@Put('/:id')
 	async update(@Param('id') id: string, @Body() dto: CategoryDto) {
 		return await this.categoryService.update(id, dto)
+	}
+
+	@Auth()
+	@CheckAbilities({ action: Action.Delete, subject: 'Category' })
+	@Delete('/:id')
+	async delete(@Param('id') id: string) {
+		return await this.categoryService.delete(id)
 	}
 }

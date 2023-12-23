@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+	ForbiddenException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { apartmentSelect } from './apartment.select'
 import { ApartmentDto } from './apartment.dto'
@@ -39,8 +43,14 @@ export class ApartmentService {
 		})
 	}
 
-	async update(id: string, dto: ApartmentDto) {
+	async update(id: string, userId: string, dto: ApartmentDto) {
 		const apartment = await this.getById(id)
+
+		if (apartment.user.id !== userId) {
+			throw new ForbiddenException(
+				'Access denied: you are not the owner of this apartment'
+			)
+		}
 
 		return await this.prisma.apartment.update({
 			where: { id },
@@ -54,8 +64,14 @@ export class ApartmentService {
 		})
 	}
 
-	async delete(id: string) {
+	async delete(id: string, userId: string) {
 		const apartment = await this.getById(id)
+
+		if (apartment.user.id !== userId) {
+			throw new ForbiddenException(
+				'Access denied: you are not the owner of this apartment'
+			)
+		}
 
 		await this.prisma.apartment.delete({
 			where: { id },

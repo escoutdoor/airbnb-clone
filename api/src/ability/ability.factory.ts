@@ -45,6 +45,12 @@ export class AbilityFactory {
 		if (isAdmin) {
 			can(Action.Manage, 'all')
 		} else {
+			can(Action.Read, 'Category')
+			cannot(
+				[Action.Create, Action.Update, Action.Delete],
+				'Category'
+			).because('You must be an admin')
+
 			cannot(Action.Read, 'Wishlist').because('You must be an admin')
 		}
 
