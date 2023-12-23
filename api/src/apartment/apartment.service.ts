@@ -4,7 +4,7 @@ import {
 	NotFoundException,
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
-import { apartmentSelect } from './apartment.select'
+import { apartmentItemSelect, apartmentSelect } from './apartment.select'
 import { ApartmentDto } from './apartment.dto'
 
 @Injectable()
@@ -26,7 +26,7 @@ export class ApartmentService {
 
 	async getAll() {
 		return await this.prisma.apartment.findMany({
-			select: apartmentSelect,
+			select: apartmentItemSelect,
 		})
 	}
 

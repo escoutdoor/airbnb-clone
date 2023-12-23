@@ -4,7 +4,7 @@ import {
 	NotFoundException,
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
-import { userSelect } from './user.select'
+import { userDetailsSelect } from './user.select'
 import { UserDto } from './user.dto'
 
 @Injectable()
@@ -14,7 +14,7 @@ export class UserService {
 	async getProfile(id: string) {
 		const user = await this.prisma.user.findUnique({
 			where: { id },
-			select: userSelect,
+			select: userDetailsSelect,
 		})
 
 		if (!user) {
@@ -40,7 +40,7 @@ export class UserService {
 		return await this.prisma.user.update({
 			where: { email: user.email },
 			data: dto,
-			select: userSelect,
+			select: userDetailsSelect,
 		})
 	}
 }

@@ -9,6 +9,16 @@ export const userSelect: Prisma.UserSelect = {
 	dateOfBirth: true,
 	email: true,
 	phoneNumber: true,
+}
+
+export const userDetailsSelect: Prisma.UserSelect = {
+	id: true,
+	firstName: true,
+	surName: true,
+	avatar: true,
+	dateOfBirth: true,
+	email: true,
+	phoneNumber: true,
 	role: true,
 	wishlists: {
 		select: wishlistSelect,
