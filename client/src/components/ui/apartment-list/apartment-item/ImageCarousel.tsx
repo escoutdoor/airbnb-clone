@@ -16,7 +16,7 @@ const ImageCarousel: FC<{ images: string[] }> = ({ images }) => {
 			{images.map((img, index) => (
 				<SwiperSlide key={index} className={styles.slide}>
 					<Image
-						src={`/images/apartments/${img}`}
+						src={img}
 						width={270}
 						height={256}
 						alt={img}
