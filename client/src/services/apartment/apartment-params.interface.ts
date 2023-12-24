@@ -1,3 +1,5 @@
+import { ApartmentType } from '@/shared/interfaces/apartment.interface'
+
 export interface IApartmentFilterParams {
 	type?: ApartmentType
 	minPrice?: number
@@ -8,5 +10,3 @@ export interface IApartmentFilterParams {
 	amenities?: string[]
 	languages?: string[]
 }
-
-export type ApartmentType = 'room' | 'entire home'
