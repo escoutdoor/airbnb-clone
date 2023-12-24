@@ -1,4 +1,4 @@
-import { IUser } from '@/shared/interfaces/user.interface'
+import { IUser, IUserDetails } from '@/shared/interfaces/user.interface'
 
 export const useProfile = () => {
 	return {
@@ -9,6 +9,6 @@ export const useProfile = () => {
 					apartments: [{ id: '1', images: ['asa'], name: '' }],
 				},
 			],
-		} as IUser,
+		} as IUserDetails,
 	}
 }
