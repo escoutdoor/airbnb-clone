@@ -3,112 +3,14 @@
 import ApartmentList from '@/components/ui/apartment-list/ApartmentList'
 import styles from './home.module.scss'
 import { NextPage } from 'next'
+import { IApartmentItem } from '@/shared/interfaces/apartment.interface'
 
-const Home: NextPage = () => {
+const Home: NextPage<{ apartments: IApartmentItem[] }> = ({ apartments }) => {
 	return (
 		<div className={styles.page}>
 			<div className="wrapper">
 				<div className={styles.content}>
-					<ApartmentList
-						apartments={[
-							{
-								id: '1',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-							{
-								id: '2',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-							{
-								id: '3',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-							{
-								id: '4',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-							{
-								id: '5',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-							{
-								id: '6',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-							{
-								id: '7',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-							{
-								id: '8',
-								images: [
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-									'image.webp',
-								],
-								name: 'asa',
-							},
-						]}
-					/>
+					<ApartmentList apartments={apartments} />
 				</div>
 			</div>
 		</div>
