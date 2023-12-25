@@ -2,7 +2,6 @@
 
 import styles from './layout.module.scss'
 import { FC, ReactNode } from 'react'
-import { usePathname } from 'next/navigation'
 import { ICategory } from '@/shared/interfaces/category.interface'
 import Footer from './footer/Footer'
 import Header from './header/Header'
@@ -10,23 +9,34 @@ import FilterBar from './filter-bar/FilterBar'
 
 interface ILayout {
 	children: ReactNode
-	categories: ICategory[]
+	categories?: ICategory[]
+	isSearchPage?: boolean
+	size?: LayoutSize
 }
 
-const Layout: FC<ILayout> = ({ children, categories }) => {
-	const pathname = usePathname()
+export type LayoutSize = 'small' | 'medium' | 'large'
 
-	const isSearchPage = pathname.includes('/search') || pathname === '/'
-
+const Layout: FC<ILayout> = ({
+	children,
+	categories,
+	isSearchPage = false,
+	size = 'large',
+}) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.navbar}>
-				<Header isSearchPage={isSearchPage} />
-				{isSearchPage ? <FilterBar categories={categories} /> : null}
+				<Header size={size} isSearchPage={isSearchPage} />
+				{isSearchPage ? (
+					<FilterBar categories={categories || []} />
+				) : null}
 			</div>
 
-			<main>{children}</main>
-			<Footer />
+			<main>
+				<div className={`wrapper ${size !== 'large' ? size : ''}`}>
+					<div className={styles.content}>{children}</div>
+				</div>
+			</main>
+			<Footer size={size} />
 		</div>
 	)
 }

@@ -1,11 +1,12 @@
 'use client'
 
+import { LayoutSize } from '../Layout'
 import styles from './footer.module.scss'
 
-const Footer = () => {
+const Footer = ({ size }: { size: LayoutSize }) => {
 	return (
 		<div className={styles.footer}>
-			<div className="wrapper">
+			<div className={`wrapper ${size !== 'large' ? size : ''}`}>
 				<p className={styles.text}>
 					Airbnb clone by Ivan Popov &copy; 2023 escoutdoor
 				</p>

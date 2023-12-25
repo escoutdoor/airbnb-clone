@@ -9,5 +9,9 @@
 	> main {
 		min-height: 100vh;
 		margin: 24px 0px;
+
+		.content {
+			width: 100%;
+		}
 	}
 }

@@ -8,10 +8,8 @@ import { IApartmentItem } from '@/shared/interfaces/apartment.interface'
 const Home: NextPage<{ apartments: IApartmentItem[] }> = ({ apartments }) => {
 	return (
 		<div className={styles.page}>
-			<div className="wrapper">
-				<div className={styles.content}>
-					<ApartmentList apartments={apartments} />
-				</div>
+			<div className={styles.content}>
+				<ApartmentList apartments={apartments} />
 			</div>
 		</div>
 	)
