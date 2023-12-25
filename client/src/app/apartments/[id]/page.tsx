@@ -8,7 +8,7 @@ export default function ApartmentPage({
 }: {
 	params: { id: string }
 }) {
-	const { apartment, isLoading } = useApartment(id)
+	const { apartment } = useApartment(id)
 
 	if (apartment) {
 		return <Apartment apartment={apartment} />
