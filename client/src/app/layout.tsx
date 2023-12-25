@@ -1,9 +1,7 @@
 import './globals.scss'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import { CategoryService } from '@/services/category/category.service'
 import Provider from '@/utils/provider'
-import Layout from '@/components/layout/Layout'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -40,14 +38,10 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode
 }) {
-	const { data: categories } = await CategoryService.getAll()
-
 	return (
 		<html lang="en">
 			<body className={roboto.className}>
-				<Provider>
-					<Layout categories={categories}>{children}</Layout>
-				</Provider>
+				<Provider>{children}</Provider>
 			</body>
 		</html>
 	)
