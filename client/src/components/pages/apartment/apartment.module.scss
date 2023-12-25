@@ -1,2 +1,13 @@
 .page {
+	color: var(--black);
+
+	.container {
+		display: flex;
+		justify-content: space-between;
+
+		.sidebar {
+			width: 33%;
+			margin-left: 8%;
+		}
+	}
 }
