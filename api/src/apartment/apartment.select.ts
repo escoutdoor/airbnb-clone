@@ -6,6 +6,12 @@ export const locationSelect: Prisma.LocationSelect = {
 	id: true,
 	latitude: true,
 	longitude: true,
+	country: true,
+	city: true,
+	street: true,
+	houseNumber: true,
+	apartmentNumber: true,
+	zipCode: true,
 }
 
 export const apartmentSelect: Prisma.ApartmentSelect = {
@@ -37,6 +43,9 @@ export const apartmentItemSelect: Prisma.ApartmentSelect = {
 	images: true,
 	price: true,
 	description: true,
+	location: {
+		select: locationSelect,
+	},
 	user: {
 		select: userSelect,
 	},

@@ -95,15 +95,23 @@ model Apartment {
 }
 
 model Location {
-  id            String      @id @default(uuid())
-  createdAt     DateTime    @default(now()) @map("created_at")
-  updatedAt     DateTime    @updatedAt @map("updated_at")
+  id              String      @id @default(uuid())
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
 
-  latitude      Float
-  longitude     Float
+  country         String
+  city            String
+  street          String
+  houseNumber     Int         @map("house_number")
+  apartmentNumber Int?        @map("apartment_number")
 
-  apartment     Apartment @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
-  apartmentId   String @unique @map("apartment_id")
+  zipCode         String?     @map("zip_code")
+
+  latitude        Float
+  longitude       Float
+
+  apartment       Apartment @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
+  apartmentId     String @unique @map("apartment_id")
 }
 
 model Review {

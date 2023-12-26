@@ -24,6 +24,46 @@ export class LocationDto {
 
 	@IsNumber()
 	longitude: number
+
+	@IsString({
+		message: 'Country must be a string',
+	})
+	@MinLength(2, {
+		message: 'Country is too short. Minimal length is 2 characters',
+	})
+	country: string
+
+	@IsString({
+		message: 'City must be a string',
+	})
+	@MinLength(2, {
+		message: 'City is too short. Minimal length is 2 characters',
+	})
+	city: string
+
+	@IsString({
+		message: 'Street must be a string',
+	})
+	@MinLength(2, {
+		message: 'Street is too short. Minimal length is 2 characters',
+	})
+	street: string
+
+	@IsNumber()
+	@Min(1, { message: 'House number must be a positive number' })
+	houseNumber: number
+
+	@IsOptional()
+	@IsNumber()
+	apartmentNumber: number
+
+	@IsString({
+		message: 'Zip code must be a string',
+	})
+	@MinLength(5, {
+		message: 'Zip code is too short. Minimal length is 5 characters',
+	})
+	zipCode: string
 }
 
 export class ApartmentDto {
