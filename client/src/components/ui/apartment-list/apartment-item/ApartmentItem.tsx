@@ -11,6 +11,7 @@ import SmallText from '../../small-text/SmallText'
 import Link from 'next/link'
 import { useWishListModal } from '@/hooks/useWishListModal'
 import { useProfile } from '@/hooks/useProfile'
+import { getLocationTitle } from '@/utils/get-location-title'
 
 const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 	const { handleClick } = useWishListModal()
@@ -41,7 +42,7 @@ const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 				<ImageCarousel images={item.images} />
 				<div className={styles.card}>
 					<div className={styles.text}>
-						<Text>{item.name} </Text>
+						<Text>{getLocationTitle(item.location)}</Text>
 						<div className={styles.price}>
 							<Text>$59</Text> <SmallText>night</SmallText>
 						</div>
