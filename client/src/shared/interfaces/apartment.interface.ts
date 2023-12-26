@@ -26,8 +26,8 @@ export interface IApartmentLocation {
 	country: string
 	city: string
 	street: string
-	houseNumber: string
-	apartmentNumber?: string
+	houseNumber: number
+	apartmentNumber?: number
 	zipCode?: string
 	latitude: number
 	longitude: number
