@@ -1,5 +1,11 @@
-import { ApartmentType } from '@/shared/interfaces/apartment.interface'
+import {
+	ApartmentType,
+	IApartment,
+} from '@/shared/interfaces/apartment.interface'
+import { getLocationTitle } from './get-location-title'
 
-export const getOverviewTitle = ({ type }: { type: ApartmentType }): string => {
-	return `${type.charAt(0).toUpperCase() + type.slice(1)} in LOCATION`
+export const getOverviewTitle = (apartment: IApartment): string => {
+	return `${
+		apartment.type.charAt(0).toUpperCase() + apartment.type.slice(1)
+	} in ${getLocationTitle(apartment.location)}`
 }
