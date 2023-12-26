@@ -5,8 +5,8 @@ export const reviewSelect: Prisma.ReviewSelect = {
 	id: true,
 	rating: true,
 	text: true,
-	createdAt: true,
 	user: {
 		select: userSelect,
 	},
+	createdAt: true,
 }
