@@ -1,6 +1,6 @@
 import './globals.scss'
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 import Provider from '@/utils/provider'
 
 import 'swiper/css'
@@ -8,18 +8,10 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
-const roboto = Roboto({
-	variable: '--font-roboto',
-	weight: ['100', '300', '400', '500', '700', '900'],
-	subsets: [
-		'cyrillic',
-		'cyrillic-ext',
-		'greek',
-		'greek-ext',
-		'latin',
-		'latin-ext',
-		'vietnamese',
-	],
+const nunito = Nunito({
+	variable: '--font-nunito',
+	weight: ['300', '400', '500', '700', '900'],
+	subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext', 'vietnamese'],
 })
 
 export const metadata: Metadata = {
@@ -40,7 +32,7 @@ export default async function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={roboto.className}>
+			<body className={nunito.className}>
 				<Provider>{children}</Provider>
 			</body>
 		</html>
