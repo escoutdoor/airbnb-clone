@@ -7,6 +7,7 @@ import ApartmentCard from './apartment-card/ApartmentCard'
 import ReservationWidget from './reservation-widget/ReservationWidget'
 import ApartmentDetails from './apartment-details/ApartmentDetails'
 import ApartmentLocation from './apartment-location/ApartmentLocation'
+import ReviewList from './review-list/ReviewList'
 
 const Apartment: NextPage<{ apartment: IApartment }> = ({ apartment }) => {
 	return (
@@ -18,7 +19,12 @@ const Apartment: NextPage<{ apartment: IApartment }> = ({ apartment }) => {
 					<ReservationWidget apartment={apartment} />
 				</div>
 			</div>
-			<ApartmentLocation location={apartment.location} />
+			<section>
+				<ReviewList reviews={apartment.reviews} />
+			</section>
+			<section>
+				<ApartmentLocation location={apartment.location} />
+			</section>
 		</div>
 	)
 }

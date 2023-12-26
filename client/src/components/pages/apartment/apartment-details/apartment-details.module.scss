@@ -1,4 +1,6 @@
 .container {
+	flex: 1;
+
 	.overview {
 		padding: 32px 0px;
 
@@ -17,5 +19,53 @@
 				}
 			}
 		}
+	}
+
+	.renter {
+		display: flex;
+		gap: 24px;
+		padding: 24px 0;
+
+		.right {
+			.link {
+				display: inline-block;
+
+				> p {
+					margin-top: 4px;
+					font-size: 13px;
+					line-height: 1.2;
+					color: #666;
+					font-weight: 300;
+				}
+			}
+		}
+	}
+
+	> section {
+		border-top: 1px solid var(--light-gray);
+		padding: 32px 0;
+	}
+}
+
+.description {
+	.list {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;
+
+		> li {
+			margin-top: 18px;
+			font-size: 16px;
+			line-height: 1.4;
+		}
+	}
+
+	> button {
+		display: flex;
+		align-items: center;
+		gap: 3px;
+		margin-top: 16px;
 	}
 }

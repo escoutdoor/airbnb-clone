@@ -10,4 +10,9 @@
 			margin-left: 8%;
 		}
 	}
+
+	> section {
+		border-top: 1px solid var(--light-gray);
+		padding: 32px 0;
+	}
 }
