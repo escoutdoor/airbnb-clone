@@ -12,7 +12,14 @@ import {
 	prismaQuery,
 } from '@casl/prisma'
 import { Injectable } from '@nestjs/common'
-import { Apartment, Category, Prisma, User, Wishlist } from '@prisma/client'
+import {
+	Apartment,
+	Category,
+	Prisma,
+	Review,
+	User,
+	Wishlist,
+} from '@prisma/client'
 
 export enum Action {
 	Manage = 'manage',
@@ -28,6 +35,7 @@ export type AppSubjects =
 			Category: Category
 			Wishlist: Wishlist
 			Apartment: Apartment
+			Review: Review
 	  }>
 	| 'all'
 
@@ -52,6 +60,10 @@ export class AbilityFactory {
 			).because('You must be an admin')
 
 			cannot(Action.Read, 'Wishlist').because('You must be an admin')
+
+			cannot(Action.Delete, 'Review').because(
+				'You must be an admin to delete reviews'
+			)
 		}
 
 		const ability = build({
