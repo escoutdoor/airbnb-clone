@@ -8,7 +8,6 @@ export interface IApartment extends IApartmentItem {
 	bathrooms: number
 	maxGuests: number
 	hostLanguages: string[]
-	location: IApartmentLocation
 	reviews: IReview[]
 }
 
@@ -18,11 +17,18 @@ export interface IApartmentItem {
 	images: string[]
 	price: number
 	description: string[]
+	location: IApartmentLocation
 	user: IUser
 }
 
 export interface IApartmentLocation {
 	id: string
+	country: string
+	city: string
+	street: string
+	houseNumber: string
+	apartmentNumber?: string
+	zipCode?: string
 	latitude: number
 	longitude: number
 }
