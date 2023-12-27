@@ -1,4 +1,32 @@
 .list {
+	display: flex;
+	flex-wrap: wrap;
+
 	.item {
+		flex: 0 0 50%;
+		margin-bottom: 40px;
+
+		.header {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+
+			.right {
+				> p {
+					margin-top: 4px;
+				}
+			}
+		}
+
+		.content {
+			margin-top: 8px;
+
+			.details {
+			}
+
+			> p {
+				margin-top: 4px;
+			}
+		}
 	}
 }
