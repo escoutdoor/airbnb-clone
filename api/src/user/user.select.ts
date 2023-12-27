@@ -9,6 +9,7 @@ export const userSelect: Prisma.UserSelect = {
 	dateOfBirth: true,
 	email: true,
 	phoneNumber: true,
+	createdAt: true,
 }
 
 export const userDetailsSelect: Prisma.UserSelect = {
@@ -23,4 +24,5 @@ export const userDetailsSelect: Prisma.UserSelect = {
 	wishlists: {
 		select: wishlistSelect,
 	},
+	createdAt: true,
 }
