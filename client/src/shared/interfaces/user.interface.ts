@@ -5,9 +5,10 @@ export interface IUser {
 	firstName: string
 	surName: string
 	avatar: string
-	dateOfBirth: Date
+	dateOfBirth: string
 	email: string
 	phoneNumber: string
+	createdAt: string
 }
 
 export interface IUserDetails extends IUser {

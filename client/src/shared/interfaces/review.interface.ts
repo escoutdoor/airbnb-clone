@@ -4,6 +4,6 @@ export interface IReview {
 	id: string
 	rating: number
 	text: string
-	createdAt: Date
+	createdAt: string
 	user: IUser
 }
