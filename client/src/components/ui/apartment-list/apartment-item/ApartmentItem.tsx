@@ -14,7 +14,7 @@ import { useProfile } from '@/hooks/useProfile'
 import { getLocationTitle } from '@/utils/get-location-title'
 
 const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
-	const { handleClick } = useWishListModal()
+	const { open } = useWishListModal()
 	const { profile } = useProfile()
 
 	const isWishListed = profile?.wishlists?.some(wishlist =>
@@ -27,7 +27,7 @@ const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 				<button
 					onClick={e => {
 						e.preventDefault()
-						handleClick()
+						open()
 					}}
 					className={styles.wishlist__button}
 				>
