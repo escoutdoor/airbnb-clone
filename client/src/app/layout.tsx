@@ -7,6 +7,9 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+import ShareModal from '@/components/modals/share-modal/ShareModal'
+import WishlistModal from '@/components/modals/wishlist-modal/WishlistModal'
+import AuthModal from '@/components/modals/auth-modal/AuthModal'
 
 const nunito = Nunito({
 	variable: '--font-nunito',
@@ -33,7 +36,12 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<body className={nunito.className}>
-				<Provider>{children}</Provider>
+				<>
+					<ShareModal />
+					<WishlistModal />
+					<AuthModal />
+					<Provider>{children}</Provider>
+				</>
 			</body>
 		</html>
 	)

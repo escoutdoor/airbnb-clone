@@ -22,5 +22,9 @@ export const generateMetadata = async (params: {
 }
 
 export default function ApartmentLayout({ children }: { children: ReactNode }) {
-	return <Layout size="medium">{children}</Layout>
+	return (
+		<>
+			<Layout size="medium">{children}</Layout>
+		</>
+	)
 }
