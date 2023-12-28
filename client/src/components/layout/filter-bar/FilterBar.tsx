@@ -12,7 +12,7 @@ import SmallText from '@/components/ui/small-text/SmallText'
 const FilterBar: FC<{ categories: ICategory[] }> = ({ categories }) => {
 	const scrollPosition = useScrollPosition()
 
-	const { handleClick } = useFilterModal()
+	const { open } = useFilterModal()
 
 	return (
 		<div
@@ -23,7 +23,7 @@ const FilterBar: FC<{ categories: ICategory[] }> = ({ categories }) => {
 			<div className="wrapper">
 				<div className={styles.content}>
 					<CategoryList categories={categories} />
-					<button className={styles.button} onClick={handleClick}>
+					<button className={styles.button} onClick={open}>
 						<GiSettingsKnobs className={styles.icon} />
 						<SmallText>Filters</SmallText>
 					</button>
