@@ -1,7 +1,8 @@
-export const useWishListModal = () => {
-	const handleClick = () => console.log('handle click')
+import { ModalState } from '@/shared/interfaces/modal.interface'
+import { create } from 'zustand'
 
-	return {
-		handleClick,
-	}
-}
+export const useWishListModal = create<ModalState>(set => ({
+	isActive: false,
+	open: () => set({ isActive: true }),
+	close: () => set({ isActive: false }),
+}))

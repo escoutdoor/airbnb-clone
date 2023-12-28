@@ -1,9 +1,8 @@
-export const useApartmentDescriptionModal = () => {
-	const handleClick = () => {
-		console.log('click on apartment description')
-	}
+import { ModalState } from '@/shared/interfaces/modal.interface'
+import { create } from 'zustand'
 
-	return {
-		handleClick,
-	}
-}
+export const useApartmentDescriptionModal = create<ModalState>(set => ({
+	isActive: false,
+	open: () => set({ isActive: true }),
+	close: () => set({ isActive: false }),
+}))

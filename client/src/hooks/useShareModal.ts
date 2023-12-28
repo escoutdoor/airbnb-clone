@@ -1,7 +1,8 @@
-export const useShareModal = () => {
-	const handleShareClick = () => {
-		console.log('share modal click')
-	}
+import { ModalState } from '@/shared/interfaces/modal.interface'
+import { create } from 'zustand'
 
-	return { handleShareClick }
-}
+export const useShareModal = create<ModalState>(set => ({
+	isActive: false,
+	open: () => set({ isActive: true }),
+	close: () => set({ isActive: false }),
+}))
