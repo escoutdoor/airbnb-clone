@@ -9,7 +9,7 @@ import { useApartmentDescriptionModal } from '@/hooks/useApartmentDescriptionMod
 const ApartmentDescription: FC<{ description: string[] }> = ({
 	description,
 }) => {
-	const { handleClick } = useApartmentDescriptionModal()
+	const { open } = useApartmentDescriptionModal()
 
 	return (
 		<div className={styles.description}>
@@ -20,7 +20,7 @@ const ApartmentDescription: FC<{ description: string[] }> = ({
 			</ul>
 
 			{description.length > 3 ? (
-				<UnderlinedButton onClick={handleClick}>
+				<UnderlinedButton onClick={open}>
 					Show more
 					<LuChevronRight />
 				</UnderlinedButton>

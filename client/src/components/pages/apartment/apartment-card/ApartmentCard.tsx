@@ -12,8 +12,8 @@ import ApartmentImages from './ApartmentImages'
 
 const ApartmentCard: FC<{ apartment: IApartment }> = ({ apartment }) => {
 	const { profile } = useProfile()
-	const { handleClick } = useWishListModal()
-	const { handleShareClick } = useShareModal()
+	const { open } = useWishListModal()
+	const { open: openShare } = useShareModal()
 
 	const isSaved = profile.wishlists.some(list =>
 		list.apartments.some(a => a.id === apartment.id)
@@ -24,11 +24,11 @@ const ApartmentCard: FC<{ apartment: IApartment }> = ({ apartment }) => {
 			<div className={styles.header}>
 				<h1 className={styles.name}>{apartment.name}</h1>
 				<div className={styles.actions}>
-					<UnderlinedButton onClick={handleShareClick}>
+					<UnderlinedButton onClick={openShare}>
 						<IoMdShareAlt className={styles.icon} />
 						Share
 					</UnderlinedButton>
-					<UnderlinedButton onClick={handleClick}>
+					<UnderlinedButton onClick={open}>
 						{isSaved ? (
 							<IoMdHeart
 								className={`${styles.icon} ${styles.active}`}
