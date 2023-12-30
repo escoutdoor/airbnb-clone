@@ -14,6 +14,15 @@ export const locationSelect: Prisma.LocationSelect = {
 	zipCode: true,
 }
 
+export const reservationSelect: Prisma.ReservationSelect = {
+	id: true,
+	startDate: true,
+	endDate: true,
+	createdAt: true,
+	guests: true,
+	totalPrice: true,
+}
+
 export const apartmentSelect: Prisma.ApartmentSelect = {
 	id: true,
 	name: true,
@@ -26,15 +35,6 @@ export const apartmentSelect: Prisma.ApartmentSelect = {
 	bathrooms: true,
 	maxGuests: true,
 	hostLanguages: true,
-	location: {
-		select: locationSelect,
-	},
-	reviews: {
-		select: reviewSelect,
-	},
-	user: {
-		select: userSelect,
-	},
 }
 
 export const apartmentItemSelect: Prisma.ApartmentSelect = {
@@ -43,10 +43,4 @@ export const apartmentItemSelect: Prisma.ApartmentSelect = {
 	images: true,
 	price: true,
 	description: true,
-	location: {
-		select: locationSelect,
-	},
-	user: {
-		select: userSelect,
-	},
 }

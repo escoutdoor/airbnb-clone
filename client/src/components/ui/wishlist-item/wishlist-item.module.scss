@@ -1,0 +1,22 @@
+.item {
+	cursor: pointer;
+
+	.preview {
+		width: 100%;
+		border-radius: 12px;
+		padding: 5px;
+		box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+			rgba(17, 17, 26, 0.05) 0px 8px 32px;
+
+		.image {
+			display: block;
+			width: 100%;
+			border-radius: 12px;
+			object-fit: cover;
+		}
+	}
+
+	.info {
+		margin-top: 12px;
+	}
+}

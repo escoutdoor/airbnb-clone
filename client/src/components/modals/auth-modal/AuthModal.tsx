@@ -13,6 +13,7 @@ const AuthModal: FC = () => {
 			close={close}
 			title="Sign in or register"
 			isActive={isActive}
+			modalName="auth"
 		>
 			AUTH MODAL
 		</ModalContainer>

@@ -13,8 +13,21 @@ const DescriptionModal: FC<{ description: string[] }> = ({ description }) => {
 			isActive={isActive}
 			close={close}
 			title="About this space"
+			modalName="description"
 		>
 			<ul className={styles.list}>
+				{description.map((paragraph, index) => (
+					<li key={index}>{paragraph}</li>
+				))}
+				{description.map((paragraph, index) => (
+					<li key={index}>{paragraph}</li>
+				))}
+				{description.map((paragraph, index) => (
+					<li key={index}>{paragraph}</li>
+				))}
+				{description.map((paragraph, index) => (
+					<li key={index}>{paragraph}</li>
+				))}
 				{description.map((paragraph, index) => (
 					<li key={index}>{paragraph}</li>
 				))}

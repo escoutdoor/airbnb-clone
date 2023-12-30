@@ -21,20 +21,6 @@
 		}
 	}
 
-	.swiper {
-		.slide {
-			width: 100%;
-
-			.image {
-				width: 100%;
-				object-fit: cover;
-			}
-		}
-
-		overflow: hidden;
-		border-radius: 16px;
-	}
-
 	.card {
 		display: flex;
 

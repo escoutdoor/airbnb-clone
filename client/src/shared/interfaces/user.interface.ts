@@ -1,4 +1,4 @@
-import { IApartmentItem } from './apartment.interface'
+import { IApartment, IApartmentItem } from './apartment.interface'
 
 export interface IUser {
 	id: string
@@ -19,8 +19,12 @@ export interface IUserDetails extends IUser {
 export interface Wishlist {
 	id: string
 	name: string
-	apartments: IApartmentItem[]
+	userId: string
+	apartments: IWishlistApartment[]
 }
+
+export interface IWishlistApartment
+	extends Omit<IApartment, 'user' | 'reviews'> {}
 
 export enum Role {
 	'USER' = 'USER',

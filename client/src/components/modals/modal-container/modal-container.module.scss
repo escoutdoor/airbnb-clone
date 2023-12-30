@@ -32,6 +32,17 @@
 		background-color: #fff;
 		padding: 24px 0 32px;
 
+		&.description,
+		&.filter {
+			// default
+		}
+
+		&.share,
+		&.wishlist,
+		&.auth {
+			max-width: 568px;
+		}
+
 		.header {
 			display: flex;
 			align-items: center;
@@ -58,7 +69,7 @@
 
 		.content {
 			max-height: calc(100vh - 300px);
-			padding: 24px;
+			padding: 24px 0;
 			overflow: auto;
 		}
 	}

@@ -1,9 +1,9 @@
-import styles from './apartment-item.module.scss'
+import styles from './image-carousel.module.scss'
 import { FC } from 'react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { SwiperSlide, Swiper } from 'swiper/react'
 import Image from 'next/image'
-import CarouselButtons from '../../carousel-buttons/CarouselButtons'
+import CarouselButtons from '../carousel-buttons/CarouselButtons'
 
 const ImageCarousel: FC<{ images: string[] }> = ({ images }) => {
 	return (

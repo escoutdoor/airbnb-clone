@@ -1,21 +1,26 @@
 'use client'
 
 import styles from './modal-container.module.scss'
-import { FC, PropsWithChildren, useLayoutEffect } from 'react'
+import { FC, HTMLAttributes, PropsWithChildren, useLayoutEffect } from 'react'
 import { IoClose } from 'react-icons/io5'
 import MediumHeading from '@/components/ui/headings/medium-heading/MediumHeading'
 
-interface IModalContainer {
+interface IModalContainer extends HTMLAttributes<HTMLDivElement> {
 	isActive: boolean
 	close: () => void
 	title?: string
+	modalName: ModalName
 }
+
+type ModalName = 'description' | 'auth' | 'filter' | 'share' | 'wishlist'
 
 const ModalContainer: FC<PropsWithChildren<IModalContainer>> = ({
 	isActive,
 	close,
 	children,
 	title,
+	modalName,
+	...rest
 }) => {
 	useLayoutEffect(() => {
 		if (isActive) {
@@ -34,7 +39,11 @@ const ModalContainer: FC<PropsWithChildren<IModalContainer>> = ({
 			}
 			onClick={close}
 		>
-			<div className={styles.modal} onClick={e => e.stopPropagation()}>
+			<div
+				{...rest}
+				className={`${styles.modal} ${styles[modalName]}`}
+				onClick={e => e.stopPropagation()}
+			>
 				<div className={styles.header}>
 					<button className={styles.button} onClick={close}>
 						<IoClose className={styles.icon} />

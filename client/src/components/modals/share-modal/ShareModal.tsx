@@ -13,6 +13,7 @@ const ShareModal: FC = () => {
 			close={close}
 			title="Share this place"
 			isActive={isActive}
+			modalName="share"
 		>
 			SHARE MODAL
 		</ModalContainer>

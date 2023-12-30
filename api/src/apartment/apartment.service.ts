@@ -4,8 +4,15 @@ import {
 	NotFoundException,
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
-import { apartmentItemSelect, apartmentSelect } from './apartment.select'
+import {
+	apartmentItemSelect,
+	apartmentSelect,
+	locationSelect,
+	reservationSelect,
+} from './apartment.select'
 import { ApartmentDto } from './apartment.dto'
+import { reviewSelect } from 'src/review/review.select'
+import { userSelect } from 'src/user/user.select'
 
 @Injectable()
 export class ApartmentService {
@@ -14,7 +21,21 @@ export class ApartmentService {
 	async getById(id: string) {
 		const apartment = await this.prisma.apartment.findUnique({
 			where: { id },
-			select: apartmentSelect,
+			select: {
+				...apartmentSelect,
+				location: {
+					select: locationSelect,
+				},
+				reviews: {
+					select: reviewSelect,
+				},
+				user: {
+					select: userSelect,
+				},
+				reservations: {
+					select: reservationSelect,
+				},
+			},
 		})
 
 		if (!apartment) {
@@ -26,7 +47,12 @@ export class ApartmentService {
 
 	async getAll() {
 		return await this.prisma.apartment.findMany({
-			select: apartmentItemSelect,
+			select: {
+				...apartmentItemSelect,
+				location: {
+					select: locationSelect,
+				},
+			},
 		})
 	}
 
@@ -39,7 +65,12 @@ export class ApartmentService {
 				},
 				userId,
 			},
-			select: apartmentSelect,
+			select: {
+				...apartmentSelect,
+				location: {
+					select: locationSelect,
+				},
+			},
 		})
 	}
 
@@ -60,7 +91,12 @@ export class ApartmentService {
 					update: dto.location,
 				},
 			},
-			select: apartmentSelect,
+			select: {
+				...apartmentSelect,
+				location: {
+					select: locationSelect,
+				},
+			},
 		})
 	}
 

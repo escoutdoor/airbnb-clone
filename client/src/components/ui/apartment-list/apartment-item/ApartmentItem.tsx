@@ -4,7 +4,6 @@ import styles from './apartment-item.module.scss'
 import { FC } from 'react'
 import { IApartmentItem } from '@/shared/interfaces/apartment.interface'
 import { IoMdHeartEmpty, IoMdHeart } from 'react-icons/io'
-import ImageCarousel from './ImageCarousel'
 import Text from '../../text/Text'
 import Rating from '../../rating/Rating'
 import SmallText from '../../small-text/SmallText'
@@ -12,6 +11,7 @@ import Link from 'next/link'
 import { useWishListModal } from '@/hooks/useWishListModal'
 import { useProfile } from '@/hooks/useProfile'
 import { getLocationTitle } from '@/utils/get-location-title'
+import ImageCarousel from '../../image-carousel/ImageCarousel'
 
 const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 	const { open } = useWishListModal()

@@ -9,7 +9,12 @@ const FilterModal: FC = () => {
 	const { isActive, close } = useFilterModal()
 
 	return (
-		<ModalContainer close={close} title="Filters" isActive={isActive}>
+		<ModalContainer
+			close={close}
+			title="Filters"
+			isActive={isActive}
+			modalName="filter"
+		>
 			FILTER MODAL
 		</ModalContainer>
 	)
