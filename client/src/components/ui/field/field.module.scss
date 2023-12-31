@@ -1,0 +1,40 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	position: relative;
+	margin: 45px auto -25px;
+
+	> label {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		left: 16px;
+		bottom: 0;
+		font-size: 16px;
+		color: var(--gray);
+		transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
+	}
+
+	.field {
+		padding: 26px 16px 8px;
+		width: 100%;
+		border-radius: 8px;
+		font-size: 15px;
+		color: var(--black);
+		border: 1px solid var(--gray);
+		transition: border-color 0.2s ease-in-out;
+
+		&:focus,
+		&:not(:placeholder-shown) {
+			border-color: var(--black);
+			border-width: 2px;
+
+			& ~ label {
+				top: -26px;
+				font-size: 12px;
+			}
+		}
+	}
+}
