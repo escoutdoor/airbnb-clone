@@ -26,7 +26,7 @@ const ModalContainer: FC<PropsWithChildren<IModalContainer>> = ({
 		if (isActive) {
 			document.body.style.overflowY = 'hidden'
 		} else {
-			document.body.style.overflowY = 'auto'
+			document.body.style.removeProperty('overflow-y')
 		}
 	}, [isActive])
 
