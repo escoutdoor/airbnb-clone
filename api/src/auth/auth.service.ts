@@ -11,6 +11,8 @@ import { userSelect } from 'src/user/user.select'
 import { JwtService } from '@nestjs/jwt'
 import { hash, verify } from 'argon2'
 
+const EXPIRES_IN = 86400000
+
 @Injectable()
 export class AuthService {
 	constructor(
@@ -84,6 +86,7 @@ export class AuthService {
 			user: {
 				id: user.id,
 				email: user.email,
+				role: user.role,
 			},
 			...tokens,
 		}
@@ -93,13 +96,15 @@ export class AuthService {
 		const data = { id: user.id, email: user.email }
 
 		const accessToken = this.jwt.sign(data, {
-			expiresIn: '1h',
+			expiresIn: '1d',
 		})
 
 		const refreshToken = this.jwt.sign(data, {
 			expiresIn: '7d',
 		})
 
-		return { accessToken, refreshToken }
+		const expiresIn = new Date().setTime(new Date().getTime() + EXPIRES_IN)
+
+		return { accessToken, refreshToken, expiresIn }
 	}
 }
