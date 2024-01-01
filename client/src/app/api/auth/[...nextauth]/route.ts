@@ -11,13 +11,16 @@ async function refreshToken(token: JWT): Promise<JWT> {
 		user: {
 			id: response.user.id,
 			email: response.user.email,
+			role: response.user.role,
 		},
 		accessToken: response.accessToken,
 		refreshToken: response.refreshToken,
+		expiresIn: response.expiresIn,
 	}
 }
 
 export const authOptions: NextAuthOptions = {
+	secret: process.env.JWT_SECRET,
 	providers: [
 		CredentialsProvider({
 			name: 'Credentials',
@@ -34,7 +37,10 @@ export const authOptions: NextAuthOptions = {
 
 				const { email, password } = credentials
 
-				const response = await AuthService.login({ email, password })
+				const response = await AuthService.login({
+					email,
+					password,
+				})
 
 				if (response.status == 401) {
 					console.log(response.statusText)
@@ -42,7 +48,7 @@ export const authOptions: NextAuthOptions = {
 					return null
 				}
 
-				return response.data.user
+				return response.data
 			},
 		}),
 	],
@@ -51,14 +57,13 @@ export const authOptions: NextAuthOptions = {
 		async jwt({ token, user }) {
 			if (user) return { ...token, ...user }
 
+			if (new Date().getTime() < token.expiresIn) return token
+
 			return await refreshToken(token)
 		},
 
 		async session({ token, session }) {
-			session.user = {
-				id: token.user.id,
-				email: token.user.email,
-			}
+			session.user = token.user
 			session.accessToken = token.accessToken
 			session.refreshToken = token.refreshToken
 

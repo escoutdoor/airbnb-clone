@@ -37,10 +37,12 @@ export default async function RootLayout({
 		<html lang="en">
 			<body className={nunito.className}>
 				<>
-					<ShareModal />
-					<WishlistModal />
-					<AuthModal />
-					<Provider>{children}</Provider>
+					<Provider>
+						<ShareModal />
+						<WishlistModal />
+						<AuthModal />
+						<main>{children}</main>
+					</Provider>
 				</>
 			</body>
 		</html>
