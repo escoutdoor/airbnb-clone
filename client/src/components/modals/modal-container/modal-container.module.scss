@@ -26,7 +26,6 @@
 
 	.modal {
 		width: 100%;
-		max-height: 100%;
 		max-width: 780px;
 		border-radius: 12px;
 		background-color: #fff;
@@ -38,8 +37,8 @@
 		}
 
 		&.share,
-		&.wishlist,
-		&.auth {
+		&.auth,
+		&.wishlist {
 			max-width: 568px;
 		}
 
@@ -68,9 +67,9 @@
 		}
 
 		.content {
-			max-height: calc(100vh - 300px);
-			padding: 24px 0;
-			overflow: auto;
+			width: 100%;
+			padding: 5% 0 20%;
+			overflow-y: auto;
 		}
 	}
 }

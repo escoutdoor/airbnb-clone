@@ -1,9 +1,7 @@
 .container {
-	display: flex;
-	flex-direction: column;
 	width: 100%;
 	position: relative;
-	margin: 45px auto -25px;
+	margin: 15px 0;
 
 	> label {
 		display: flex;
@@ -12,7 +10,7 @@
 		top: 0;
 		left: 16px;
 		bottom: 0;
-		font-size: 16px;
+		font-size: 15px;
 		color: var(--gray);
 		transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out;
 	}
@@ -24,11 +22,11 @@
 		font-size: 15px;
 		color: var(--black);
 		border: 1px solid var(--gray);
-		transition: border-color 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
 
 		&:focus,
 		&:not(:placeholder-shown) {
-			border-color: var(--black);
+			border-color: var(--gray);
 			border-width: 2px;
 
 			& ~ label {

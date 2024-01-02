@@ -2,12 +2,12 @@ import { IHeaderMenuItem } from '@/interfaces/header-menu.interface'
 
 export const headerMenu: IHeaderMenuItem[] = [
 	{
-		id: 3,
+		id: 1,
 		title: 'Gift Cards',
 		href: '/gift-cards',
 	},
 	{
-		id: 4,
+		id: 2,
 		title: 'Airbnb your home',
 		href: '/host/homes',
 	},

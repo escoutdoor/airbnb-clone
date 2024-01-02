@@ -4,23 +4,25 @@ import ModalContainer from '../modal-container/ModalContainer'
 import styles from './auth-modal.module.scss'
 import { FC } from 'react'
 import { useAuthModal } from '@/hooks/useAuthModal'
-import Field from '@/components/ui/field/Field'
 import { useSession } from 'next-auth/react'
+import AuthLoginTab from './AuthLoginTab'
+import AuthRegisterTab from './AuthRegisterTab'
 
 const AuthModal: FC = () => {
-	const { isActive, close } = useAuthModal()
+	const { status, close } = useAuthModal()
 	const { data: session } = useSession()
-
-	console.log(session)
 
 	return (
 		<ModalContainer
 			close={close}
-			title="Sign in or register"
-			isActive={isActive}
+			title={status.activeTab === 'login' ? 'Log in' : 'Sign up'}
+			isActive={status.isActive}
 			modalName="auth"
 		>
-			<Field label="Email" type="email" />
+			<div className={styles.container}>
+				{status.activeTab === 'login' && <AuthLoginTab />}
+				{status.activeTab === 'register' && <AuthRegisterTab />}
+			</div>
 		</ModalContainer>
 	)
 }

@@ -15,7 +15,7 @@ const ApartmentCard: FC<{ apartment: IApartment }> = ({ apartment }) => {
 	const { open } = useWishListModal()
 	const { open: openShare } = useShareModal()
 
-	const isSaved = profile.wishlists.some(list =>
+	const isSaved = profile?.wishlists.some(list =>
 		list.apartments.some(a => a.id === apartment.id)
 	)
 

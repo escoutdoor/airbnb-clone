@@ -1,0 +1,18 @@
+.button {
+	width: 100%;
+	color: #fff;
+	font-size: 16px;
+	line-height: 1.25rem;
+	font-weight: 500;
+	padding: 14px 24px;
+	border-radius: 8px;
+	cursor: pointer;
+	margin-bottom: 16px;
+
+	background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+	transition: filter 0.2s ease-in-out;
+
+	&:hover {
+		filter: brightness(0.9);
+	}
+}

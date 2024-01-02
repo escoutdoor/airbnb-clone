@@ -8,6 +8,7 @@ import SmallText from '@/components/ui/small-text/SmallText'
 import { getTotalPrice } from '@/utils/get-total-price'
 import Text from '@/components/ui/text/Text'
 import MediumHeading from '@/components/ui/headings/medium-heading/MediumHeading'
+import GradientButton from '@/components/ui/gradient-button/GradientButton'
 
 const ReservationWidget: FC<{ apartment: IApartment }> = ({ apartment }) => {
 	return (
@@ -18,7 +19,7 @@ const ReservationWidget: FC<{ apartment: IApartment }> = ({ apartment }) => {
 						<ParagraphHeading>${apartment.price} </ParagraphHeading>
 						<SmallText>night</SmallText>
 					</div>
-					<button className={styles.button}>Reserve</button>
+					<GradientButton onClick={() => {}}>Reserve</GradientButton>
 					<p className={styles.charging}>You won't be charged yet</p>
 					<div className={styles.total__counter}>
 						<MediumHeading>

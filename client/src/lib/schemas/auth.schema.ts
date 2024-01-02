@@ -1,5 +1,8 @@
 import { z } from 'zod'
 
+const PASSWORD_REGEX =
+	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
+
 export const loginSchema = z.object({
 	email: z
 		.string({
@@ -13,7 +16,45 @@ export const loginSchema = z.object({
 		.string({
 			invalid_type_error: 'Password must be a string',
 		})
-		.min(6, {
-			message: 'Password must be at least 6 characters long',
+		.regex(PASSWORD_REGEX, {
+			message:
+				'Password must be at least 6 characters long, contain at least 1 lowercase letter, 1 uppercase letter, 1 number, and 1 symbol',
 		}),
 })
+
+export const registerSchema = z
+	.object({
+		firstName: z
+			.string({
+				invalid_type_error: 'First name must be a string',
+			})
+			.min(2, {
+				message: 'First name must be at least 2 characters long',
+			}),
+		surName: z
+			.string({
+				invalid_type_error: 'Surname must be a string',
+			})
+			.min(2, {
+				message: 'Surname must be at least 2 characters long',
+			}),
+		dateOfBirth: z
+			.string({
+				invalid_type_error: 'Date of birth must be a string',
+			})
+			.datetime({
+				message: 'Invalid date of birth',
+			}),
+		phoneNumber: z
+			.string({
+				invalid_type_error: 'Phone number must be a string',
+			})
+			.min(10, {
+				message: 'Phone number must be at least 10 characters long',
+			}),
+	})
+	.merge(loginSchema)
+
+export type TLoginSchema = z.infer<typeof loginSchema>
+
+export type TRegisterSchema = z.infer<typeof registerSchema>

@@ -19,7 +19,7 @@ const Field = forwardRef<HTMLInputElement, IField>(
 					ref={ref}
 					{...rest}
 				/>
-				<label>Email</label>
+				<label>{label}</label>
 			</div>
 		)
 	}

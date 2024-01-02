@@ -8,12 +8,19 @@ import { IApartmentFilterParams } from './apartment-params.interface'
 
 export const ApartmentService = {
 	async getById(id: string) {
-		return await instance.get<IApartment>(`${APARTMENT_URL}/${id}`)
+		return await instance<IApartment>({
+			method: 'GET',
+			url: `${APARTMENT_URL}/${id}`,
+		})
 	},
 
 	async getAll(params: IApartmentFilterParams) {
-		return await instance.get<IApartmentItem[]>(`${APARTMENT_URL}`, {
+		const response = await instance<IApartmentItem[]>({
+			method: 'GET',
+			url: `${APARTMENT_URL}`,
 			params,
 		})
+
+		return response
 	},
 }

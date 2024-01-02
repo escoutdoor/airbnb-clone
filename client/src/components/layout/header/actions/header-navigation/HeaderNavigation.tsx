@@ -9,6 +9,7 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { useAuthModal } from '@/hooks/useAuthModal'
 import HeaderMenuItem from './header-menu-item/HeaderMenuItem'
 import Image from 'next/image'
+import { signOut } from 'next-auth/react'
 
 const HeaderNavigation: FC = () => {
 	const { ref, isActive, setIsActive } = useOutside(false)
@@ -20,12 +21,12 @@ const HeaderNavigation: FC = () => {
 		{
 			id: 1,
 			title: 'Sign up',
-			onClick: () => open(),
+			onClick: () => open('register'),
 		},
 		{
 			id: 2,
 			title: 'Log in',
-			onClick: () => open(),
+			onClick: () => open('login'),
 		},
 	]
 
@@ -44,7 +45,7 @@ const HeaderNavigation: FC = () => {
 			>
 				<GiHamburgerMenu className={styles.icon} />
 				<Image
-					src={`/avatars/${profile.avatar || 'default.jpg'}`}
+					src={profile?.avatar || '/avatars/default.jpg'}
 					width={32}
 					height={32}
 					className={styles.avatar}
@@ -52,12 +53,22 @@ const HeaderNavigation: FC = () => {
 				/>
 			</button>
 			<ul className={styles.menu}>
-				{authItems.map(item => (
-					<HeaderMenuItem key={item.id} item={item} />
-				))}
+				{!profile &&
+					authItems.map(item => (
+						<HeaderMenuItem key={item.id} item={item} />
+					))}
 				{headerMenu.map(item => (
 					<HeaderMenuItem key={item.id} item={item} />
 				))}
+				{profile && (
+					<HeaderMenuItem
+						item={{
+							id: 1,
+							onClick: () => signOut(),
+							title: 'Log out',
+						}}
+					></HeaderMenuItem>
+				)}
 			</ul>
 		</div>
 	)

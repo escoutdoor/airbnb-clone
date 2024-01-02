@@ -6,14 +6,14 @@ import Text from '@/components/ui/text/Text'
 
 const HeaderMenuItem: FC<{ item: IHeaderMenuItem }> = ({ item }) => {
 	return (
-		<li className={styles.item} onClick={item.onClick}>
-			<Text>
-				{item.href ? (
-					<Link href={item.href}>{item.title}</Link>
-				) : (
-					item.title
-				)}
-			</Text>
+		<li className={styles.item}>
+			{item.href ? (
+				<Link className={styles.link} href={item.href}>
+					<Text>{item.title}</Text>
+				</Link>
+			) : (
+				<Text onClick={item.onClick}>{item.title}</Text>
+			)}
 		</li>
 	)
 }
