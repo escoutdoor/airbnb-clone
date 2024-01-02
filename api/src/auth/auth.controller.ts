@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { AccessTokenDto, LoginDto, RegisterDto } from './auth.dto'
-import { Auth } from './decorators/auth.decorator'
 
 @Controller('auth')
 export class AuthController {
@@ -29,7 +28,6 @@ export class AuthController {
 		return this.authService.register(dto)
 	}
 
-	@Auth()
 	@UsePipes(new ValidationPipe())
 	@HttpCode(HttpStatus.OK)
 	@Post('access-token')

@@ -11,7 +11,7 @@ import { userSelect } from 'src/user/user.select'
 import { JwtService } from '@nestjs/jwt'
 import { hash, verify } from 'argon2'
 
-const EXPIRES_IN = 86400000
+const EXPIRES_IN = 1000 * 60 * 60 * 24
 
 @Injectable()
 export class AuthService {
