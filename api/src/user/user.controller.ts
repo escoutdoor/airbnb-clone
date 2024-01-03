@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Get,
+	Param,
 	Put,
 	UsePipes,
 	ValidationPipe,
@@ -19,6 +20,11 @@ export class UserController {
 	@Get('')
 	async getProfile(@CurrentUser('id') id: string) {
 		return await this.userService.getProfile(id)
+	}
+
+	@Get(':id')
+	async getById(@Param('id') userId: string) {
+		return await this.userService.getById(userId)
 	}
 
 	@Auth()

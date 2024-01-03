@@ -24,6 +24,14 @@ export class UserService {
 		return user
 	}
 
+	async getById(userId: string) {
+		const user = await this.getProfile(userId)
+
+		const { role, wishlists, ...rest } = user
+
+		return rest
+	}
+
 	async update(id: string, dto: UserDto) {
 		const user = await this.getProfile(id)
 

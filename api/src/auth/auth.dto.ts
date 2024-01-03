@@ -58,7 +58,7 @@ export class RegisterDto extends LoginDto {
 	@IsString({
 		message: 'Phone number must be a string',
 	})
-	@IsPhoneNumber()
+	@IsPhoneNumber('UA')
 	phoneNumber: string
 }
 
