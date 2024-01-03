@@ -82,6 +82,7 @@ model Apartment {
   hostLanguages   String[]    @default([]) @map("host_languages")
 
   location        Location?
+  amenities       String[]    @default([])
 
   reviews         Review[]
   wishlists       Wishlist[]
