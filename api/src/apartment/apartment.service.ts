@@ -10,9 +10,11 @@ import {
 	locationSelect,
 	reservationSelect,
 } from './apartment.select'
-import { ApartmentDto } from './apartment.dto'
+import { ApartmentDto } from './dto/apartment.dto'
 import { reviewSelect } from 'src/review/review.select'
 import { userSelect } from 'src/user/user.select'
+import { ApartmentFilterDto } from './dto/apartment-filter.dto'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApartmentService {
@@ -45,8 +47,58 @@ export class ApartmentService {
 		return apartment
 	}
 
-	async getAll() {
+	async getAll(dto: ApartmentFilterDto) {
+		const where: Prisma.ApartmentWhereInput = dto.searchTerm
+			? {
+					OR: [
+						{
+							name: {
+								contains: dto.searchTerm,
+								mode: 'insensitive',
+							},
+						},
+						{
+							location: {
+								city: {
+									contains: dto.searchTerm,
+									mode: 'insensitive',
+								},
+								country: {
+									contains: dto.searchTerm,
+									mode: 'insensitive',
+								},
+							},
+						},
+						{
+							description: {
+								hasSome: [dto.searchTerm],
+							},
+						},
+						{
+							category: {
+								name: {
+									contains: dto.searchTerm,
+									mode: 'insensitive',
+								},
+							},
+						},
+						{
+							hostLanguages: {
+								hasSome: [dto.searchTerm],
+							},
+						},
+						{
+							type: {
+								contains: dto.searchTerm,
+								mode: 'insensitive',
+							},
+						},
+					],
+				}
+			: {}
+
 		return await this.prisma.apartment.findMany({
+			where,
 			select: {
 				...apartmentItemSelect,
 				location: {

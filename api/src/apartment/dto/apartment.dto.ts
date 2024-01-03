@@ -118,6 +118,15 @@ export class ApartmentDto {
 	@Type(() => LocationDto)
 	location: LocationDto
 
+	@IsArray({
+		message: 'Amenities must be an array of strings',
+	})
+	@ArrayMinSize(1, {
+		message: 'At least one amenity must be provided',
+	})
+	@IsString({ each: true })
+	amenities: string[]
+
 	@IsUUID()
 	@IsString({
 		message: 'Category id must be a string',

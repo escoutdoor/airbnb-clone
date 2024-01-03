@@ -1,6 +1,4 @@
 import { Prisma } from '@prisma/client'
-import { reviewSelect } from 'src/review/review.select'
-import { userSelect } from 'src/user/user.select'
 
 export const locationSelect: Prisma.LocationSelect = {
 	id: true,
@@ -35,6 +33,7 @@ export const apartmentSelect: Prisma.ApartmentSelect = {
 	bathrooms: true,
 	maxGuests: true,
 	hostLanguages: true,
+	amenities: true,
 }
 
 export const apartmentItemSelect: Prisma.ApartmentSelect = {

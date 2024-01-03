@@ -6,14 +6,16 @@ import {
 	Param,
 	Post,
 	Put,
+	Query,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common'
 import { ApartmentService } from './apartment.service'
-import { ApartmentDto } from './apartment.dto'
+import { ApartmentDto } from './dto/apartment.dto'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 
 import { CurrentUser } from 'src/auth/decorators/user.decorator'
+import { ApartmentFilterDto } from './dto/apartment-filter.dto'
 
 @Controller('apartments')
 export class ApartmentController {
@@ -24,9 +26,10 @@ export class ApartmentController {
 		return await this.apartmentService.getById(id)
 	}
 
+	@UsePipes(new ValidationPipe({ transform: true }))
 	@Get()
-	async getAll() {
-		return await this.apartmentService.getAll()
+	async getAll(@Query() dto: ApartmentFilterDto) {
+		return await this.apartmentService.getAll(dto)
 	}
 
 	@Auth()
