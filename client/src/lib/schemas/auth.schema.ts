@@ -38,13 +38,10 @@ export const registerSchema = z
 			.min(2, {
 				message: 'Surname must be at least 2 characters long',
 			}),
-		dateOfBirth: z
-			.string({
-				invalid_type_error: 'Date of birth must be a string',
-			})
-			.datetime({
-				message: 'Invalid date of birth',
-			}),
+		dateOfBirth: z.date({
+			invalid_type_error: 'Date of birth must be a date',
+			required_error: 'Date of birth is required',
+		}),
 		phoneNumber: z
 			.string({
 				invalid_type_error: 'Phone number must be a string',
