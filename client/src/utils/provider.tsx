@@ -6,7 +6,14 @@ import { SessionProvider } from 'next-auth/react'
 import { FC, PropsWithChildren } from 'react'
 
 const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
-	const queryClient = new QueryClient()
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				refetchOnWindowFocus: false,
+				throwOnError: true,
+			},
+		},
+	})
 
 	return (
 		<>
