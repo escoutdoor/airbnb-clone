@@ -7,6 +7,7 @@ export interface IApartment extends IApartmentItem {
 	bedrooms: number
 	bathrooms: number
 	maxGuests: number
+	amenities: string[]
 	hostLanguages: string[]
 	reviews: IReview[]
 }
