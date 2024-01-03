@@ -6,6 +6,7 @@ import { FC } from 'react'
 import { useWishListModal } from '@/hooks/useWishListModal'
 import WishlistItem from '@/components/ui/wishlist-item/WishlistItem'
 import { useProfile } from '@/hooks/useProfile'
+import DarkButton from '@/components/ui/dark-button/DarkButton'
 
 const WishlistModal: FC = () => {
 	const { isActive, close } = useWishListModal()
@@ -17,6 +18,11 @@ const WishlistModal: FC = () => {
 			title="Add to wishlist"
 			isActive={isActive}
 			modalName="wishlist"
+			footer={
+				<div className={styles.footer}>
+					<DarkButton>Create new wishlist</DarkButton>
+				</div>
+			}
 		>
 			<ul className={styles.list}>
 				{profile?.wishlists.map(wishlist => (

@@ -4,3 +4,13 @@
 	gap: 12px;
 	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
 }
+
+.footer {
+	display: flex;
+	border-top: 1px solid #ebebeb;
+	padding: 16px 24px;
+
+	> button {
+		width: 100%;
+	}
+}

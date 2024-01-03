@@ -61,13 +61,22 @@ const HeaderNavigation: FC = () => {
 					<HeaderMenuItem key={item.id} item={item} />
 				))}
 				{profile && (
-					<HeaderMenuItem
-						item={{
-							id: 1,
-							onClick: () => signOut(),
-							title: 'Log out',
-						}}
-					></HeaderMenuItem>
+					<>
+						<HeaderMenuItem
+							item={{
+								id: 2,
+								href: '/wishlists',
+								title: 'Wishlists',
+							}}
+						/>
+						<HeaderMenuItem
+							item={{
+								id: 1,
+								onClick: () => signOut(),
+								title: 'Log out',
+							}}
+						/>
+					</>
 				)}
 			</ul>
 		</div>

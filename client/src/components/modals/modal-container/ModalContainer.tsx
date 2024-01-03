@@ -1,7 +1,13 @@
 'use client'
 
 import styles from './modal-container.module.scss'
-import { FC, HTMLAttributes, PropsWithChildren, useLayoutEffect } from 'react'
+import {
+	FC,
+	HTMLAttributes,
+	PropsWithChildren,
+	ReactNode,
+	useLayoutEffect,
+} from 'react'
 import { IoClose } from 'react-icons/io5'
 import MediumHeading from '@/components/ui/headings/medium-heading/MediumHeading'
 
@@ -10,6 +16,7 @@ interface IModalContainer extends HTMLAttributes<HTMLDivElement> {
 	close: () => void
 	title?: string
 	modalName: ModalName
+	footer?: ReactNode
 }
 
 type ModalName = 'description' | 'auth' | 'filter' | 'share' | 'wishlist'
@@ -20,6 +27,7 @@ const ModalContainer: FC<PropsWithChildren<IModalContainer>> = ({
 	children,
 	title,
 	modalName,
+	footer,
 	...rest
 }) => {
 	useLayoutEffect(() => {
@@ -51,6 +59,7 @@ const ModalContainer: FC<PropsWithChildren<IModalContainer>> = ({
 					<MediumHeading>{title}</MediumHeading>
 				</div>
 				<div className={styles.content}>{children}</div>
+				{footer}
 			</div>
 		</div>
 	)
