@@ -1,5 +1,6 @@
 'use client'
 
+import ErrorText from './error-text/ErrorText'
 import styles from './field.module.scss'
 import { forwardRef } from 'react'
 
@@ -12,15 +13,18 @@ interface IField
 const Field = forwardRef<HTMLInputElement, IField>(
 	({ placeholder, label, error, ...rest }, ref) => {
 		return (
-			<div className={styles.container}>
-				<input
-					placeholder=""
-					className={styles.field}
-					ref={ref}
-					{...rest}
-				/>
-				<label>{label}</label>
-			</div>
+			<>
+				<div className={styles.field}>
+					<input
+						placeholder=""
+						className={styles.input}
+						ref={ref}
+						{...rest}
+					/>
+					<label className={styles.label}>{label}</label>
+				</div>
+				{error && <ErrorText>{error}</ErrorText>}
+			</>
 		)
 	}
 )
