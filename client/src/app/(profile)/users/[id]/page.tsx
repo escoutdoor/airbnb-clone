@@ -1,9 +1,13 @@
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-	title: 'Guest Profile',
-}
+import { useUser } from '@/hooks/useUser'
 
-export default function ProfilePage() {
-	return 'profile'
+export default function UserPage({
+	params: { id },
+}: {
+	params: { id: string }
+}) {
+	const { user, isLoading, status, error, isError } = useUser(id)
+
+	return <>{user?.firstName}</>
 }
