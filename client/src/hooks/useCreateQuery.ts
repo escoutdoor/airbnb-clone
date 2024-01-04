@@ -9,14 +9,56 @@ export const useCreateQuery = () => {
 	const pathname = usePathname()
 
 	const createQuery = useCallback(
-		({ name, value }: { name: string; value: string }) => {
+		({
+			name,
+			value,
+			isArray = false,
+		}: {
+			name: string
+			value?: string
+			isArray?: boolean
+		}) => {
 			const params = new URLSearchParams(searchParams)
-			params.set(name, value)
 
-			push(pathname + '?' + params.toString())
+			if (!value) {
+				params.delete(name)
+				return pathname + '?' + params.toString()
+			}
+
+			if (isArray) {
+				const array = searchParams.getAll(name)
+				const isExists = array.some(item => item === value)
+
+				if (isExists) {
+					const indexToRemove = array.indexOf(value)
+					array.splice(indexToRemove, 1)
+					params.delete(name)
+					array.forEach(item => params.append(name, item))
+				} else {
+					params.append(name, value)
+				}
+			} else {
+				if (value) {
+					params.set(name, value)
+				} else {
+					params.delete(name)
+				}
+			}
+
+			return pathname + '?' + params.toString()
 		},
 		[searchParams]
 	)
 
-	return { createQuery }
+	const removeQuery = useCallback(
+		({ name }: { name: string }) => {
+			const params = new URLSearchParams(searchParams)
+			params.delete(name)
+
+			return pathname + '?' + params.toString()
+		},
+		[searchParams]
+	)
+
+	return { createQuery, removeQuery }
 }
