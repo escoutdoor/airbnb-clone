@@ -48,6 +48,18 @@ export class ApartmentService {
 	}
 
 	async getAll(dto: ApartmentFilterDto) {
+		return await this.prisma.apartment.findMany({
+			where: await this.getWhereOptions(dto),
+			select: {
+				...apartmentItemSelect,
+				location: {
+					select: locationSelect,
+				},
+			},
+		})
+	}
+
+	private async getWhereOptions(dto: ApartmentFilterDto) {
 		const where: Prisma.ApartmentWhereInput = dto.searchTerm
 			? {
 					OR: [
@@ -97,15 +109,65 @@ export class ApartmentService {
 				}
 			: {}
 
-		return await this.prisma.apartment.findMany({
-			where,
-			select: {
-				...apartmentItemSelect,
-				location: {
-					select: locationSelect,
+		if (dto.amenities) {
+			where.amenities = {
+				hasEvery: dto.amenities,
+			}
+		}
+
+		if (dto.hostLanguages) {
+			where.hostLanguages = {
+				hasSome: dto.hostLanguages,
+			}
+		}
+
+		if (dto.bathrooms) {
+			where.bathrooms = {
+				gte: dto.bathrooms,
+			}
+		}
+
+		if (dto.bedrooms) {
+			where.bedrooms = {
+				gte: dto.bedrooms,
+			}
+		}
+
+		if (dto.beds) {
+			where.beds = {
+				gte: dto.beds,
+			}
+		}
+
+		if (dto.category) {
+			where.category = {
+				name: {
+					contains: dto.category,
+					mode: 'insensitive',
 				},
-			},
-		})
+			}
+		}
+
+		if (dto.maxPrice) {
+			where.price = {
+				lte: dto.maxPrice,
+			}
+		}
+
+		if (dto.minPrice) {
+			where.price = {
+				gte: dto.minPrice,
+			}
+		}
+
+		if (dto.type) {
+			where.type = {
+				contains: dto.type,
+				mode: 'insensitive',
+			}
+		}
+
+		return where
 	}
 
 	async create(userId: string, dto: ApartmentDto) {
