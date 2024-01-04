@@ -26,6 +26,7 @@ export class ApartmentFilterDto {
 	type?: ApartmentType
 
 	@IsOptional()
+	@Transform(({ value }) => +value)
 	@IsNumber()
 	@Min(0, {
 		message: 'Min price must be greater than or equal to 0',
@@ -33,6 +34,7 @@ export class ApartmentFilterDto {
 	minPrice?: number
 
 	@IsOptional()
+	@Transform(({ value }) => +value)
 	@IsNumber()
 	@Min(1, {
 		message: 'Max price must be greater than or equal to 1',
@@ -40,6 +42,7 @@ export class ApartmentFilterDto {
 	maxPrice?: number
 
 	@IsOptional()
+	@Transform(({ value }) => +value)
 	@IsNumber()
 	@Min(1, {
 		message: 'Bedrooms must be greater than or equal to 1',
@@ -47,6 +50,7 @@ export class ApartmentFilterDto {
 	bedrooms?: number
 
 	@IsOptional()
+	@Transform(({ value }) => +value)
 	@IsNumber()
 	@Min(1, {
 		message: 'Beds must be greater than or equal to 1',
@@ -54,6 +58,7 @@ export class ApartmentFilterDto {
 	beds?: number
 
 	@IsOptional()
+	@Transform(({ value }) => +value)
 	@IsNumber()
 	@Min(1, {
 		message: 'Bathrooms must be greater than or equal to 1',
@@ -68,5 +73,5 @@ export class ApartmentFilterDto {
 	@IsOptional()
 	@Transform(({ value }) => value?.split(',')?.map(v => v?.trim()))
 	@IsArray()
-	languages?: string[]
+	hostLanguages?: string[]
 }
