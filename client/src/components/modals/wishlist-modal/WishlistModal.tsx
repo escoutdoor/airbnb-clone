@@ -19,7 +19,7 @@ const WishlistModal: FC = () => {
 			isActive={isActive}
 			modalName="wishlist"
 			footer={
-				<div className={styles.footer}>
+				<div className={styles.container}>
 					<DarkButton>Create new wishlist</DarkButton>
 				</div>
 			}

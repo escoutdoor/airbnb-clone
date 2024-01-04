@@ -59,7 +59,7 @@ const ModalContainer: FC<PropsWithChildren<IModalContainer>> = ({
 					<MediumHeading>{title}</MediumHeading>
 				</div>
 				<div className={styles.content}>{children}</div>
-				{footer}
+				{footer && <div className={styles.footer}>{footer}</div>}
 			</div>
 		</div>
 	)
