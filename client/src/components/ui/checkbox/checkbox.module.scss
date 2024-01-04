@@ -1,0 +1,45 @@
+.container {
+	padding: 12px 0;
+
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	cursor: pointer;
+
+	.field {
+		position: relative;
+		border-radius: 4px;
+		border: 1px solid #ebebeb;
+		width: 24px;
+		height: 24px;
+		transition: all 0.2s ease-in-out;
+
+		.input {
+			position: absolute;
+			opacity: 0;
+		}
+
+		.icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			transition: opacity 0.2s ease-in-out;
+			color: #fff;
+			z-index: 99;
+		}
+
+		&.active {
+			border-color: transparent;
+			background: var(--black);
+
+			.icon {
+				opacity: 1;
+			}
+		}
+	}
+
+	> label {
+		cursor: pointer;
+	}
+}

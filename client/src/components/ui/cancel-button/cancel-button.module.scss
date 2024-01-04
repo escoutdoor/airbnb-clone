@@ -1,0 +1,17 @@
+.button {
+	cursor: pointer;
+	padding: 10px;
+
+	> p {
+		font-weight: 700;
+		transition: all 0.2s ease-in-out;
+		opacity: 0.9;
+	}
+
+	&:hover {
+		> p {
+			color: #000;
+			opacity: 1;
+		}
+	}
+}
