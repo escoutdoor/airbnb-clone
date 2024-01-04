@@ -1,0 +1,41 @@
+.section {
+	padding: 0 24px;
+
+	.container {
+		padding: 24px 0;
+
+		border-top: 1px solid #ebebeb;
+
+		.select__container {
+			margin-top: 20px;
+
+			.list {
+				display: flex;
+				padding: 14px 0;
+				flex-wrap: wrap;
+				gap: 14px;
+
+				.item {
+					padding: 10px 20px;
+					border: 1px solid #ebebeb;
+					cursor: pointer;
+					border-radius: 30px;
+					transition: all 0.1s ease-in-out;
+
+					&.active {
+						border-color: transparent;
+						background-color: var(--black);
+
+						> p {
+							color: #fff;
+						}
+					}
+
+					&:hover {
+						border-color: var(--black);
+					}
+				}
+			}
+		}
+	}
+}
