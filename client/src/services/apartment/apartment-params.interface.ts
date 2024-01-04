@@ -10,5 +10,5 @@ export interface IApartmentFilterParams {
 	beds?: number
 	bathrooms?: number
 	amenities?: string[]
-	languages?: string[]
+	hostLanguages?: string[]
 }

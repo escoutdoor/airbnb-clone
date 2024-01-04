@@ -5,6 +5,7 @@ import {
 	IApartmentItem,
 } from '@/shared/interfaces/apartment.interface'
 import { IApartmentFilterParams } from './apartment-params.interface'
+import qs from 'qs'
 
 export const ApartmentService = {
 	async getById(id: string) {
@@ -19,6 +20,9 @@ export const ApartmentService = {
 			method: 'GET',
 			url: `${APARTMENT_URL}`,
 			params,
+			paramsSerializer: params => {
+				return qs.stringify(params, { arrayFormat: 'comma' })
+			},
 		})
 
 		return response
