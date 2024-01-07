@@ -4,13 +4,13 @@ import styles from './apartment-item.module.scss'
 import { FC } from 'react'
 import { IApartmentItem } from '@/shared/interfaces/apartment.interface'
 import { IoMdHeartEmpty, IoMdHeart } from 'react-icons/io'
+import { useWishListModal } from '@/hooks/useWishListModal'
+import { useProfile } from '@/hooks/useProfile'
+import { getLocationTitle } from '@/utils/get-location-title'
 import Text from '../../text/Text'
 import Rating from '../../rating/Rating'
 import SmallText from '../../small-text/SmallText'
 import Link from 'next/link'
-import { useWishListModal } from '@/hooks/useWishListModal'
-import { useProfile } from '@/hooks/useProfile'
-import { getLocationTitle } from '@/utils/get-location-title'
 import ImageCarousel from '../../image-carousel/ImageCarousel'
 
 const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
@@ -27,7 +27,7 @@ const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 				<button
 					onClick={e => {
 						e.preventDefault()
-						open()
+						open(item.id)
 					}}
 					className={styles.wishlist__button}
 				>
@@ -44,7 +44,8 @@ const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 					<div className={styles.text}>
 						<Text>{getLocationTitle(item.location)}</Text>
 						<div className={styles.price}>
-							<Text>$59</Text> <SmallText>night</SmallText>
+							<Text>${item.price}</Text>{' '}
+							<SmallText>night</SmallText>
 						</div>
 					</div>
 					<Rating rating={4.75} />

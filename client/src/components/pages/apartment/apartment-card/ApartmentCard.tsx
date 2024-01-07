@@ -28,7 +28,7 @@ const ApartmentCard: FC<{ apartment: IApartment }> = ({ apartment }) => {
 						<IoMdShareAlt className={styles.icon} />
 						Share
 					</UnderlinedButton>
-					<UnderlinedButton onClick={open}>
+					<UnderlinedButton onClick={() => open(apartment.id)}>
 						{isSaved ? (
 							<IoMdHeart
 								className={`${styles.icon} ${styles.active}`}

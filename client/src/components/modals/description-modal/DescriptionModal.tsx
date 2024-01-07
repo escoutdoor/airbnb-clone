@@ -19,18 +19,6 @@ const DescriptionModal: FC<{ description: string[] }> = ({ description }) => {
 				{description.map((paragraph, index) => (
 					<li key={index}>{paragraph}</li>
 				))}
-				{description.map((paragraph, index) => (
-					<li key={index}>{paragraph}</li>
-				))}
-				{description.map((paragraph, index) => (
-					<li key={index}>{paragraph}</li>
-				))}
-				{description.map((paragraph, index) => (
-					<li key={index}>{paragraph}</li>
-				))}
-				{description.map((paragraph, index) => (
-					<li key={index}>{paragraph}</li>
-				))}
 			</ul>
 		</ModalContainer>
 	)

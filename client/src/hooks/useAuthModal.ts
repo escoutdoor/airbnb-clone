@@ -1,11 +1,13 @@
 import { create } from 'zustand'
 
+type ActiveTab = 'login' | 'register'
+
 type AuthModalState = {
 	status: {
 		isActive: boolean
-		activeTab: 'login' | 'register'
+		activeTab: ActiveTab
 	}
-	open: (tab: 'login' | 'register') => void
+	open: (tab: ActiveTab) => void
 	close: () => void
 }
 
@@ -14,7 +16,7 @@ export const useAuthModal = create<AuthModalState>(set => ({
 		isActive: false,
 		activeTab: 'login',
 	},
-	open: (tab: 'login' | 'register') =>
+	open: (tab: ActiveTab) =>
 		set(state => ({
 			status: {
 				activeTab: tab,

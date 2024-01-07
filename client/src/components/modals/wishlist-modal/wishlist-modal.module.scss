@@ -1,14 +1,29 @@
-.list {
+.container {
 	padding: 0px 24px;
-	display: grid;
-	gap: 12px;
-	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+
+	.list {
+		display: grid;
+		gap: 12px;
+		grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+	}
+
+	> p {
+		color: var(--gray);
+		font-size: 13px;
+	}
 }
 
-.container {
+.adding__footer {
 	width: 100%;
 
 	> button {
 		width: 100%;
 	}
+}
+
+.create__wishlist {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
 }

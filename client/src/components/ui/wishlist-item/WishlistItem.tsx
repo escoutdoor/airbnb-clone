@@ -1,20 +1,22 @@
 import styles from './wishlist-item.module.scss'
 import { FC } from 'react'
-import { Wishlist } from '@/shared/interfaces/user.interface'
+import { IWishlist } from '@/shared/interfaces/user.interface'
 import MediumHeading from '../headings/medium-heading/MediumHeading'
 import SmallText from '../small-text/SmallText'
 import Image from 'next/image'
 
 interface IWishlistItem {
-	item: Wishlist
-	handleDelete?: () => void
+	item: IWishlist
+	toggle?: () => void
 }
 
-const WishlistItem: FC<IWishlistItem> = ({ handleDelete, item }) => {
-	const previewImage = item?.apartments?.[0].images?.[0]
+const WishlistItem: FC<IWishlistItem> = ({ toggle, item }) => {
+	const previewImage = item.apartments.length
+		? item?.apartments?.[0].images?.[0]
+		: '/images/apartments/wishlist-preview.jpg'
 
 	return (
-		<li className={styles.item}>
+		<li className={styles.item} onClick={toggle}>
 			<div className={styles.preview}>
 				<Image
 					width={270}

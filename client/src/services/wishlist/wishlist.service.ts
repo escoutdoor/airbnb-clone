@@ -1,11 +1,9 @@
+import { IWishlist } from '@/shared/interfaces/user.interface'
 import { WISHLIST_URL } from '../helpers/api.constants'
 import { instance } from '../helpers/axios.instance'
+import { TWishlistSchema } from '@/lib/schemas/wishlist.schema'
 
-interface IWishlistData {
-	name: string
-}
-
-export const wishlistService = {
+export const WishlistService = {
 	async getById(wishlistId: string) {
 		const response = await instance({
 			method: 'GET',
@@ -15,8 +13,8 @@ export const wishlistService = {
 		return response
 	},
 
-	async create(data: IWishlistData) {
-		const response = await instance({
+	async create(data: TWishlistSchema) {
+		const response = await instance<IWishlist>({
 			method: 'POST',
 			url: `${WISHLIST_URL}`,
 			data,
@@ -34,7 +32,7 @@ export const wishlistService = {
 		return response
 	},
 
-	async update(wishlistId: string, data: IWishlistData) {
+	async update(wishlistId: string, data: TWishlistSchema) {
 		const response = await instance({
 			method: 'PUT',
 			url: `${WISHLIST_URL}/${wishlistId}`,

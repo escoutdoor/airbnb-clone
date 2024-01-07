@@ -13,10 +13,10 @@ export interface IUser {
 
 export interface IUserDetails extends IUser {
 	role: Role
-	wishlists: Wishlist[]
+	wishlists: IWishlist[]
 }
 
-export interface Wishlist {
+export interface IWishlist {
 	id: string
 	name: string
 	userId: string
