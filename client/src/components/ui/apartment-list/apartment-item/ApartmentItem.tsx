@@ -7,6 +7,7 @@ import { IoMdHeartEmpty, IoMdHeart } from 'react-icons/io'
 import { useWishListModal } from '@/hooks/useWishListModal'
 import { useProfile } from '@/hooks/useProfile'
 import { getLocationTitle } from '@/utils/get-location-title'
+import { useAuthModal } from '@/hooks/useAuthModal'
 import Text from '../../text/Text'
 import Rating from '../../rating/Rating'
 import SmallText from '../../small-text/SmallText'
@@ -15,11 +16,21 @@ import ImageCarousel from '../../image-carousel/ImageCarousel'
 
 const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 	const { open } = useWishListModal()
+	const { open: openAuthModal } = useAuthModal()
 	const { profile } = useProfile()
 
 	const isWishListed = profile?.wishlists?.some(wishlist =>
 		wishlist.apartments.some(apartment => apartment.id === item.id)
 	)
+
+	const handleWishListClick = () => {
+		if (!profile) {
+			openAuthModal('login')
+			return
+		}
+
+		open(item.id)
+	}
 
 	return (
 		<div className={styles.item}>
@@ -27,7 +38,7 @@ const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 				<button
 					onClick={e => {
 						e.preventDefault()
-						open(item.id)
+						handleWishListClick()
 					}}
 					className={styles.wishlist__button}
 				>

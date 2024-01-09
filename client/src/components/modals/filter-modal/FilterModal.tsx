@@ -4,7 +4,7 @@ import styles from './filter-modal.module.scss'
 import { FC } from 'react'
 import { useCreateQuery } from '@/hooks/useCreateQuery'
 import { useFilterModal } from '@/hooks/useFilterModal'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ApartmentType } from '@/shared/interfaces/apartment.interface'
 import ModalContainer from '../modal-container/ModalContainer'
 import DarkButton from '@/components/ui/dark-button/DarkButton'
@@ -19,6 +19,7 @@ const FilterModal: FC = () => {
 	const { isActive, close } = useFilterModal()
 	const { createQuery } = useCreateQuery()
 	const { push } = useRouter()
+	const pathname = usePathname()
 
 	const { get, getAll } = useSearchParams()
 
@@ -28,6 +29,23 @@ const FilterModal: FC = () => {
 	const bathrooms = get('bathrooms') as string | undefined
 	const amenities = getAll('amenities') as string[] | undefined
 	const hostLanguages = getAll('hostLanguages') as string[] | undefined
+	const minPrice = get('minPrice') as string | undefined
+	const maxPrice = get('maxPrice') as string | undefined
+
+	const handlePrice = (values: number[]) => {
+		if (values[1] < values[0]) return
+
+		push(
+			`${pathname}?${new URLSearchParams({
+				minPrice: values[0].toString(),
+				maxPrice: values[1].toString(),
+			})}`
+		)
+	}
+
+	const handleClear = () => {
+		push(pathname)
+	}
 
 	return (
 		<ModalContainer
@@ -37,7 +55,7 @@ const FilterModal: FC = () => {
 			modalName="filter"
 			footer={
 				<div className={styles.footer__container}>
-					<CancelButton onClick={close}>Cancel</CancelButton>
+					<CancelButton onClick={handleClear}>Clear all</CancelButton>
 					<DarkButton onClick={close}>Show places</DarkButton>
 				</div>
 			}
@@ -46,7 +64,13 @@ const FilterModal: FC = () => {
 				value={type}
 				onChange={e => push(createQuery({ name: 'type', value: e }))}
 			/>
-			<PriceRange />
+			<PriceRange
+				onChange={handlePrice}
+				values={[
+					minPrice ? +minPrice : 10,
+					maxPrice ? +maxPrice : 1000,
+				]}
+			/>
 			<RoomsBedsSelect
 				bedrooms={bedrooms ? +bedrooms : undefined}
 				beds={beds ? +beds : undefined}

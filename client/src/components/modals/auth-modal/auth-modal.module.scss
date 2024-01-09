@@ -1,3 +1,9 @@
 .container {
 	padding: 0px 24px;
 }
+
+.footer {
+	> p {
+		display: inline-block;
+	}
+}

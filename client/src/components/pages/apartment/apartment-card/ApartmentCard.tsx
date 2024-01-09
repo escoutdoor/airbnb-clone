@@ -9,26 +9,37 @@ import { useProfile } from '@/hooks/useProfile'
 import { useWishListModal } from '@/hooks/useWishListModal'
 import { useShareModal } from '@/hooks/useShareModal'
 import ApartmentImages from './ApartmentImages'
+import { useAuthModal } from '@/hooks/useAuthModal'
 
 const ApartmentCard: FC<{ apartment: IApartment }> = ({ apartment }) => {
 	const { profile } = useProfile()
 	const { open } = useWishListModal()
-	const { open: openShare } = useShareModal()
+	const { open: openShareModal } = useShareModal()
+	const { open: openAuthModal } = useAuthModal()
 
 	const isSaved = profile?.wishlists.some(list =>
 		list.apartments.some(a => a.id === apartment.id)
 	)
+
+	const handleWishListClick = () => {
+		if (!profile) {
+			openAuthModal('login')
+			return
+		}
+
+		open(apartment.id)
+	}
 
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
 				<h1 className={styles.name}>{apartment.name}</h1>
 				<div className={styles.actions}>
-					<UnderlinedButton onClick={openShare}>
+					<UnderlinedButton onClick={openShareModal}>
 						<IoMdShareAlt className={styles.icon} />
 						Share
 					</UnderlinedButton>
-					<UnderlinedButton onClick={() => open(apartment.id)}>
+					<UnderlinedButton onClick={() => handleWishListClick()}>
 						{isSaved ? (
 							<IoMdHeart
 								className={`${styles.icon} ${styles.active}`}

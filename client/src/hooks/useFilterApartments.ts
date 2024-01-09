@@ -5,8 +5,8 @@ import { ApartmentService } from '@/services/apartment/apartment.service'
 import { useQuery } from '@tanstack/react-query'
 import { useDebounce } from './useDebounce'
 
-export const useFilterApartments = (data: IApartmentFilterParams) => {
-	// const data = useDebounce(params, 300)
+export const useFilterApartments = (params: IApartmentFilterParams) => {
+	const data = useDebounce(params, 300)
 
 	const { data: apartments, isLoading } = useQuery({
 		queryKey: ['apartments', data],

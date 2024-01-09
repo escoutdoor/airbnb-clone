@@ -5,5 +5,46 @@
 		padding: 24px 0;
 
 		border-top: 1px solid #ebebeb;
+
+		.range {
+			padding: 40px 32.5px 20px;
+
+			.slider {
+				display: flex;
+				align-items: center;
+
+				.thumb {
+					width: 32px;
+					height: 32px;
+					background-color: #fff;
+					box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+						rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+					border-radius: 50%;
+					cursor: pointer;
+				}
+
+				.track {
+					background: var(--red);
+					height: 5px;
+					border-radius: 5px;
+
+					&:first-child,
+					&:nth-child(3) {
+						background: var(--gray);
+					}
+				}
+			}
+
+			.values {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-top: 20px;
+
+				> div {
+					flex: 0.2;
+				}
+			}
+		}
 	}
 }
