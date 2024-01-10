@@ -17,7 +17,7 @@ import HostLanguageSelect from './host-language-select/HostLanguageSelect'
 
 const FilterModal: FC = () => {
 	const { isActive, close } = useFilterModal()
-	const { createQuery } = useCreateQuery()
+	const { createQuery, removeQuery } = useCreateQuery()
 	const { push } = useRouter()
 	const pathname = usePathname()
 
@@ -33,8 +33,6 @@ const FilterModal: FC = () => {
 	const maxPrice = get('maxPrice') as string | undefined
 
 	const handlePrice = (values: number[]) => {
-		if (values[1] < values[0]) return
-
 		push(
 			`${pathname}?${new URLSearchParams({
 				minPrice: values[0].toString(),

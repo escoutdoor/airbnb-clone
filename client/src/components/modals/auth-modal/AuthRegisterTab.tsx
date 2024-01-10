@@ -1,25 +1,26 @@
 'use client'
 
-import Field from '@/components/ui/field/Field'
-import GradientButton from '@/components/ui/gradient-button/GradientButton'
+import { FC } from 'react'
+import { DateTime } from 'luxon'
 import { TRegisterSchema, registerSchema } from '@/lib/schemas/auth.schema'
 import { AuthService } from '@/services/auth/auth.service'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import GradientButton from '@/components/ui/gradient-button/GradientButton'
+import Field from '@/components/ui/field/Field'
 
 const AuthRegisterTab: FC = () => {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-		setValue,
 		watch,
+		setValue,
 	} = useForm<TRegisterSchema>({
 		mode: 'onChange',
 		resolver: zodResolver(registerSchema),
 		defaultValues: {
-			dateOfBirth: new Date(),
+			dateOfBirth: DateTime.now().minus({ years: 18 }).toJSDate(),
 		},
 	})
 
@@ -52,6 +53,14 @@ const AuthRegisterTab: FC = () => {
 				type="tel"
 				{...register('phoneNumber')}
 				error={errors.phoneNumber?.message}
+			/>
+			<Field
+				label="Date of Birth"
+				type="date"
+				{...register('dateOfBirth')}
+				min={DateTime.now().minus({ years: 100 }).toISODate()}
+				max={DateTime.now().minus({ years: 3 }).toISODate()}
+				error={errors.dateOfBirth?.message}
 			/>
 			<Field
 				label="Password"

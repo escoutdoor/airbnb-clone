@@ -24,7 +24,7 @@
 				}
 
 				.track {
-					background: var(--red);
+					background: var(--black);
 					height: 5px;
 					border-radius: 5px;
 
@@ -39,10 +39,17 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				margin-top: 20px;
+				margin-top: 40px;
+				gap: 24px;
 
 				> div {
-					flex: 0.2;
+					flex: 1;
+				}
+
+				.line {
+					height: 1px;
+					background: #ebebeb;
+					width: 16px;
 				}
 			}
 		}

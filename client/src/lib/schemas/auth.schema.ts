@@ -38,7 +38,7 @@ export const registerSchema = z
 			.min(2, {
 				message: 'Surname must be at least 2 characters long',
 			}),
-		dateOfBirth: z.date({
+		dateOfBirth: z.coerce.date({
 			invalid_type_error: 'Date of birth must be a date',
 			required_error: 'Date of birth is required',
 		}),

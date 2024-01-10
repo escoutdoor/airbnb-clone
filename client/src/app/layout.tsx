@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import Provider from '@/utils/provider'
 
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
+
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
