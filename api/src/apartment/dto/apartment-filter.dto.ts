@@ -28,16 +28,16 @@ export class ApartmentFilterDto {
 	@IsOptional()
 	@Transform(({ value }) => +value)
 	@IsNumber()
-	@Min(0, {
-		message: 'Min price must be greater than or equal to 0',
+	@Min(10, {
+		message: 'Min price must be greater than or equal to 10$',
 	})
 	minPrice?: number
 
 	@IsOptional()
 	@Transform(({ value }) => +value)
 	@IsNumber()
-	@Min(1, {
-		message: 'Max price must be greater than or equal to 1',
+	@Min(10, {
+		message: 'Max price must be greater than or equal to 10$',
 	})
 	maxPrice?: number
 

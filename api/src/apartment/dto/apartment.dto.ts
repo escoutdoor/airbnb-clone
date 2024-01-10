@@ -91,7 +91,9 @@ export class ApartmentDto {
 	type: string
 
 	@IsNumber()
-	@Min(0, { message: 'Price must be a positive number' })
+	@Min(10, {
+		message: 'Price must be bigger than 10',
+	})
 	price: number
 
 	@IsNumber()
