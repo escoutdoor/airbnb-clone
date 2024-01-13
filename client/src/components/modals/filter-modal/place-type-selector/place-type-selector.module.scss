@@ -36,6 +36,11 @@
 				border-radius: 0 12px 12px 0;
 			}
 
+			&:nth-child(2) {
+				border-left-color: #fff;
+				border-right-color: #fff;
+			}
+
 			&.active {
 				border: none;
 

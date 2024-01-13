@@ -2,7 +2,7 @@ import { APARTMENT_URL } from '../helpers/api.constants'
 import { instance } from '../helpers/axios.instance'
 import {
 	IApartment,
-	IApartmentItem,
+	IApartmentResponse,
 } from '@/shared/interfaces/apartment.interface'
 import { IApartmentFilterParams } from './apartment-params.interface'
 import qs from 'qs'
@@ -16,7 +16,7 @@ export const ApartmentService = {
 	},
 
 	async getAll(params: IApartmentFilterParams) {
-		const response = await instance<IApartmentItem[]>({
+		const response = await instance<IApartmentResponse>({
 			method: 'GET',
 			url: `${APARTMENT_URL}`,
 			params,

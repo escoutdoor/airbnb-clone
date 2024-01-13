@@ -1,27 +1,26 @@
 'use client'
 
 import styles from './rooms-beds-select.module.scss'
-import { FC } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import ParagraphHeading from '@/components/ui/headings/paragraph-heading/ParagraphHeading'
 import RoomsBedsCountSelector from './RoomsBedsCountSelector'
-import { useCreateQuery } from '@/hooks/useCreateQuery'
-import { useRouter } from 'next/navigation'
+import { IApartmentFilterParams } from '@/services/apartment/apartment-params.interface'
 
 type RoomsBedsSelectProps = {
-	bedrooms?: number
-	beds?: number
-	bathrooms?: number
+	bedrooms: number | undefined
+	beds: number | undefined
+	bathrooms: number | undefined
+	maxGuests: number | undefined
+	setFilter: Dispatch<SetStateAction<IApartmentFilterParams>>
 }
 
 const RoomsBedsSelect: FC<RoomsBedsSelectProps> = ({
 	bedrooms,
 	beds,
 	bathrooms,
+	maxGuests,
+	setFilter,
 }) => {
-	const { push } = useRouter()
-
-	const { createQuery } = useCreateQuery()
-
 	return (
 		<section className={styles.section}>
 			<div className={styles.container}>
@@ -29,38 +28,42 @@ const RoomsBedsSelect: FC<RoomsBedsSelectProps> = ({
 				<RoomsBedsCountSelector
 					title="Bedrooms"
 					onChange={e =>
-						push(
-							createQuery({
-								name: 'bedrooms',
-								value: e?.toString(),
-							})
-						)
+						setFilter(prev => ({
+							...prev,
+							bedrooms: e?.toString(),
+						}))
 					}
 					value={bedrooms}
 				/>
 				<RoomsBedsCountSelector
 					title="Beds"
 					onChange={e =>
-						push(
-							createQuery({
-								name: 'beds',
-								value: e?.toString(),
-							})
-						)
+						setFilter(prev => ({
+							...prev,
+							beds: e?.toString(),
+						}))
 					}
 					value={beds}
 				/>
 				<RoomsBedsCountSelector
 					title="Bathrooms"
 					onChange={e =>
-						push(
-							createQuery({
-								name: 'bathrooms',
-								value: e?.toString(),
-							})
-						)
+						setFilter(prev => ({
+							...prev,
+							bathrooms: e?.toString(),
+						}))
 					}
 					value={bathrooms}
+				/>
+				<RoomsBedsCountSelector
+					title="Max guests"
+					onChange={e =>
+						setFilter(prev => ({
+							...prev,
+							maxGuests: e?.toString(),
+						}))
+					}
+					value={maxGuests}
 				/>
 			</div>
 		</section>

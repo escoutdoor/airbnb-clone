@@ -66,6 +66,14 @@ export class ApartmentFilterDto {
 	bathrooms?: number
 
 	@IsOptional()
+	@Transform(({ value }) => +value)
+	@IsNumber()
+	@Min(1, {
+		message: 'Max guests must be greater than or equal to 1',
+	})
+	maxGuests?: number
+
+	@IsOptional()
 	@Transform(({ value }) => value?.split(',')?.map(v => v?.trim()))
 	@IsArray()
 	amenities?: string[]

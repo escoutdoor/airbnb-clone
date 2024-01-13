@@ -3,10 +3,15 @@ import styles from './host-language-select.module.scss'
 import { FC } from 'react'
 import Checkbox from '@/components/ui/checkbox/Checkbox'
 
-const HostLanguageSelect: FC<{
-	hostLanguages?: string[]
-	onChange: (value?: string) => void
-}> = ({ hostLanguages, onChange }) => {
+type HostLanguageSelectProps = {
+	hostLanguages: string[]
+	onChange: (value: string) => void
+}
+
+const HostLanguageSelect: FC<HostLanguageSelectProps> = ({
+	hostLanguages,
+	onChange,
+}) => {
 	return (
 		<section className={styles.section}>
 			<div className={styles.container}>

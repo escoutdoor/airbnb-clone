@@ -48,7 +48,7 @@ export class ApartmentService {
 	}
 
 	async getAll(dto: ApartmentFilterDto) {
-		return await this.prisma.apartment.findMany({
+		const apartments = await this.prisma.apartment.findMany({
 			where: await this.getWhereOptions(dto),
 			select: {
 				...apartmentItemSelect,
@@ -57,6 +57,15 @@ export class ApartmentService {
 				},
 			},
 		})
+
+		const total = await this.prisma.apartment.count({
+			where: await this.getWhereOptions(dto),
+		})
+
+		return {
+			apartments,
+			total,
+		}
 	}
 
 	private async getWhereOptions(dto: ApartmentFilterDto) {
@@ -157,6 +166,12 @@ export class ApartmentService {
 		if (dto.minPrice) {
 			where.price = {
 				gte: dto.minPrice,
+			}
+		}
+
+		if (dto.maxGuests) {
+			where.maxGuests = {
+				gte: dto.maxGuests,
 			}
 		}
 

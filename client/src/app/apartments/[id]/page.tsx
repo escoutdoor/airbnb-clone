@@ -9,14 +9,13 @@ export default function ApartmentPage({
 }: {
 	params: { id: string }
 }) {
-	const { apartment } = useApartment(id)
+	const { apartment, isError, isLoading } = useApartment(id)
 
-	if (apartment) {
+	if (apartment)
 		return (
 			<>
 				<DescriptionModal description={apartment.description} />
 				<Apartment apartment={apartment} />
 			</>
 		)
-	}
 }

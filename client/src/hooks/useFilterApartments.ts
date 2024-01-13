@@ -6,16 +6,23 @@ import { useQuery } from '@tanstack/react-query'
 import { useDebounce } from './useDebounce'
 
 export const useFilterApartments = (params: IApartmentFilterParams) => {
-	const data = useDebounce(params, 300)
+	const debouncedParams = useDebounce(params, 200)
 
-	const { data: apartments, isLoading } = useQuery({
-		queryKey: ['apartments', data],
-		queryFn: () => ApartmentService.getAll(data),
-		select: ({ data }) => data,
-	})
+	const { data, isLoading, error, isError, isFetched, isFetching, status } =
+		useQuery({
+			queryKey: ['apartments', debouncedParams],
+			queryFn: () => ApartmentService.getAll(debouncedParams),
+			select: ({ data }) => data,
+		})
 
 	return {
-		apartments,
+		apartments: data?.apartments,
+		total: data?.total,
 		isLoading,
+		error,
+		isError,
+		isFetched,
+		isFetching,
+		status,
 	}
 }

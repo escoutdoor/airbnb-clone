@@ -1,102 +1,150 @@
 'use client'
 
 import styles from './filter-modal.module.scss'
-import { FC } from 'react'
-import { useCreateQuery } from '@/hooks/useCreateQuery'
+import { FC, useEffect, useState } from 'react'
 import { useFilterModal } from '@/hooks/useFilterModal'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useFilterApartments } from '@/hooks/useFilterApartments'
+import { IApartmentFilterParams } from '@/services/apartment/apartment-params.interface'
+import { usePathname, useRouter } from 'next/navigation'
 import { ApartmentType } from '@/shared/interfaces/apartment.interface'
+import { BeatLoader } from 'react-spinners'
 import ModalContainer from '../modal-container/ModalContainer'
-import DarkButton from '@/components/ui/dark-button/DarkButton'
 import CancelButton from '@/components/ui/cancel-button/CancelButton'
-import PlaceTypeSelect from './place-type-select/PlaceTypeSelect'
+import DarkButton from '@/components/ui/dark-button/DarkButton'
+import PlaceTypeSelector from './place-type-selector/PlaceTypeSelector'
 import PriceRange from './price-range/PriceRange'
 import RoomsBedsSelect from './rooms-beds-select/RoomsBedsSelect'
 import AmenitiesSelect from './amenities-select/AmenitiesSelect'
 import HostLanguageSelect from './host-language-select/HostLanguageSelect'
+import qs from 'qs'
 
-const FilterModal: FC = () => {
-	const { isActive, close } = useFilterModal()
-	const { createQuery, removeQuery } = useCreateQuery()
+type FilterModalProps = {
+	searchParams?: { [key: string]: string | string[] | undefined }
+}
+
+const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
+	const { close, isActive } = useFilterModal()
 	const { push } = useRouter()
 	const pathname = usePathname()
 
-	const { get, getAll } = useSearchParams()
+	const [filter, setFilter] = useState<IApartmentFilterParams>({
+		...searchParams,
+	})
 
-	const type = get('type') as ApartmentType | undefined
-	const beds = get('beds') as string | undefined
-	const bedrooms = get('bedrooms') as string | undefined
-	const bathrooms = get('bathrooms') as string | undefined
-	const amenities = getAll('amenities') as string[] | undefined
-	const hostLanguages = getAll('hostLanguages') as string[] | undefined
-	const minPrice = get('minPrice') as string | undefined
-	const maxPrice = get('maxPrice') as string | undefined
-
-	const handlePrice = (values: number[]) => {
-		push(
-			`${pathname}?${new URLSearchParams({
-				minPrice: values[0].toString(),
-				maxPrice: values[1].toString(),
-			})}`
-		)
-	}
+	const { total, isFetching } = useFilterApartments({ ...filter })
 
 	const handleClear = () => {
-		push(pathname)
+		setFilter({})
 	}
+
+	const handleSubmit = () => {
+		const query = qs.stringify(
+			{ ...filter },
+			{ arrayFormat: 'repeat', skipNulls: true }
+		)
+
+		push(`${pathname}?${query}`)
+		close()
+	}
+
+	const handleAmenitiesChange = (value: string) => {
+		let amenities = [...(filter.amenities || [])] || []
+		const isExist = amenities.find(amenity => amenity === value)
+
+		if (isExist) {
+			amenities = amenities.filter(amenity => amenity !== value)
+		} else {
+			amenities = [...amenities, value]
+		}
+
+		setFilter({ ...filter, amenities })
+	}
+
+	const handleLanguageChange = (value: string) => {
+		let hostLanguages = [...(filter.hostLanguages || [])] || []
+		const isExist = hostLanguages.find(language => language === value)
+
+		if (isExist) {
+			hostLanguages = hostLanguages.filter(language => language !== value)
+		} else {
+			hostLanguages = [...hostLanguages, value]
+		}
+
+		setFilter({ ...filter, hostLanguages })
+	}
+
+	const handlePrice = (values: number[]) => {
+		const [minPrice, maxPrice] = values
+
+		setFilter({
+			...filter,
+			minPrice: minPrice.toString(),
+			maxPrice: maxPrice.toString(),
+		})
+	}
+
+	useEffect(() => {
+		if (!isActive) return
+
+		setFilter({ ...(searchParams as IApartmentFilterParams) })
+	}, [searchParams])
 
 	return (
 		<ModalContainer
 			close={close}
-			title="Filters"
 			isActive={isActive}
 			modalName="filter"
+			title="Filters"
 			footer={
-				<div className={styles.footer__container}>
-					<CancelButton onClick={handleClear}>Clear all</CancelButton>
-					<DarkButton onClick={close}>Show places</DarkButton>
+				<div className={styles.footer}>
+					<CancelButton onClick={handleClear}>Clear</CancelButton>
+					<DarkButton onClick={handleSubmit}>
+						{isFetching ? (
+							<BeatLoader color="#fff" size={8} />
+						) : total ? (
+							<>
+								Show {total}{' '}
+								{filter.type === 'room'
+									? 'room'
+									: filter.type === 'entire home'
+									? 'home'
+									: 'place'}
+								{total > 1 ? 's' : ''}
+							</>
+						) : (
+							'No exact matches'
+						)}
+					</DarkButton>
 				</div>
 			}
 		>
-			<PlaceTypeSelect
-				value={type}
-				onChange={e => push(createQuery({ name: 'type', value: e }))}
+			<PlaceTypeSelector
+				value={filter.type}
+				onChange={(value?: ApartmentType) =>
+					setFilter({ ...filter, type: value })
+				}
 			/>
 			<PriceRange
 				onChange={handlePrice}
 				values={[
-					minPrice ? +minPrice : 10,
-					maxPrice ? +maxPrice : 1000,
+					filter.minPrice ? +filter.minPrice : 10,
+					filter.maxPrice ? +filter.maxPrice : 1000,
 				]}
 			/>
 			<RoomsBedsSelect
-				bedrooms={bedrooms ? +bedrooms : undefined}
-				beds={beds ? +beds : undefined}
-				bathrooms={bathrooms ? +bathrooms : undefined}
+				bedrooms={filter.bedrooms ? +filter.bedrooms : undefined}
+				beds={filter.beds ? +filter.beds : undefined}
+				bathrooms={filter.bathrooms ? +filter.bathrooms : undefined}
+				maxGuests={filter.maxGuests ? +filter.maxGuests : undefined}
+				setFilter={setFilter}
 			/>
 			<AmenitiesSelect
-				amenities={amenities}
-				onChange={e =>
-					push(
-						createQuery({
-							name: 'amenities',
-							isArray: true,
-							value: e,
-						})
-					)
-				}
+				onChange={handleAmenitiesChange}
+				amenities={filter.amenities || []}
 			/>
 			<HostLanguageSelect
-				hostLanguages={hostLanguages}
-				onChange={e =>
-					push(
-						createQuery({
-							name: 'hostLanguages',
-							isArray: true,
-							value: e,
-						})
-					)
-				}
+				hostLanguages={filter.hostLanguages || []}
+				onChange={handleLanguageChange}
 			/>
 		</ModalContainer>
 	)

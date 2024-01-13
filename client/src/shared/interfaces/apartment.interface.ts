@@ -35,3 +35,8 @@ export interface IApartmentLocation {
 }
 
 export type ApartmentType = 'room' | 'entire home'
+
+export interface IApartmentResponse {
+	apartments: IApartmentItem[]
+	total: number
+}

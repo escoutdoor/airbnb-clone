@@ -24,6 +24,7 @@ const PriceRange: FC<PriceRangeProps> = ({ onChange, values }) => {
 						thumbClassName={styles.thumb}
 						trackClassName={styles.track}
 						onAfterChange={onChange}
+						value={values}
 						min={10}
 						max={10000}
 						defaultValue={[10, 1000]}
@@ -34,9 +35,9 @@ const PriceRange: FC<PriceRangeProps> = ({ onChange, values }) => {
 						)}
 					/>
 					<div className={styles.values}>
-						<Field label="Minimum" />
+						<Field label="Minimum" value={values[0]} />
 						<span className={styles.line} />
-						<Field label="Maximum" />
+						<Field label="Maximum" value={values[1]} />
 					</div>
 				</div>
 			</div>

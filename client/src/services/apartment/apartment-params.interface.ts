@@ -4,11 +4,12 @@ export interface IApartmentFilterParams {
 	searchTerm?: string
 	category?: string
 	type?: ApartmentType
-	minPrice?: number
-	maxPrice?: number
-	bedrooms?: number
-	beds?: number
-	bathrooms?: number
+	minPrice?: string
+	maxPrice?: string
+	bedrooms?: string
+	beds?: string
+	bathrooms?: string
+	maxGuests?: string
 	amenities?: string[]
 	hostLanguages?: string[]
 }

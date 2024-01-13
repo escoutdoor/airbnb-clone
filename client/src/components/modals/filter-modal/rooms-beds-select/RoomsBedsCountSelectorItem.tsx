@@ -5,8 +5,9 @@ import SmallText from '@/components/ui/small-text/SmallText'
 const RoomsBedsCountSelectorItem: FC<{
 	value?: number
 	isActive: boolean
+	isLastItem?: boolean
 	onClick: () => void
-}> = ({ value, isActive, onClick }) => {
+}> = ({ value, isActive, onClick, isLastItem = false }) => {
 	return (
 		<li
 			onClick={onClick}
@@ -15,7 +16,7 @@ const RoomsBedsCountSelectorItem: FC<{
 			}
 		>
 			<SmallText>
-				{value === 8 ? value + '+' : value ? value : 'Any'}
+				{isLastItem ? value + '+' : value ? value : 'Any'}
 			</SmallText>
 		</li>
 	)

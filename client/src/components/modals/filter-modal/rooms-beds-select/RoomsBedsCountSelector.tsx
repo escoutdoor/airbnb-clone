@@ -19,6 +19,7 @@ const RoomsBedsCountSelector: FC<{
 				{[...Array(8)].map((_, i) => (
 					<RoomsBedsCountSelectorItem
 						isActive={value === i + 1}
+						isLastItem={i === 7}
 						key={i}
 						value={i + 1}
 						onClick={() => onChange(i + 1)}
