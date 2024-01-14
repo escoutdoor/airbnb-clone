@@ -157,15 +157,15 @@ export class ApartmentService {
 			}
 		}
 
-		if (dto.maxPrice) {
-			where.price = {
-				lte: dto.maxPrice,
-			}
-		}
+		if (dto.minPrice || dto.maxPrice) {
+			where.price = {}
 
-		if (dto.minPrice) {
-			where.price = {
-				gte: dto.minPrice,
+			if (dto.minPrice) {
+				where.price.gte = dto.minPrice
+			}
+
+			if (dto.maxPrice) {
+				where.price.lte = dto.maxPrice
 			}
 		}
 

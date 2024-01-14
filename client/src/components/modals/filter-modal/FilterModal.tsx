@@ -16,7 +16,6 @@ import PriceRange from './price-range/PriceRange'
 import RoomsBedsSelect from './rooms-beds-select/RoomsBedsSelect'
 import AmenitiesSelect from './amenities-select/AmenitiesSelect'
 import HostLanguageSelect from './host-language-select/HostLanguageSelect'
-import qs from 'qs'
 
 type FilterModalProps = {
 	searchParams?: { [key: string]: string | string[] | undefined }
@@ -31,17 +30,16 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 		...searchParams,
 	})
 
-	const { total, isFetching } = useFilterApartments({ ...filter })
+	const { total, isFetching } = useFilterApartments({
+		...filter,
+	})
 
 	const handleClear = () => {
 		setFilter({})
 	}
 
 	const handleSubmit = () => {
-		const query = qs.stringify(
-			{ ...filter },
-			{ arrayFormat: 'repeat', skipNulls: true }
-		)
+		const query = new URLSearchParams(filter as any)
 
 		push(`${pathname}?${query}`)
 		close()
@@ -84,8 +82,6 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 	}
 
 	useEffect(() => {
-		if (!isActive) return
-
 		setFilter({ ...(searchParams as IApartmentFilterParams) })
 	}, [searchParams])
 
@@ -130,6 +126,7 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 					filter.minPrice ? +filter.minPrice : 10,
 					filter.maxPrice ? +filter.maxPrice : 1000,
 				]}
+				defaultValues={[10, 1000]}
 			/>
 			<RoomsBedsSelect
 				bedrooms={filter.bedrooms ? +filter.bedrooms : undefined}
