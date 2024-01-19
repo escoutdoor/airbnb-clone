@@ -12,4 +12,7 @@ export interface IApartmentFilterParams {
 	maxGuests?: string
 	amenities?: string[]
 	hostLanguages?: string[]
+	page?: string
+	startDate?: string
+	endDate?: string
 }

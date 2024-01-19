@@ -1,0 +1,12 @@
+.container {
+	display: flex;
+	gap: 80px;
+
+	.sidebar {
+		width: 40%;
+	}
+
+	> main {
+		width: 100%;
+	}
+}

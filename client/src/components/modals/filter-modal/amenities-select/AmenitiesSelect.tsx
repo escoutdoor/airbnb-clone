@@ -16,12 +16,12 @@ const AmenitiesSelect: FC<AmenitiesSelectProps> = ({ amenities, onChange }) => {
 				<div className={styles.options}>
 					<Checkbox
 						title="Wifi"
-						isActive={amenities.includes('Wifi')}
+						isActive={amenities.some(v => v === 'Wifi')}
 						onClick={() => onChange('Wifi')}
 					/>
 					<Checkbox
 						title="Dryer"
-						isActive={amenities.includes('Dryer')}
+						isActive={amenities.some(v => v === 'Dryer')}
 						onClick={() => onChange('Dryer')}
 					/>
 				</div>

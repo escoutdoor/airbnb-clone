@@ -182,6 +182,22 @@ export class ApartmentService {
 			}
 		}
 
+		if (dto.endDate || dto.startDate) {
+			where.reservations = {}
+
+			if (dto.endDate) {
+				where.reservations.every.endDate = {
+					lte: dto.endDate,
+				}
+			}
+
+			if (dto.startDate) {
+				where.reservations.every.startDate = {
+					gte: dto.startDate,
+				}
+			}
+		}
+
 		return where
 	}
 

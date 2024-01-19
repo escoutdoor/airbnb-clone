@@ -66,9 +66,9 @@ const authOptions: NextAuthOptions = {
 			return session
 		},
 	},
-	// pages: {
-	// 	error: '/error',
-	// },
+	pages: {
+		error: '/error',
+	},
 }
 
 export { authOptions }

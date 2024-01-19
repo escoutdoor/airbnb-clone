@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './filter-modal.module.scss'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { useFilterModal } from '@/hooks/useFilterModal'
 import { useFilterApartments } from '@/hooks/useFilterApartments'
 import { IApartmentFilterParams } from '@/services/apartment/apartment-params.interface'
@@ -16,6 +16,8 @@ import PriceRange from './price-range/PriceRange'
 import RoomsBedsSelect from './rooms-beds-select/RoomsBedsSelect'
 import AmenitiesSelect from './amenities-select/AmenitiesSelect'
 import HostLanguageSelect from './host-language-select/HostLanguageSelect'
+import qs from 'qs'
+import { toggleUniqueValue } from '@/utils/toggle-unique-value'
 
 type FilterModalProps = {
 	searchParams?: { [key: string]: string | string[] | undefined }
@@ -30,55 +32,43 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 		...searchParams,
 	})
 
-	const { total, isFetching } = useFilterApartments({
-		...filter,
-	})
-
-	const handleClear = () => {
-		setFilter({})
-	}
+	const { total, isFetching } = useFilterApartments({ ...filter })
 
 	const handleSubmit = () => {
-		const query = new URLSearchParams(filter as any)
+		const query = qs.stringify(
+			{ ...filter },
+			{
+				indices: false,
+				skipNulls: true,
+			}
+		)
 
 		push(`${pathname}?${query}`)
 		close()
 	}
 
-	const handleAmenitiesChange = (value: string) => {
-		let amenities = [...(filter.amenities || [])] || []
-		const isExist = amenities.find(amenity => amenity === value)
+	const handleAmenities = (value: string) => {
+		const amenities = toggleUniqueValue(value, filter.amenities)
 
-		if (isExist) {
-			amenities = amenities.filter(amenity => amenity !== value)
-		} else {
-			amenities = [...amenities, value]
-		}
-
-		setFilter({ ...filter, amenities })
+		setFilter(prev => ({ ...prev, amenities }))
 	}
 
-	const handleLanguageChange = (value: string) => {
-		let hostLanguages = [...(filter.hostLanguages || [])] || []
-		const isExist = hostLanguages.find(language => language === value)
-
-		if (isExist) {
-			hostLanguages = hostLanguages.filter(language => language !== value)
-		} else {
-			hostLanguages = [...hostLanguages, value]
-		}
+	const handleLanguage = (value: string) => {
+		const hostLanguages = toggleUniqueValue(value, filter.hostLanguages)
 
 		setFilter({ ...filter, hostLanguages })
 	}
 
-	const handlePrice = (values: number[]) => {
-		const [minPrice, maxPrice] = values
-
+	const handlePrice = ([minPrice, maxPrice]: number[]) => {
 		setFilter({
 			...filter,
 			minPrice: minPrice.toString(),
 			maxPrice: maxPrice.toString(),
 		})
+	}
+
+	const handleClear = () => {
+		setFilter({})
 	}
 
 	useEffect(() => {
@@ -136,12 +126,12 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 				setFilter={setFilter}
 			/>
 			<AmenitiesSelect
-				onChange={handleAmenitiesChange}
+				onChange={handleAmenities}
 				amenities={filter.amenities || []}
 			/>
 			<HostLanguageSelect
 				hostLanguages={filter.hostLanguages || []}
-				onChange={handleLanguageChange}
+				onChange={handleLanguage}
 			/>
 		</ModalContainer>
 	)

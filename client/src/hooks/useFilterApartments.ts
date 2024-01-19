@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useDebounce } from './useDebounce'
 
 export const useFilterApartments = (params: IApartmentFilterParams) => {
-	const debouncedParams = useDebounce(params, 200)
+	const debouncedParams = useDebounce(params, 400)
 
 	const { data, isLoading, error, isError, isFetched, isFetching, status } =
 		useQuery({

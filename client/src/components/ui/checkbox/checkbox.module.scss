@@ -1,6 +1,5 @@
 .container {
 	padding: 12px 0;
-
 	display: flex;
 	gap: 16px;
 	align-items: center;
@@ -24,9 +23,9 @@
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			transition: opacity 0.2s ease-in-out;
+			transition: opacity 0.1s ease-in-out;
 			color: #fff;
-			z-index: 99;
+			cursor: pointer;
 		}
 
 		&.active {

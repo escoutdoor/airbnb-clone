@@ -40,6 +40,14 @@ li {
 	}
 }
 
+.rdrDefinedRangesWrapper {
+	display: none;
+}
+
+.rdrDateDisplayWrapper {
+	background: none !important;
+}
+
 :root {
 	--black: #222222;
 	--gray: #717171;

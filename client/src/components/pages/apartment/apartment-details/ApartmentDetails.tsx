@@ -7,12 +7,16 @@ import ParagraphHeading from '@/components/ui/headings/paragraph-heading/Paragra
 import { getOverviewTitle } from '@/utils/get-overview-title'
 import Avatar from '@/components/ui/avatar/Avatar'
 import MediumHeading from '@/components/ui/headings/medium-heading/MediumHeading'
-import SmallText from '@/components/ui/small-text/SmallText'
 import Link from 'next/link'
 import ApartmentDescription from './ApartmentDescription'
 import DatesSelection from '@/components/ui/dates-selection/DatesSelection'
+import { useSearchParams } from 'next/navigation'
 
 const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
+	const { get } = useSearchParams()
+	const startDate = get('startDate')
+	const endDate = get('endDate')
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.overview}>

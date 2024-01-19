@@ -82,4 +82,12 @@ export class ApartmentFilterDto {
 	@Transform(({ value }) => value?.split(',')?.map(v => v?.trim()))
 	@IsArray()
 	hostLanguages?: string[]
+
+	@IsOptional()
+	@IsString()
+	endDate?: string
+
+	@IsOptional()
+	@IsString()
+	startDate?: string
 }

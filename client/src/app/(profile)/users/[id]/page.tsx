@@ -1,5 +1,6 @@
 'use client'
 
+import User from '@/components/pages/user/User'
 import { useUser } from '@/hooks/useUser'
 
 export default function UserPage({
@@ -9,5 +10,5 @@ export default function UserPage({
 }) {
 	const { user, isLoading, status, error, isError } = useUser(id)
 
-	return <>{user?.firstName}</>
+	if (user) return <User user={user} />
 }
