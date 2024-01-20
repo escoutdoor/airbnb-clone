@@ -1,18 +1,20 @@
 export const toggleUniqueValue = (
 	value: string,
-	array: string[] | string | undefined
+	array?: string[] | string
 ): any[] => {
-	if (!array || typeof array === 'string') {
+	if (!array) {
 		return [value]
 	}
 
-	const isExist = array.some(v => v === value)
+	const uniqueArray = typeof array === 'string' ? [array] : array
+
+	const isExist = uniqueArray.find(v => v === value)
 
 	if (isExist) {
-		const filteredArray = array.filter(v => v !== value)
+		const filteredArray = uniqueArray.filter(v => v !== value)
 
 		return filteredArray
 	}
 
-	return [...array, value]
+	return [...uniqueArray, value]
 }

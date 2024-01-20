@@ -11,5 +11,9 @@
 			grid-template-columns: repeat(2, 1fr);
 			margin-top: 20px;
 		}
+
+		> button {
+			margin-top: 12px;
+		}
 	}
 }

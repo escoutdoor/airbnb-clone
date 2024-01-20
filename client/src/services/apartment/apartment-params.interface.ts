@@ -10,8 +10,8 @@ export interface IApartmentFilterParams {
 	beds?: string
 	bathrooms?: string
 	maxGuests?: string
-	amenities?: string[]
-	hostLanguages?: string[]
+	amenities?: string | string[]
+	hostLanguages?: string | string[]
 	page?: string
 	startDate?: string
 	endDate?: string

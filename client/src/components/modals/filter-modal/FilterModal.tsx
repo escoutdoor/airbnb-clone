@@ -8,6 +8,7 @@ import { IApartmentFilterParams } from '@/services/apartment/apartment-params.in
 import { usePathname, useRouter } from 'next/navigation'
 import { ApartmentType } from '@/shared/interfaces/apartment.interface'
 import { BeatLoader } from 'react-spinners'
+import { toggleUniqueValue } from '@/utils/toggle-unique-value'
 import ModalContainer from '../modal-container/ModalContainer'
 import CancelButton from '@/components/ui/cancel-button/CancelButton'
 import DarkButton from '@/components/ui/dark-button/DarkButton'
@@ -17,10 +18,9 @@ import RoomsBedsSelect from './rooms-beds-select/RoomsBedsSelect'
 import AmenitiesSelect from './amenities-select/AmenitiesSelect'
 import HostLanguageSelect from './host-language-select/HostLanguageSelect'
 import qs from 'qs'
-import { toggleUniqueValue } from '@/utils/toggle-unique-value'
 
 type FilterModalProps = {
-	searchParams?: { [key: string]: string | string[] | undefined }
+	searchParams?: IApartmentFilterParams
 }
 
 const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
@@ -28,9 +28,9 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 	const { push } = useRouter()
 	const pathname = usePathname()
 
-	const [filter, setFilter] = useState<IApartmentFilterParams>({
-		...searchParams,
-	})
+	const [filter, setFilter] = useState<IApartmentFilterParams>(
+		searchParams as IApartmentFilterParams
+	)
 
 	const { total, isFetching } = useFilterApartments({ ...filter })
 
@@ -127,10 +127,10 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 			/>
 			<AmenitiesSelect
 				onChange={handleAmenities}
-				amenities={filter.amenities || []}
+				amenities={filter.amenities}
 			/>
 			<HostLanguageSelect
-				hostLanguages={filter.hostLanguages || []}
+				hostLanguages={filter.hostLanguages}
 				onChange={handleLanguage}
 			/>
 		</ModalContainer>

@@ -3,11 +3,12 @@
 import FilterModal from '@/components/modals/filter-modal/FilterModal'
 import Home from '@/components/pages/home/Home'
 import { useFilterApartments } from '@/hooks/useFilterApartments'
+import { IApartmentFilterParams } from '@/services/apartment/apartment-params.interface'
 
 export default function HomePage({
 	searchParams,
 }: {
-	searchParams?: { [key: string]: string | string[] | undefined }
+	searchParams?: IApartmentFilterParams
 }) {
 	const { apartments, isLoading, error, status } = useFilterApartments({
 		...searchParams,

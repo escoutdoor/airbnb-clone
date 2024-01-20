@@ -1,7 +1,5 @@
+import Wishlists from '@/components/pages/wishlists/Wishlists'
+
 export default function WishlistsPage() {
-	return (
-		<div>
-			<h1>WishlistsPage</h1>
-		</div>
-	)
+	return <Wishlists />
 }
