@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { Metadata } from 'next'
 import { UserService } from '@/services/user/user.service'
 import { getName } from '@/utils/get-name'
+import Layout from '@/components/layout/Layout'
 
 interface Params {
 	id: string
@@ -21,5 +22,9 @@ export const generateMetadata = async (params: {
 }
 
 export default function UserLayout({ children }: { children: ReactNode }) {
-	return <>{children}</>
+	return (
+		<>
+			<Layout size="medium">{children}</Layout>
+		</>
+	)
 }

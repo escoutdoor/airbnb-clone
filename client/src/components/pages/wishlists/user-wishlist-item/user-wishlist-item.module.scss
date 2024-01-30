@@ -1,0 +1,56 @@
+.wrapper {
+	width: 100%;
+	position: relative;
+
+	&:hover {
+		.button {
+			display: flex;
+		}
+	}
+
+	.button {
+		display: none;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top: 5%;
+		left: 5%;
+		z-index: 3;
+		width: 34px;
+		height: 34px;
+		background-color: #fff;
+		cursor: pointer;
+		transition: transform 0.2s ease;
+		border-radius: 50%;
+
+		.icon {
+			font-size: 16px;
+		}
+
+		&:hover {
+			transform: scale(1.05);
+		}
+	}
+
+	.link {
+		width: 100%;
+
+		.preview {
+			border-radius: 12px;
+			padding: 5px;
+			box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+				rgba(17, 17, 26, 0.05) 0px 8px 32px;
+
+			.image {
+				display: block;
+				width: 100%;
+				border-radius: 12px;
+				object-fit: cover;
+			}
+		}
+
+		.details {
+			margin-top: 12px;
+		}
+	}
+}

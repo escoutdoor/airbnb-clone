@@ -83,7 +83,7 @@ const WishlistModal: FC = () => {
 							<WishlistItem
 								key={wishlist.id}
 								item={wishlist}
-								toggle={() => {
+								onClick={() => {
 									toggleWishlist({
 										wishlistId: wishlist.id,
 										apartmentId,
@@ -96,7 +96,7 @@ const WishlistModal: FC = () => {
 				)}
 				{activeTab === 'create' && (
 					<>
-						<form>
+						<form onSubmit={handleSubmit(onSubmit)}>
 							<Field
 								{...register('name')}
 								maxLength={50}

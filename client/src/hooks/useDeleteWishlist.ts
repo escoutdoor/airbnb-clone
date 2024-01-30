@@ -1,30 +1,28 @@
-'use client'
-
-import { TWishlistSchema } from '@/lib/schemas/wishlist.schema'
 import { WishlistService } from '@/services/wishlist/wishlist.service'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-export const useCreateWishlist = () => {
+export const useDeleteWishlist = () => {
 	const queryClient = useQueryClient()
 
 	const {
-		mutate: createWishlist,
+		mutate: deleteWishlist,
 		isPending,
 		error,
 		status,
 		isError,
 		isSuccess,
 	} = useMutation({
-		mutationKey: ['wishlist', 'create'],
-		mutationFn: async (data: TWishlistSchema) =>
-			await WishlistService.create(data),
+		mutationKey: ['delete wishlist'],
+		mutationFn: (wishlistId: string) => WishlistService.delete(wishlistId),
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['profile'] })
+			queryClient.invalidateQueries({
+				queryKey: ['profile'],
+			})
 		},
 	})
 
 	return {
-		createWishlist,
+		deleteWishlist,
 		isPending,
 		error,
 		status,

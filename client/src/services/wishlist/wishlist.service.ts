@@ -5,7 +5,7 @@ import { TWishlistSchema } from '@/lib/schemas/wishlist.schema'
 
 export const WishlistService = {
 	async getById(wishlistId: string) {
-		const response = await instance({
+		const response = await instance<IWishlist>({
 			method: 'GET',
 			url: `${WISHLIST_URL}/${wishlistId}`,
 		})

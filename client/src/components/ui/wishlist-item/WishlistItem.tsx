@@ -7,16 +7,18 @@ import Image from 'next/image'
 
 interface IWishlistItem {
 	item: IWishlist
-	toggle?: () => void
+	onClick?: () => void
 }
 
-const WishlistItem: FC<IWishlistItem> = ({ toggle, item }) => {
+export const WISHLIST_PREVIEW = '/images/apartments/wishlist-preview.jpg'
+
+const WishlistItem: FC<IWishlistItem> = ({ onClick, item }) => {
 	const previewImage = item.apartments.length
-		? item?.apartments?.[0].images?.[0]
-		: '/images/apartments/wishlist-preview.jpg'
+		? item?.apartments?.[0].images?.[1]
+		: WISHLIST_PREVIEW
 
 	return (
-		<li className={styles.item} onClick={toggle}>
+		<li className={styles.item} onClick={onClick}>
 			<div className={styles.preview}>
 				<Image
 					width={270}
