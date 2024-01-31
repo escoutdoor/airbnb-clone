@@ -10,5 +10,5 @@ export default withAuth(function middleware(req) {}, {
 })
 
 export const config = {
-	match: ['/users/:path*', '/wishlists'],
+	matcher: ['/users/:path*', '/wishlists'],
 }

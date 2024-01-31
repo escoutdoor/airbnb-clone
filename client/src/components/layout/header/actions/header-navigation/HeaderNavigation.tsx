@@ -10,12 +10,14 @@ import { useAuthModal } from '@/hooks/useAuthModal'
 import HeaderMenuItem from './header-menu-item/HeaderMenuItem'
 import Image from 'next/image'
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const HeaderNavigation: FC = () => {
 	const { ref, isActive, setIsActive } = useOutside(false)
 
 	const { open } = useAuthModal()
 	const { profile } = useProfile()
+	const { push } = useRouter()
 
 	const authItems = [
 		{
@@ -72,7 +74,9 @@ const HeaderNavigation: FC = () => {
 						<HeaderMenuItem
 							item={{
 								id: 1,
-								onClick: () => signOut(),
+								onClick: () => {
+									signOut({ callbackUrl: '/' })
+								},
 								title: 'Log out',
 							}}
 						/>
