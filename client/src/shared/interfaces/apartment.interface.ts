@@ -1,5 +1,4 @@
 import { IReview } from './review.interface'
-import { IUser } from './user.interface'
 
 export interface IApartment extends IApartmentItem {
 	type: ApartmentType
@@ -19,7 +18,6 @@ export interface IApartmentItem {
 	price: number
 	description: string[]
 	location: IApartmentLocation
-	user: IUser
 }
 
 export interface IApartmentLocation {

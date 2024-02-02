@@ -1,10 +1,9 @@
 'use server'
 
-import { authOptions } from '@/lib/next-auth/auth'
-import { getServerSession } from 'next-auth'
+import { auth } from '@/lib/next-auth/auth'
 
 export const getAccessToken = async () => {
-	const data = await getServerSession(authOptions)
+	const data = await auth()
 
 	const accessToken = data?.accessToken
 	return accessToken || null

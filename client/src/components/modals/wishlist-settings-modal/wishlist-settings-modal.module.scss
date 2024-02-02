@@ -1,0 +1,47 @@
+.footer {
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	display: flex;
+}
+
+.container {
+	padding: 0px 24px;
+
+	.popover {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		width: 100%;
+		padding: 24px 0;
+
+		&:first-child {
+			border-bottom: 1px solid #ebebeb;
+		}
+
+		.icon {
+			font-size: 16px;
+			color: var(--black);
+		}
+
+		.right {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-left: 16px;
+		}
+	}
+
+	.delete {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		padding: 32px 0;
+
+		> p {
+			margin-top: 8px;
+		}
+	}
+}

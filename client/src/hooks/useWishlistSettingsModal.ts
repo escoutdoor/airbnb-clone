@@ -1,16 +1,16 @@
 import { create } from 'zustand'
 
-type ActiveTab = 'delete' | 'rename'
+type ActiveTab = 'delete' | 'rename' | 'main'
 
 type WishlistSettingsModalState = {
 	status: {
 		isActive: boolean
 		activeTab: ActiveTab
-		apartmentId: string
+		wishlistId: string
 		name: string
 	}
 	changeTab: (tab: ActiveTab) => void
-	open: ({ apartmentId, name }: { apartmentId: string; name: string }) => void
+	open: ({ wishlistId, name }: { wishlistId: string; name: string }) => void
 	close: () => void
 }
 
@@ -18,8 +18,8 @@ export const useWishListSettingsModal = create<WishlistSettingsModalState>(
 	set => ({
 		status: {
 			isActive: false,
-			activeTab: 'delete',
-			apartmentId: '',
+			activeTab: 'main',
+			wishlistId: '',
 			name: '',
 		},
 		changeTab: (tab: ActiveTab) =>
@@ -27,16 +27,16 @@ export const useWishListSettingsModal = create<WishlistSettingsModalState>(
 				status: {
 					activeTab: tab,
 					isActive: state.status.isActive,
-					apartmentId: state.status.apartmentId,
+					wishlistId: state.status.wishlistId,
 					name: state.status.name,
 				},
 			})),
-		open: ({ apartmentId, name }) => {
+		open: ({ wishlistId, name }) => {
 			set(() => ({
 				status: {
 					isActive: true,
-					activeTab: 'delete',
-					apartmentId,
+					activeTab: 'main',
+					wishlistId,
 					name,
 				},
 			}))
@@ -45,8 +45,8 @@ export const useWishListSettingsModal = create<WishlistSettingsModalState>(
 			set(() => ({
 				status: {
 					isActive: false,
-					activeTab: 'delete',
-					apartmentId: '',
+					activeTab: 'main',
+					wishlistId: '',
 					name: '',
 				},
 			})),

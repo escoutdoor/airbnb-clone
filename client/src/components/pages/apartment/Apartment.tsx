@@ -8,6 +8,8 @@ import ReservationWidget from './reservation-widget/ReservationWidget'
 import ApartmentDetails from './apartment-details/ApartmentDetails'
 import ApartmentLocation from './apartment-location/ApartmentLocation'
 import ReviewList from './review-list/ReviewList'
+import ParagraphHeading from '@/components/ui/headings/paragraph-heading/ParagraphHeading'
+import Rating from '@/components/ui/rating/Rating'
 
 const Apartment: NextPage<{ apartment: IApartment }> = ({ apartment }) => {
 	return (
@@ -19,7 +21,21 @@ const Apartment: NextPage<{ apartment: IApartment }> = ({ apartment }) => {
 					<ReservationWidget apartment={apartment} />
 				</div>
 			</div>
-			<section>
+			<section className={styles.reviews}>
+				<div className={styles.header}>
+					{apartment.reviews.length ? (
+						<>
+							<Rating rating={4.75} />
+							<ParagraphHeading>
+								{' · '}
+								{apartment.reviews.length} review
+								{apartment.reviews.length > 1 ? 's' : ''}
+							</ParagraphHeading>
+						</>
+					) : (
+						<ParagraphHeading>No reviews</ParagraphHeading>
+					)}
+				</div>
 				<ReviewList reviews={apartment.reviews} />
 			</section>
 			<section>

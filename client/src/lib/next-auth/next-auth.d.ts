@@ -9,6 +9,7 @@ declare module 'next-auth' {
 			email: string
 			role: Role
 		}
+
 		accessToken: string
 		refreshToken: string
 		expiresIn: number
@@ -22,6 +23,7 @@ declare module 'next-auth/jwt' {
 			email: string
 			role: Role
 		}
+
 		accessToken: string
 		refreshToken: string
 		expiresIn: number

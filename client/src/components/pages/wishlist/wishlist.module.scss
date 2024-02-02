@@ -11,20 +11,48 @@
 			justify-content: space-between;
 			align-items: center;
 
-			.back {
-				.icon {
-					color: var(--black);
-					cursor: pointer;
-				}
-			}
-
-			.dots__icon {
-				font-size: 18px;
+			.target {
+				padding: 0 24px 10px;
 				cursor: pointer;
+
+				.icon {
+					font-size: 20px;
+					color: var(--black);
+				}
+
+				&:first-child {
+					padding-left: 0;
+				}
+
+				&:last-child {
+					padding-right: 0;
+				}
 			}
 		}
 
 		.content {
+			margin-top: 12px;
+
+			.name {
+				font-size: 2rem;
+				font-weight: 500;
+			}
+
+			.details {
+				margin-top: 42px;
+
+				> h2 {
+					font-weight: 500;
+					font-size: 1.4rem;
+					color: var(--gray);
+				}
+
+				.no__saves {
+					> p {
+						margin: 12px 0 18px;
+					}
+				}
+			}
 		}
 	}
 }

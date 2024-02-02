@@ -1,4 +1,4 @@
-import { IApartment, IApartmentItem } from './apartment.interface'
+import { IApartment } from './apartment.interface'
 
 export interface IUser {
 	id: string

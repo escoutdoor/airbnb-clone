@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Metadata } from 'next'
 import { WishlistService } from '@/services/wishlist/wishlist.service'
+import WishlistSettingsModal from '@/components/modals/wishlist-settings-modal/WishlistSettingsModal'
 
 interface Params {
 	id: string
@@ -20,5 +21,10 @@ export const generateMetadata = async (params: {
 }
 
 export default function WishlistLayout({ children }: { children: ReactNode }) {
-	return <>{children}</>
+	return (
+		<>
+			{children}
+			<WishlistSettingsModal />
+		</>
+	)
 }

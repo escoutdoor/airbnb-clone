@@ -1,12 +1,24 @@
 import { AuthService } from '@/services/auth/auth.service'
-import { NextAuthOptions } from 'next-auth'
+import {
+	GetServerSidePropsContext,
+	NextApiRequest,
+	NextApiResponse,
+} from 'next'
+import { NextAuthOptions, getServerSession } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 async function refreshToken(token: JWT): Promise<JWT> {
 	const response = await AuthService.getToken(token.refreshToken)
 
-	return response
+	console.log('refresh')
+
+	return {
+		...token,
+		expiresIn: response.expiresIn,
+		accessToken: response.accessToken,
+		refreshToken: response.refreshToken,
+	}
 }
 
 const authOptions: NextAuthOptions = {
@@ -51,17 +63,20 @@ const authOptions: NextAuthOptions = {
 	},
 	callbacks: {
 		async jwt({ token, user }) {
-			if (user) return { ...token, ...user }
+			if (user) {
+				return { ...token, ...user }
+			}
 
 			if (new Date().getTime() < token.expiresIn) return token
 
-			return await refreshToken(token)
+			return refreshToken(token)
 		},
 
 		async session({ token, session }) {
 			session.user = token.user
 			session.accessToken = token.accessToken
 			session.refreshToken = token.refreshToken
+			session.expiresIn = token.expiresIn
 
 			return session
 		},
@@ -71,4 +86,13 @@ const authOptions: NextAuthOptions = {
 	},
 }
 
-export { authOptions }
+const auth = (
+	...args:
+		| [GetServerSidePropsContext['req'], GetServerSidePropsContext['res']]
+		| [NextApiRequest, NextApiResponse]
+		| []
+) => {
+	return getServerSession(...args, authOptions)
+}
+
+export { authOptions, auth }

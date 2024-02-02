@@ -31,7 +31,7 @@ export const AuthService = {
 	},
 
 	async getToken(refreshToken: string) {
-		const response = await instance({
+		const response = await instance<IAuthResponse>({
 			method: 'POST',
 			url: `${AUTH_URL}/access-token`,
 			data: {
