@@ -1,8 +1,5 @@
-// create amenities options & host languages options arrays
-
 import { IOption } from '@/interfaces/option.interface'
 
-// TypeScript
 export const amenityOptions: IOption[] = [
 	{
 		id: 1,

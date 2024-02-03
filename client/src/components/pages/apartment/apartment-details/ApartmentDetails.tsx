@@ -3,19 +3,20 @@
 import styles from './apartment-details.module.scss'
 import { FC } from 'react'
 import { IApartment } from '@/shared/interfaces/apartment.interface'
-import ParagraphHeading from '@/components/ui/headings/paragraph-heading/ParagraphHeading'
+import { useSearchParams } from 'next/navigation'
 import { getOverviewTitle } from '@/utils/get-overview-title'
+import ParagraphHeading from '@/components/ui/headings/paragraph-heading/ParagraphHeading'
 import Avatar from '@/components/ui/avatar/Avatar'
 import MediumHeading from '@/components/ui/headings/medium-heading/MediumHeading'
 import Link from 'next/link'
 import ApartmentDescription from './ApartmentDescription'
 import DatesSelection from '@/components/ui/dates-selection/DatesSelection'
-import { useSearchParams } from 'next/navigation'
+import ApartmentAmenities from './apartment-amenities/ApartmentAmenities'
 
 const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 	const { get } = useSearchParams()
-	const startDate = get('startDate')
-	const endDate = get('endDate')
+	const startDate = get('start_date')
+	const endDate = get('end_date')
 
 	return (
 		<div className={styles.container}>
@@ -52,6 +53,7 @@ const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 					<ApartmentDescription description={apartment.description} />
 				</section>
 			) : null}
+			<ApartmentAmenities amenities={apartment.amenities} />
 			<section>
 				<ParagraphHeading>
 					NIGHTS_QUANTITY nights in {apartment.location.city}

@@ -1,0 +1,25 @@
+.container {
+	border-top: 1px solid var(--light-gray);
+	padding: 32px 0;
+
+	> h1 {
+	}
+
+	.list {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		margin-top: 24px;
+		gap: 20px;
+
+		.item {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+
+			.icon {
+				color: var(--black);
+				font-size: 24px;
+			}
+		}
+	}
+}
