@@ -8,11 +8,10 @@ import { useRouter } from 'next/navigation'
 import { useWishListSettingsModal } from '@/hooks/useWishlistSettingsModal'
 import WishlistMap from './wishlist-map/WishlistMap'
 import ApartmentList from '@/components/ui/apartment-list/ApartmentList'
-import Text from '@/components/ui/text/Text'
 import DarkButton from '@/components/ui/dark-button/DarkButton'
 import SmallText from '@/components/ui/small-text/SmallText'
 
-const Wishlist: NextPage<{ wishlist: IWishlist }> = ({ wishlist }) => {
+const Wishlist: NextPage<{ wishlist: IWishlist }> = ({ wishlist}) => {
 	const { open } = useWishListSettingsModal()
 	const { push } = useRouter()
 
@@ -28,14 +27,14 @@ const Wishlist: NextPage<{ wishlist: IWishlist }> = ({ wishlist }) => {
 					</div>
 					<div
 						className={styles.target}
-						onClick={() =>
+							onClick={() =>
 							open({
 								wishlistId: wishlist.id,
 								name: wishlist.name,
 							})
 						}
 					>
-						<HiDotsHorizontal className={styles.icon} />
+					<HiDotsHorizontal className={styles.icon} />
 					</div>
 				</div>
 				<div className={styles.content}>

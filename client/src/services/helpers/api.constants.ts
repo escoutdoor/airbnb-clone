@@ -1,9 +1,11 @@
-export const CATEGORY_URL = '/categories'
+export const CATEGORY_URL = '/categories';
 
-export const APARTMENT_URL = '/apartments'
+export const APARTMENT_URL = '/apartments';
 
-export const WISHLIST_URL = '/wishlists'
+export const WISHLIST_URL = '/wishlists';
 
-export const AUTH_URL = '/auth'
+export const AUTH_URL = '/auth';
 
-export const USER_URL = '/users'
+export const USER_URL = '/users';
+
+export const REVIEWS_URL = '/reviews';

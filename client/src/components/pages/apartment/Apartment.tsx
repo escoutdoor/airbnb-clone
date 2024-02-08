@@ -10,6 +10,7 @@ import ApartmentLocation from './apartment-location/ApartmentLocation'
 import ReviewList from './review-list/ReviewList'
 import ParagraphHeading from '@/components/ui/headings/paragraph-heading/ParagraphHeading'
 import Rating from '@/components/ui/rating/Rating'
+import CreateReview from './create-review/CreateReview'
 
 const Apartment: NextPage<{ apartment: IApartment }> = ({ apartment }) => {
 	return (
@@ -35,8 +36,10 @@ const Apartment: NextPage<{ apartment: IApartment }> = ({ apartment }) => {
 					) : (
 						<ParagraphHeading>No reviews</ParagraphHeading>
 					)}
+
 				</div>
 				<ReviewList reviews={apartment.reviews} />
+				<CreateReview />
 			</section>
 			<section>
 				<ApartmentLocation location={apartment.location} />
