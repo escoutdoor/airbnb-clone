@@ -13,7 +13,13 @@ export const useCreateReview = () => {
     status,
   } = useMutation({
     mutationKey: ['create review'],
-    mutationFn: async (data: TCreateReviewSchema) => ReviewService.create(data),
+    mutationFn: async ({
+      apartmentId,
+      data,
+    }: {
+      apartmentId: string;
+      data: TCreateReviewSchema;
+    }) => ReviewService.create(apartmentId, data),
     onMutate: () => {
       queryClient.invalidateQueries({
         queryKey: ['apartment'],

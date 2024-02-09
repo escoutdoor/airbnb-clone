@@ -3,11 +3,11 @@ import { instance } from '../helpers/axios.instance';
 import { REVIEWS_URL } from '../helpers/api.constants';
 
 export const ReviewService = {
-  async create(data: TCreateReviewSchema) {
+  async create(apartmentId: string, data: TCreateReviewSchema) {
     await instance({
       method: 'POST',
       data,
-      url: REVIEWS_URL,
+      url: `${REVIEWS_URL}/${apartmentId}`,
     });
   },
 };

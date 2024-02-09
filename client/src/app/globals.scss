@@ -5,8 +5,7 @@
 	font-family: var(--font-nunito);
 }
 
-body {
-}
+body {}
 
 a {
 	text-decoration: none;
@@ -14,7 +13,8 @@ a {
 }
 
 button,
-input {
+input,
+textarea {
 	border: none;
 	outline: none;
 	background: transparent;

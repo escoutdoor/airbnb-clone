@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+
+  .textarea {
+    resize: none;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 14px;
+    min-height: 200px;
+    color: var(--black);
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
+  }
+
+  >div {
+    margin-top: 15px;
+  }
+
+}
