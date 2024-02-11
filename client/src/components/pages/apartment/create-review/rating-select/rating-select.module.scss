@@ -1,0 +1,19 @@
+.container {
+	margin-top: 8px;
+
+	.rating__wrapper {
+		display: block;
+		max-width: 120px;
+		max-height: 30px;
+
+		.rating {
+			width: 99%;
+			height: 19px;
+		}
+
+	}
+
+	.error__wrapper {
+		margin-top: 12px;
+	}
+}

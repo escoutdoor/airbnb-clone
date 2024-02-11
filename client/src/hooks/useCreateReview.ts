@@ -20,7 +20,7 @@ export const useCreateReview = () => {
       apartmentId: string;
       data: TCreateReviewSchema;
     }) => ReviewService.create(apartmentId, data),
-    onMutate: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['apartment'],
       });
