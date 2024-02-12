@@ -1,0 +1,47 @@
+.page {
+
+    .header {
+
+        >p {
+            margin-top: 8px;
+        }
+    }
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 42px;
+
+        .item {
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+            border-radius: 12px;
+            min-height: 156px;
+            cursor: pointer;
+
+            .content {
+                padding: 20px 16px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .icon {
+                    color: var(--black);
+                    font-size: 32px;
+                    margin-bottom: 16px;
+                }
+
+                .info {
+                    >h2 {}
+
+                    >p {
+                        margin-top: 8px;
+                    }
+
+                }
+            }
+
+        }
+    }
+}
