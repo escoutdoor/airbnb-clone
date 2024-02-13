@@ -1,6 +1,13 @@
 import z from 'zod';
 
 const createReviewSchema = z.object({
+  phoneNumber: z
+    .string({
+      invalid_type_error: 'Phone number must be a string',
+    })
+    .min(10, {
+      message: 'Phone number must be at least 10 characters long',
+    }),
   text: z
     .string({
       required_error: '',

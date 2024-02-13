@@ -1,0 +1,25 @@
+.page {
+
+    .container {
+        width: 60%;
+
+        .inputs {
+            display: flex;
+            gap: 24px;
+
+            >div {
+                flex: 1;
+            }
+        }
+
+        .form {
+
+            >button {
+                margin-top: 12px;
+            }
+        }
+
+    }
+
+
+}
