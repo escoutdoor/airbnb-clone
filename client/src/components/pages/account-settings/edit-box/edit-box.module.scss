@@ -1,5 +1,18 @@
 .container {
 
+    padding: 24px 0;
+    border-bottom: 1px solid #ebebeb;
+
+    &.disabled {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -khtml-user-select: none;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
     .header {
         width: 100%;
 
