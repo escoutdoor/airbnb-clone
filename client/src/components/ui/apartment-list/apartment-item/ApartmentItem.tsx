@@ -20,7 +20,7 @@ const ApartmentItem: FC<{ item: IApartmentItem }> = ({ item }) => {
 	const { profile } = useProfile()
 
 	const isWishListed = profile?.wishlists?.some(wishlist =>
-		wishlist.apartments.some(apartment => apartment.id === item.id)
+		wishlist.apartments.some(apartment => apartment.id === item.id),
 	)
 
 	const handleWishListClick = () => {

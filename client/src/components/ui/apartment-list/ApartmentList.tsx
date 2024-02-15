@@ -3,9 +3,11 @@ import { FC } from 'react'
 import { IApartmentItem } from '@/shared/interfaces/apartment.interface'
 import ApartmentItem from './apartment-item/ApartmentItem'
 
-const ApartmentList: FC<{ apartments: IApartmentItem[] }> = ({
-	apartments,
-}) => {
+type ApartmentListProps = {
+	apartments: IApartmentItem[]
+}
+
+const ApartmentList: FC<ApartmentListProps> = ({ apartments }) => {
 	return (
 		<ul className={styles.list}>
 			{apartments.map(item => (

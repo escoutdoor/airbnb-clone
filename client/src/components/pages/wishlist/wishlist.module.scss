@@ -3,6 +3,7 @@
 	justify-content: space-between;
 
 	.info {
+		margin-top: 24px;
 		padding-right: 24px;
 		width: 100%;
 
@@ -41,14 +42,14 @@
 			.details {
 				margin-top: 42px;
 
-				> h2 {
+				>h2 {
 					font-weight: 500;
 					font-size: 1.4rem;
 					color: var(--gray);
 				}
 
 				.no__saves {
-					> p {
+					>p {
 						margin: 12px 0 18px;
 					}
 				}

@@ -1,4 +1,7 @@
 .page {
+
+	margin-top: 24px;
+
 	color: var(--black);
 
 	.container {
@@ -11,7 +14,7 @@
 		}
 	}
 
-	> section {
+	>section {
 		border-top: 1px solid var(--light-gray);
 		padding: 32px 0;
 	}
@@ -23,8 +26,8 @@
 			gap: 8px;
 			margin-bottom: 24px;
 
-			> div {
-				> p {
+			>div {
+				>p {
 					font-size: 22px;
 				}
 			}

@@ -1,4 +1,6 @@
 .container {
+	margin-top: 24px;
+
 	display: flex;
 	gap: 80px;
 
@@ -6,7 +8,7 @@
 		width: 40%;
 	}
 
-	> main {
+	>main {
 		width: 100%;
 	}
 }
