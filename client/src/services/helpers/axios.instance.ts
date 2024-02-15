@@ -1,21 +1,28 @@
-import axios from 'axios'
-import { getAccessToken } from './api.helper'
+import axios from 'axios';
+import { getAccessToken } from './api.helper';
 
 const instance = axios.create({
-	baseURL: process.env.API_URL,
-	headers: {
-		'Content-Type': 'application/json',
-	},
-})
+  baseURL: process.env.API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-instance.interceptors.request.use(async config => {
-	const accessToken = await getAccessToken()
+const defaultInstance = axios.create({
+  baseURL: process.env.API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-	if (config.headers && accessToken) {
-		config.headers.Authorization = `Bearer ${accessToken}`
-	}
+instance.interceptors.request.use(async (config) => {
+  const accessToken = await getAccessToken();
 
-	return config
-})
+  if (config.headers && accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
 
-export { instance }
+  return config;
+});
+
+export { instance, defaultInstance };

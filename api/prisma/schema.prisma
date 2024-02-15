@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+/ This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -11,138 +11,137 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  firstName     String    @map("first_name")
-  surName       String    @map("sur_name")
-  dateOfBirth   DateTime  @map("date_of_birth")
-  avatar        String    @default("https://avatars.githubusercontent.com/u/116205876?s=400&u=af8933ecc5b56551e632bb8b600e941f86c1a261&v=4")
+  firstName   String   @map("first_name")
+  surName     String   @map("sur_name")
+  dateOfBirth DateTime @map("date_of_birth")
+  avatar      String   @default("https://avatars.githubusercontent.com/u/116205876?s=400&u=af8933ecc5b56551e632bb8b600e941f86c1a261&v=4")
 
-  phoneNumber   String    @map("phone_number")
-  email         String    @unique
-  password      String
-  role          Role      @default(USER)
+  phoneNumber String @map("phone_number")
+  email       String @unique
+  password    String
+  role        Role   @default(USER)
 
-  reviews       Review[]
-  wishlists     Wishlist[]
-  reservations  Reservation[]
-  apartments    Apartment[]
+  reviews      Review[]
+  wishlists    Wishlist[]
+  reservations Reservation[]
+  apartments   Apartment[]
 }
 
 model Reservation {
-  id            String      @id @default(uuid())
-  createdAt     DateTime    @default(now()) @map("created_at")
-  updatedAt     DateTime    @updatedAt @map("updated_at")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  startDate     DateTime    @map("start_date")
-  endDate       DateTime    @map("end_date")
+  startDate DateTime @map("start_date")
+  endDate   DateTime @map("end_date")
 
-  totalPrice    Int         @map("total_price")
-  guests        Int
+  totalPrice Int @map("total_price")
+  guests     Int
 
-  user          User        @relation(fields: [userId], references: [id])
-  userId        String      @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
 
-  apartment     Apartment   @relation(fields: [apartmentId], references: [id])
-  apartmentId   String      @map("apartment_id")
+  apartment   Apartment @relation(fields: [apartmentId], references: [id])
+  apartmentId String    @map("apartment_id")
 }
 
 model Wishlist {
-  id            String      @id @default(uuid())
-  createdAt     DateTime    @default(now()) @map("created_at")
-  updatedAt     DateTime    @updatedAt @map("updated_at")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  name          String
+  name String
 
-  apartments    Apartment[]
+  apartments Apartment[]
 
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String      @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 }
 
 model Apartment {
-  id              String      @id @default(uuid())
-  createdAt       DateTime    @default(now()) @map("created_at")
-  updatedAt       DateTime    @updatedAt @map("updated_at")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  name            String
-  images          String[]    @default([])
-  description     String[]
+  name        String
+  images      String[] @default([])
+  description String[]
 
-  type            String
-  price           Int         
+  type  String
+  price Int
 
-  beds            Int         
-  bedrooms        Int        
-  bathrooms       Int         
-  maxGuests       Int         @map("max_guests")
+  beds      Int
+  bedrooms  Int
+  bathrooms Int
+  maxGuests Int @map("max_guests")
 
-  hostLanguages   String[]    @default([]) @map("host_languages")
+  hostLanguages String[] @default([]) @map("host_languages")
 
-  location        Location?
-  amenities       String[]    @default([])
+  location  Location?
+  amenities String[]  @default([])
 
-  reviews         Review[]
-  wishlists       Wishlist[]
-  reservations    Reservation[]
+  reviews      Review[]
+  wishlists    Wishlist[]
+  reservations Reservation[]
 
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String      @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 
-  category        Category    @relation(fields: [categoryId], references: [id])
-  categoryId      String      @map("category_id")
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @map("category_id")
 }
 
 model Location {
-  id              String      @id @default(uuid())
-  createdAt       DateTime    @default(now()) @map("created_at")
-  updatedAt       DateTime    @updatedAt @map("updated_at")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   country         String
   city            String
   street          String
-  houseNumber     Int         @map("house_number")
-  apartmentNumber Int?        @map("apartment_number")
+  houseNumber     Int    @map("house_number")
+  apartmentNumber Int?   @map("apartment_number")
 
-  zipCode         String?     @map("zip_code")
+  zipCode String? @map("zip_code")
 
-  latitude        Float
-  longitude       Float
+  latitude  Float
+  longitude Float
 
-  apartment       Apartment @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
-  apartmentId     String @unique @map("apartment_id")
+  apartment   Apartment @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
+  apartmentId String    @unique @map("apartment_id")
 }
 
 model Review {
-  id            String      @id @default(uuid())
-  createdAt     DateTime    @default(now()) @map("created_at")
-  updatedAt     DateTime    @updatedAt @map("updated_at")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  text          String
-  rating        Int         @default(0)
+  text   String
+  rating Int    @default(0)
 
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String      @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 
-  apartment     Apartment   @relation(fields: [apartmentId], references: [id])
-  apartmentId   String      @map("apartment_id")
+  apartment   Apartment @relation(fields: [apartmentId], references: [id])
+  apartmentId String    @map("apartment_id")
 }
 
 model Category {
-  id            String      @id @default(uuid())
-  createdAt     DateTime    @default(now()) @map("created_at")
-  updatedAt     DateTime    @updatedAt  @map("updated_at")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  name          String      @unique
-  image         String 
+  name  String @unique
+  image String
 
-  apartments    Apartment[]
+  apartments Apartment[]
 }
 
 enum Role {
   USER
   ADMIN
 }
-
