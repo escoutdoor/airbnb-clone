@@ -29,7 +29,7 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 	const pathname = usePathname()
 
 	const [filter, setFilter] = useState<IApartmentFilterParams>(
-		searchParams as IApartmentFilterParams
+		searchParams as IApartmentFilterParams,
 	)
 
 	const { total, isFetching } = useFilterApartments({ ...filter })
@@ -40,7 +40,7 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 			{
 				indices: false,
 				skipNulls: true,
-			}
+			},
 		)
 
 		push(`${pathname}?${query}`)
@@ -93,8 +93,8 @@ const FilterModal: FC<FilterModalProps> = ({ searchParams }) => {
 								{filter.type === 'room'
 									? 'room'
 									: filter.type === 'entire home'
-									? 'home'
-									: 'place'}
+										? 'home'
+										: 'place'}
 								{total > 1 ? 's' : ''}
 							</>
 						) : (

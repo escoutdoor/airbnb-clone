@@ -3,7 +3,6 @@
 import styles from './apartment-details.module.scss'
 import { FC } from 'react'
 import { IApartment } from '@/shared/interfaces/apartment.interface'
-import { useSearchParams } from 'next/navigation'
 import { getOverviewTitle } from '@/utils/get-overview-title'
 import ParagraphHeading from '@/components/ui/headings/paragraph-heading/ParagraphHeading'
 import Avatar from '@/components/ui/avatar/Avatar'
@@ -14,8 +13,6 @@ import DatesSelection from '@/components/ui/dates-selection/DatesSelection'
 import ApartmentAmenities from './apartment-amenities/ApartmentAmenities'
 
 const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
-	const { get } = useSearchParams()
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.overview}>
@@ -55,7 +52,7 @@ const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 					NIGHTS_QUANTITY nights in {apartment.location.city}
 				</ParagraphHeading>
 
-				<DatesSelection />
+				<DatesSelection apartment={apartment} />
 			</section>
 		</div>
 	)
