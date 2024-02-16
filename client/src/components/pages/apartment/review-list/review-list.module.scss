@@ -12,7 +12,7 @@
 			gap: 14px;
 
 			.right {
-				> p {
+				>p {
 					margin-top: 4px;
 				}
 			}
@@ -22,9 +22,16 @@
 			margin-top: 8px;
 
 			.details {
+				display: flex;
+				gap: 8px;
+				align-items: flex-end;
+
+				>div {
+					padding-top: 5px;
+				}
 			}
 
-			> p {
+			>p {
 				margin-top: 4px;
 			}
 		}

@@ -9,6 +9,7 @@ import { getName } from '@/utils/get-name'
 import { getTimeLeft } from '@/utils/get-time-left'
 import SmallText from '@/components/ui/small-text/SmallText'
 import Text from '@/components/ui/text/Text'
+import ReviewRating from '../create-review/review-rating/ReviewRating'
 
 const ReviewItem: FC<{ review: IReview }> = ({ review }) => {
 	return (
@@ -25,6 +26,7 @@ const ReviewItem: FC<{ review: IReview }> = ({ review }) => {
 			<div className={styles.content}>
 				<div className={styles.details}>
 					<SmallText>{getTimeLeft(review.createdAt)}</SmallText>
+					<ReviewRating value={review.rating} isReadOnly size="sm" />
 				</div>
 				<Text>{review.text}</Text>
 			</div>

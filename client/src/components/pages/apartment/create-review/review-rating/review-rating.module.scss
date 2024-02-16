@@ -11,6 +11,15 @@
 			height: 19px;
 		}
 
+		&.sm {
+			max-width: 110px;
+			max-height: 16px;
+
+			.rating {
+				height: 16px;
+			}
+		}
+
 	}
 
 	.error__wrapper {

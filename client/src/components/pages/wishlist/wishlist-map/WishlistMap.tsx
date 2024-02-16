@@ -52,6 +52,8 @@ const WishlistMap: FC<WishlistMapProps> = ({ places }) => {
 								lat: place.location.latitude,
 								lng: place.location.longitude,
 							}}
+							icon="/icons/marker.svg"
+							// onClick={() => {
 							// onClick={() => {
 							//   fetchDirections(house);
 							// }}
