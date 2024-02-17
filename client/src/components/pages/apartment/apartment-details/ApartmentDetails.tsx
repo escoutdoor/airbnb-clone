@@ -9,8 +9,8 @@ import Avatar from '@/components/ui/avatar/Avatar'
 import MediumHeading from '@/components/ui/headings/medium-heading/MediumHeading'
 import Link from 'next/link'
 import ApartmentDescription from './ApartmentDescription'
-import DatesSelection from '@/components/ui/dates-selection/DatesSelection'
 import ApartmentAmenities from './apartment-amenities/ApartmentAmenities'
+import DatesRange from './dates-range/DatesRange'
 
 const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 	return (
@@ -52,7 +52,7 @@ const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 					NIGHTS_QUANTITY nights in {apartment.location.city}
 				</ParagraphHeading>
 
-				<DatesSelection apartment={apartment} />
+				<DatesRange apartment={apartment} />
 			</section>
 		</div>
 	)

@@ -47,7 +47,7 @@ export const useCreateQuery = () => {
 
 			return pathname + '?' + params.toString()
 		},
-		[searchParams]
+		[searchParams],
 	)
 
 	const removeQuery = useCallback(
@@ -57,7 +57,7 @@ export const useCreateQuery = () => {
 
 			return pathname + '?' + params.toString()
 		},
-		[searchParams]
+		[searchParams],
 	)
 
 	return { createQuery, removeQuery }
