@@ -1,14 +1,14 @@
 'use client'
 
-import { formatISO, isValid } from 'date-fns'
 import styles from './dates-range.module.scss'
 import { IApartment } from '@/shared/interfaces/apartment.interface'
 import { enUS } from 'date-fns/locale'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { FC, useCallback, useEffect, useMemo } from 'react'
 import { DateRangePicker, Range, RangeKeyDict } from 'react-date-range'
-import { useCreateQuery } from '@/hooks/useCreateQuery'
 import qs from 'qs'
+import { useDatesRange } from '@/hooks/useDatesRange'
+import { formatISO } from 'date-fns'
 
 type DatesRangeProps = {
 	apartment: IApartment
@@ -17,11 +17,7 @@ type DatesRangeProps = {
 const DatesRange: FC<DatesRangeProps> = ({ apartment }) => {
 	const pathname = usePathname()
 	const { push } = useRouter()
-	const { get } = useSearchParams()
-	const { removeQuery } = useCreateQuery()
-
-	const checkIn = undefined
-	const checkOut = undefined
+	const { checkIn, checkOut } = useDatesRange()
 
 	const range = useMemo<Range>(
 		() => ({
@@ -35,7 +31,19 @@ const DatesRange: FC<DatesRangeProps> = ({ apartment }) => {
 	const handleChange = useCallback((ranges: RangeKeyDict) => {
 		const { selection } = ranges
 
-		const r = {}
+		const r: { check_in?: string; check_out?: string } = {}
+
+		if (selection.startDate) {
+			r.check_in = formatISO(new Date(selection.startDate), {
+				representation: 'date',
+			})
+		}
+
+		if (selection.endDate) {
+			r.check_out = formatISO(new Date(selection.endDate), {
+				representation: 'date',
+			})
+		}
 
 		const query = qs.stringify({ ...r }, { skipNulls: true, indices: true })
 
