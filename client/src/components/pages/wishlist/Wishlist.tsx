@@ -20,8 +20,6 @@ const Wishlist: NextPage<{ wishlist: IWishlist }> = ({ wishlist }) => {
 		libraries: ['places'],
 	})
 
-	console.log(wishlist)
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.info}>

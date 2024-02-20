@@ -52,11 +52,10 @@ const WishlistMap: FC<WishlistMapProps> = ({ places }) => {
 								lat: place.location.latitude,
 								lng: place.location.longitude,
 							}}
-							icon="/icons/marker.svg"
-							// onClick={() => {
-							// onClick={() => {
-							//   fetchDirections(house);
-							// }}
+							icon={{
+								url: '/icons/marker.svg',
+								size: new google.maps.Size(100, 100),
+							}}
 						/>
 					))}
 				</GoogleMap>

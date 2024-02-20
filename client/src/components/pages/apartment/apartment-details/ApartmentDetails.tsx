@@ -11,8 +11,11 @@ import Link from 'next/link'
 import ApartmentDescription from './ApartmentDescription'
 import ApartmentAmenities from './apartment-amenities/ApartmentAmenities'
 import DatesRange from './dates-range/DatesRange'
+import { useDatesRange } from '@/hooks/useDatesRange'
 
 const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
+	const { checkIn, checkOut, daysDifference } = useDatesRange()
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.overview}>
@@ -49,7 +52,11 @@ const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 			<ApartmentAmenities amenities={apartment.amenities} />
 			<section>
 				<ParagraphHeading>
-					NIGHTS_QUANTITY nights in {apartment.location.city}
+					{daysDifference
+						? `${daysDifference} night${daysDifference > 1 ? 's' : ''} in ${apartment.location.city}`
+						: checkIn
+							? 'Select checkout date'
+							: 'Select check-in date'}
 				</ParagraphHeading>
 
 				<DatesRange apartment={apartment} />

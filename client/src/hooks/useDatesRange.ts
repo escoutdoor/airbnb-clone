@@ -1,6 +1,6 @@
 'use client'
 
-import { isValid } from 'date-fns'
+import { differenceInDays, isValid } from 'date-fns'
 import { notFound, useSearchParams } from 'next/navigation'
 
 export const useDatesRange = () => {
@@ -21,8 +21,14 @@ export const useDatesRange = () => {
 		return new Date(val)
 	}
 
+	const daysDifference =
+		checkIn && checkOut
+			? differenceInDays(new Date(checkOut), new Date(checkIn))
+			: undefined
+
 	return {
 		checkIn: validate(checkIn),
 		checkOut: validate(checkOut),
+		daysDifference,
 	}
 }

@@ -9,8 +9,11 @@ import { getTotalPrice } from '@/utils/get-total-price'
 import Text from '@/components/ui/text/Text'
 import MediumHeading from '@/components/ui/headings/medium-heading/MediumHeading'
 import GradientButton from '@/components/ui/gradient-button/GradientButton'
+import { useDatesRange } from '@/hooks/useDatesRange'
 
 const ReservationWidget: FC<{ apartment: IApartment }> = ({ apartment }) => {
+	const { daysDifference } = useDatesRange()
+
 	return (
 		<div className={styles.widget}>
 			<div className={styles.container}>
@@ -21,28 +24,35 @@ const ReservationWidget: FC<{ apartment: IApartment }> = ({ apartment }) => {
 					</div>
 					<GradientButton onClick={() => {}}>Reserve</GradientButton>
 					<p className={styles.charging}>You won't be charged yet</p>
-					<div className={styles.total__counter}>
-						<MediumHeading>
-							${apartment.price} x 5 nights
-						</MediumHeading>
-						<Text>
-							$
-							{getTotalPrice({
-								nights: 5,
-								price: apartment.price,
-							})}
-						</Text>
-					</div>
-					<div className={styles.footer}>
-						<MediumHeading>Total before taxes</MediumHeading>
-						<Text>
-							$
-							{getTotalPrice({
-								nights: 5,
-								price: apartment.price,
-							})}
-						</Text>
-					</div>
+					{daysDifference ? (
+						<>
+							<div className={styles.total__counter}>
+								<MediumHeading>
+									${apartment.price} x {daysDifference} night
+									{daysDifference > 1 ? 's' : null}
+								</MediumHeading>
+								<Text>
+									$
+									{getTotalPrice({
+										nights: daysDifference,
+										price: apartment.price,
+									})}
+								</Text>
+							</div>
+							<div className={styles.footer}>
+								<MediumHeading>
+									Total before taxes
+								</MediumHeading>
+								<Text>
+									$
+									{getTotalPrice({
+										nights: daysDifference,
+										price: apartment.price,
+									})}
+								</Text>
+							</div>
+						</>
+					) : null}
 				</div>
 			</div>
 		</div>
