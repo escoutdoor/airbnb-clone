@@ -46,7 +46,7 @@ export class ApartmentService {
 
 		const rating = await this.prisma.$queryRaw<
 			{ rating: string }[]
-		>`SELECT round(avg(rev.rating)) as rating FROM "Apartment" apart Join "Review" rev on rev.apartment_id = apart.id where apart.id = ${apartment.id}`
+		>`SELECT round(avg(rev.rating)) as rating FROM "Apartment" apart Join "Review" rev on rev.apartment_id = apart.id where apart.id = ${apartment.id} limit 1`
 
 		return {
 			...apartment,

@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module'
 import { WishlistModule } from './wishlist/wishlist.module'
 import { AbilityModule } from './ability/ability.module'
 import { ReviewModule } from './review/review.module';
+import { ReservationModule } from './reservation/reservation.module';
 
 @Module({
 	imports: [
@@ -18,6 +19,7 @@ import { ReviewModule } from './review/review.module';
 		WishlistModule,
 		AbilityModule,
 		ReviewModule,
+		ReservationModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

@@ -25,7 +25,7 @@ export class ReviewController {
 	async create(
 		@Param('id') apartmentId: string,
 		@CurrentUser('id') userId: string,
-		@Body() dto: ReviewDto
+		@Body() dto: ReviewDto,
 	) {
 		return this.reviewService.create(apartmentId, userId, dto)
 	}
