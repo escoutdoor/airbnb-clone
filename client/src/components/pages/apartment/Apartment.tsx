@@ -32,7 +32,7 @@ const Apartment: NextPage<{ apartment: IApartment }> = ({ apartment }) => {
 				<div className={styles.header}>
 					{apartment.reviews.length ? (
 						<>
-							<Rating rating={4.75} />
+							<Rating rating={apartment.rating || 0} />
 							<ParagraphHeading>
 								{' · '}
 								{apartment.reviews.length} review

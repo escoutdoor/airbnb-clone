@@ -18,14 +18,16 @@ const Header = ({
 		<div className={styles.header}>
 			<div className={`wrapper ${size !== 'large' ? size : ''}`}>
 				<div className={styles.content}>
-					<Link href={'/'}>
-						<Image
-							src={'/logo/airbnb.svg'}
-							width={102}
-							height={32}
-							alt="logo airbnb.svg"
-						/>
-					</Link>
+					<div className={styles.logo}>
+						<Link href={'/'}>
+							<Image
+								src={'/logo/airbnb.svg'}
+								width={102}
+								height={32}
+								alt="logo airbnb.svg"
+							/>
+						</Link>
+					</div>
 					{isSearchPage && <SearchBar />}
 					<Actions />
 				</div>

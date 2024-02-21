@@ -12,6 +12,7 @@ import ApartmentDescription from './ApartmentDescription'
 import ApartmentAmenities from './apartment-amenities/ApartmentAmenities'
 import DatesRange from './dates-range/DatesRange'
 import { useDatesRange } from '@/hooks/useDatesRange'
+import Rating from '@/components/ui/rating/Rating'
 
 const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 	const { checkIn, checkOut, daysDifference } = useDatesRange()
@@ -29,6 +30,9 @@ const ApartmentDetails: FC<{ apartment: IApartment }> = ({ apartment }) => {
 					}`}</li>
 					<li>{`${apartment.beds} bed${apartment.beds > 1 ? 's' : ''}`}</li>
 				</ol>
+			</div>
+			<div className={styles.rating__container}>
+				<Rating rating={apartment.rating || 0} />
 			</div>
 			<div className={styles.renter}>
 				<Avatar user={apartment.user} />

@@ -10,6 +10,7 @@ export interface IApartment extends IApartmentItem {
 	amenities: string[]
 	hostLanguages: string[]
 	reviews: IReview[]
+	rating?: number
 	user: IUser
 }
 

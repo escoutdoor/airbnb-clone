@@ -8,5 +8,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
+		.logo {
+			flex: 1;
+		}
 	}
 }

@@ -13,7 +13,6 @@ import {
 import { ApartmentService } from './apartment.service'
 import { ApartmentDto } from './dto/apartment.dto'
 import { Auth } from 'src/auth/decorators/auth.decorator'
-
 import { CurrentUser } from 'src/auth/decorators/user.decorator'
 import { ApartmentFilterDto } from './dto/apartment-filter.dto'
 
@@ -44,7 +43,7 @@ export class ApartmentController {
 	async update(
 		@Param('id') id: string,
 		@Body() dto: ApartmentDto,
-		@CurrentUser('id') userId: string
+		@CurrentUser('id') userId: string,
 	) {
 		return await this.apartmentService.update(id, userId, dto)
 	}

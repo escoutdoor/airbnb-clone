@@ -8,7 +8,7 @@ const Footer = ({ size }: { size: LayoutSize }) => {
 		<div className={styles.footer}>
 			<div className={`wrapper ${size !== 'large' ? size : ''}`}>
 				<p className={styles.text}>
-					Airbnb clone by Ivan Popov &copy; 2023 escoutdoor
+					Airbnb clone by Ivan Popov &copy; 2024 escoutdoor
 				</p>
 			</div>
 		</div>

@@ -1,0 +1,55 @@
+.container {
+	position: relative;
+	flex: 1;
+
+	.content {
+		display: flex;
+		align-items: center;
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+		height: 40px;
+		padding: 20px;
+		border-radius: 12px;
+
+		.input {
+			width: 100%;
+			height: 40px;
+		}
+
+		.icon {
+			position: absolute;
+			right: 20px;
+		}
+	}
+
+	.list {
+		position: absolute;
+		width: 100%;
+		display: none;
+		z-index: 99;
+		background: #fff;
+		border-radius: 12px;
+		box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+		.item {
+			padding: 12px;
+			cursor: pointer;
+			transition: all .1s ease;
+
+			&:first-child {
+				border-radius: 12px 12px 0 0;
+			}
+
+			&:last-child {
+				border-radius: 0 0 12px 12px;
+			}
+
+			&:hover {
+				background: #f4f4f4;
+			}
+		}
+
+		&.active {
+			display: block;
+		}
+	}
+}

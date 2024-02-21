@@ -2,14 +2,14 @@
 	flex: 1;
 
 	.overview {
-		padding: 32px 0px;
+		padding-top: 32px;
 
 		.list {
 			margin-top: 4px;
 			display: flex;
 			gap: 5px;
 
-			> li {
+			>li {
 				display: inline-block;
 				font-weight: 300;
 
@@ -17,6 +17,22 @@
 					content: '\2022';
 					margin-right: 5px;
 				}
+			}
+		}
+	}
+
+	.rating__container {
+		margin: 10px 0;
+
+		>div {
+			align-items: flex-end;
+
+			>p {
+				font-size: 20px;
+			}
+
+			>svg {
+				font-size: 20px;
 			}
 		}
 	}
@@ -30,7 +46,7 @@
 			.link {
 				display: inline-block;
 
-				> p {
+				>p {
 					margin-top: 4px;
 					font-size: 13px;
 					line-height: 1.2;
@@ -41,7 +57,7 @@
 		}
 	}
 
-	> section {
+	>section {
 		width: 100%;
 		border-top: 1px solid var(--light-gray);
 		padding: 32px 0;
@@ -56,14 +72,14 @@
 		-webkit-line-clamp: 4;
 		-webkit-box-orient: vertical;
 
-		> li {
+		>li {
 			margin-top: 18px;
 			font-size: 16px;
 			line-height: 1.4;
 		}
 	}
 
-	> button {
+	>button {
 		display: flex;
 		align-items: center;
 		gap: 3px;

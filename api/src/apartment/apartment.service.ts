@@ -1,263 +1,270 @@
 import {
-  ForbiddenException,
-  Injectable,
-  NotFoundException,
-} from "@nestjs/common";
-import { PrismaService } from "src/prisma.service";
+	ForbiddenException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common'
+import { PrismaService } from 'src/prisma.service'
 import {
-  apartmentItemSelect,
-  apartmentSelect,
-  locationSelect,
-  reservationSelect,
-} from "./apartment.select";
-import { ApartmentDto } from "./dto/apartment.dto";
-import { reviewSelect } from "src/review/review.select";
-import { userSelect } from "src/user/user.select";
-import { ApartmentFilterDto } from "./dto/apartment-filter.dto";
-import { Apartment, Prisma } from "@prisma/client";
+	apartmentItemSelect,
+	apartmentSelect,
+	locationSelect,
+	reservationSelect,
+} from './apartment.select'
+import { ApartmentDto } from './dto/apartment.dto'
+import { reviewSelect } from 'src/review/review.select'
+import { userSelect } from 'src/user/user.select'
+import { ApartmentFilterDto } from './dto/apartment-filter.dto'
+import { Apartment, Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApartmentService {
-  constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) {}
 
-  async getById(id: string) {
-    const apartment = await this.prisma.apartment.findUnique({
-      where: { id },
-      select: {
-        ...apartmentSelect,
-        location: {
-          select: locationSelect,
-        },
-        reviews: {
-          select: reviewSelect,
-        },
-        user: {
-          select: userSelect,
-        },
-        reservations: {
-          select: reservationSelect,
-        },
-      },
-    });
+	async getById(id: string) {
+		const apartment = await this.prisma.apartment.findUnique({
+			where: { id },
+			select: {
+				...apartmentSelect,
+				location: {
+					select: locationSelect,
+				},
+				reviews: {
+					select: reviewSelect,
+				},
+				user: {
+					select: userSelect,
+				},
+				reservations: {
+					select: reservationSelect,
+				},
+			},
+		})
 
-    if (!apartment) {
-      throw new NotFoundException("Apartment not found");
-    }
+		if (!apartment) {
+			throw new NotFoundException('Apartment not found')
+		}
 
-    return apartment;
-  }
+		const rating = await this.prisma.$queryRaw<
+			{ rating: string }[]
+		>`SELECT round(avg(rev.rating)) as rating FROM "Apartment" apart Join "Review" rev on rev.apartment_id = apart.id where apart.id = ${apartment.id}`
 
-  async getAll(dto: ApartmentFilterDto) {
-    const apartments = await this.prisma.apartment.findMany({
-      where: await this.getWhereOptions(dto),
-      select: {
-        ...apartmentItemSelect,
-        location: {
-          select: locationSelect,
-        },
-      },
-    });
+		return {
+			...apartment,
+			rating: +rating[0].rating,
+		}
+	}
 
-    const total = await this.prisma.apartment.count({
-      where: await this.getWhereOptions(dto),
-    });
+	async getAll(dto: ApartmentFilterDto) {
+		const apartments = await this.prisma.apartment.findMany({
+			where: await this.getWhereOptions(dto),
+			select: {
+				...apartmentItemSelect,
+				location: {
+					select: locationSelect,
+				},
+			},
+		})
 
-    return {
-      apartments,
-      total,
-    };
-  }
+		const total = await this.prisma.apartment.count({
+			where: await this.getWhereOptions(dto),
+		})
 
-  private async getWhereOptions(dto: ApartmentFilterDto) {
-    const where: Prisma.ApartmentWhereInput = dto.searchTerm
-      ? {
-          OR: [
-            {
-              name: {
-                contains: dto.searchTerm,
-                mode: "insensitive",
-              },
-            },
-            {
-              location: {
-                city: {
-                  contains: dto.searchTerm,
-                  mode: "insensitive",
-                },
-                country: {
-                  contains: dto.searchTerm,
-                  mode: "insensitive",
-                },
-              },
-            },
-            {
-              description: {
-                hasSome: [dto.searchTerm],
-              },
-            },
-            {
-              category: {
-                name: {
-                  contains: dto.searchTerm,
-                  mode: "insensitive",
-                },
-              },
-            },
-            {
-              hostLanguages: {
-                hasSome: [dto.searchTerm],
-              },
-            },
-            {
-              type: {
-                contains: dto.searchTerm,
-                mode: "insensitive",
-              },
-            },
-          ],
-        }
-      : {};
+		return {
+			apartments,
+			total,
+		}
+	}
 
-    if (dto.amenities) {
-      where.amenities = {
-        hasEvery: dto.amenities,
-      };
-    }
+	private async getWhereOptions(dto: ApartmentFilterDto) {
+		const where: Prisma.ApartmentWhereInput = dto.searchTerm
+			? {
+					OR: [
+						{
+							name: {
+								contains: dto.searchTerm,
+								mode: 'insensitive',
+							},
+						},
+						{
+							location: {
+								city: {
+									contains: dto.searchTerm,
+									mode: 'insensitive',
+								},
+								country: {
+									contains: dto.searchTerm,
+									mode: 'insensitive',
+								},
+							},
+						},
+						{
+							description: {
+								hasSome: [dto.searchTerm],
+							},
+						},
+						{
+							category: {
+								name: {
+									contains: dto.searchTerm,
+									mode: 'insensitive',
+								},
+							},
+						},
+						{
+							hostLanguages: {
+								hasSome: [dto.searchTerm],
+							},
+						},
+						{
+							type: {
+								contains: dto.searchTerm,
+								mode: 'insensitive',
+							},
+						},
+					],
+				}
+			: {}
 
-    if (dto.hostLanguages) {
-      where.hostLanguages = {
-        hasSome: dto.hostLanguages,
-      };
-    }
+		if (dto.amenities) {
+			where.amenities = {
+				hasEvery: dto.amenities,
+			}
+		}
 
-    if (dto.bathrooms) {
-      where.bathrooms = {
-        gte: dto.bathrooms,
-      };
-    }
+		if (dto.hostLanguages) {
+			where.hostLanguages = {
+				hasSome: dto.hostLanguages,
+			}
+		}
 
-    if (dto.bedrooms) {
-      where.bedrooms = {
-        gte: dto.bedrooms,
-      };
-    }
+		if (dto.bathrooms) {
+			where.bathrooms = {
+				gte: dto.bathrooms,
+			}
+		}
 
-    if (dto.beds) {
-      where.beds = {
-        gte: dto.beds,
-      };
-    }
+		if (dto.bedrooms) {
+			where.bedrooms = {
+				gte: dto.bedrooms,
+			}
+		}
 
-    if (dto.category) {
-      where.category = {
-        name: {
-          contains: dto.category,
-          mode: "insensitive",
-        },
-      };
-    }
+		if (dto.beds) {
+			where.beds = {
+				gte: dto.beds,
+			}
+		}
 
-    if (dto.minPrice || dto.maxPrice) {
-      where.price = {};
+		if (dto.category) {
+			where.category = {
+				name: {
+					contains: dto.category,
+					mode: 'insensitive',
+				},
+			}
+		}
 
-      if (dto.minPrice) {
-        where.price.gte = dto.minPrice;
-      }
+		if (dto.minPrice || dto.maxPrice) {
+			where.price = {}
 
-      if (dto.maxPrice) {
-        where.price.lte = dto.maxPrice;
-      }
-    }
+			if (dto.minPrice) {
+				where.price.gte = dto.minPrice
+			}
 
-    if (dto.maxGuests) {
-      where.maxGuests = {
-        gte: dto.maxGuests,
-      };
-    }
+			if (dto.maxPrice) {
+				where.price.lte = dto.maxPrice
+			}
+		}
 
-    if (dto.type) {
-      where.type = {
-        contains: dto.type,
-        mode: "insensitive",
-      };
-    }
+		if (dto.maxGuests) {
+			where.maxGuests = {
+				gte: dto.maxGuests,
+			}
+		}
 
-    if (dto.endDate || dto.startDate) {
-      where.reservations = {};
+		if (dto.type) {
+			where.type = {
+				contains: dto.type,
+				mode: 'insensitive',
+			}
+		}
 
-      if (dto.endDate) {
-        where.reservations.every.endDate = {
-          lte: dto.endDate,
-        };
-      }
+		if (dto.endDate || dto.startDate) {
+			where.reservations = {}
 
-      if (dto.startDate) {
-        where.reservations.every.startDate = {
-          gte: dto.startDate,
-        };
-      }
-    }
+			if (dto.endDate) {
+				where.reservations.every.endDate = {
+					lte: dto.endDate,
+				}
+			}
 
-    return where;
-  }
+			if (dto.startDate) {
+				where.reservations.every.startDate = {
+					gte: dto.startDate,
+				}
+			}
+		}
 
-  async create(userId: string, dto: ApartmentDto) {
-    return await this.prisma.apartment.create({
-      data: {
-        ...dto,
-        location: {
-          create: dto.location,
-        },
-        userId,
-      },
-      select: {
-        ...apartmentSelect,
-        location: {
-          select: locationSelect,
-        },
-      },
-    });
-  }
+		return where
+	}
 
-  async update(id: string, userId: string, dto: ApartmentDto) {
-    const apartment = await this.getById(id);
+	async create(userId: string, dto: ApartmentDto) {
+		return await this.prisma.apartment.create({
+			data: {
+				...dto,
+				location: {
+					create: dto.location,
+				},
+				userId,
+			},
+			select: {
+				...apartmentSelect,
+				location: {
+					select: locationSelect,
+				},
+			},
+		})
+	}
 
-    if (apartment.user.id !== userId) {
-      throw new ForbiddenException(
-        "Access denied: you are not the owner of this apartment",
-      );
-    }
+	async update(id: string, userId: string, dto: ApartmentDto) {
+		const apartment = await this.getById(id)
 
-    return await this.prisma.apartment.update({
-      where: { id },
-      data: {
-        ...dto,
-        location: {
-          update: dto.location,
-        },
-      },
-      select: {
-        ...apartmentSelect,
-        location: {
-          select: locationSelect,
-        },
-      },
-    });
-  }
+		if (apartment.user.id !== userId) {
+			throw new ForbiddenException(
+				'Access denied: you are not the owner of this apartment',
+			)
+		}
 
-  async delete(id: string, userId: string) {
-    const apartment = await this.getById(id);
+		return await this.prisma.apartment.update({
+			where: { id },
+			data: {
+				...dto,
+				location: {
+					update: dto.location,
+				},
+			},
+			select: {
+				...apartmentSelect,
+				location: {
+					select: locationSelect,
+				},
+			},
+		})
+	}
 
-    if (apartment.user.id !== userId) {
-      throw new ForbiddenException(
-        "Access denied: you are not the owner of this apartment",
-      );
-    }
+	async delete(id: string, userId: string) {
+		const apartment = await this.getById(id)
 
-    await this.prisma.apartment.delete({
-      where: { id },
-    });
+		if (apartment.user.id !== userId) {
+			throw new ForbiddenException(
+				'Access denied: you are not the owner of this apartment',
+			)
+		}
 
-    return "Apartment deleted";
-  }
+		await this.prisma.apartment.delete({
+			where: { id },
+		})
+
+		return 'Apartment deleted'
+	}
 }
