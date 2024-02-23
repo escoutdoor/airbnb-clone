@@ -14,14 +14,14 @@ import { Auth } from 'src/auth/decorators/auth.decorator'
 import { CurrentUser } from 'src/auth/decorators/user.decorator'
 import { CreateReservationDto } from './dto/reservation.dto'
 
-@Controller('reservation')
+@Controller('reservations')
 export class ReservationController {
 	constructor(private readonly reservationService: ReservationService) {}
 
 	@Auth()
 	@Get(':id')
 	async getById(
-		@Param(':id') reservationId: string,
+		@Param('id') reservationId: string,
 		@CurrentUser('id') userId: string,
 	) {
 		return await this.reservationService.getById(reservationId, userId)

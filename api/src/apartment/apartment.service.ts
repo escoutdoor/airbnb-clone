@@ -8,13 +8,13 @@ import {
 	apartmentItemSelect,
 	apartmentSelect,
 	locationSelect,
-	reservationSelect,
 } from './apartment.select'
+import { reservationSelect } from 'src/reservation/reservation.select'
 import { ApartmentDto } from './dto/apartment.dto'
 import { reviewSelect } from 'src/review/review.select'
 import { userSelect } from 'src/user/user.select'
 import { ApartmentFilterDto } from './dto/apartment-filter.dto'
-import { Apartment, Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 @Injectable()
 export class ApartmentService {

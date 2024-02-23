@@ -12,15 +12,6 @@ export const locationSelect: Prisma.LocationSelect = {
 	zipCode: true,
 }
 
-export const reservationSelect: Prisma.ReservationSelect = {
-	id: true,
-	startDate: true,
-	endDate: true,
-	createdAt: true,
-	guests: true,
-	totalPrice: true,
-}
-
 export const apartmentSelect: Prisma.ApartmentSelect = {
 	id: true,
 	name: true,
