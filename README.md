@@ -1,7 +1,5 @@
 # airbnb-clone
 
-airbnb clone by Ivan Popov.
-
 # Front-end Technologies:
 
 - Next.js
