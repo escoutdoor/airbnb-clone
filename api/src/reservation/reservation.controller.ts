@@ -13,6 +13,7 @@ import { ReservationService } from './reservation.service'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { CurrentUser } from 'src/auth/decorators/user.decorator'
 import { CreateReservationDto } from './dto/reservation.dto'
+import { DeleteReservationDto } from './dto/delete-reservation.dto'
 
 @Controller('reservations')
 export class ReservationController {
@@ -28,13 +29,22 @@ export class ReservationController {
 	}
 
 	@Auth()
-	@UsePipes(new ValidationPipe())
-	@Post(':id')
+	@UsePipes(new ValidationPipe({ transform: true }))
+	@Post()
 	async create(
 		@Body() dto: CreateReservationDto,
 		@CurrentUser('id') userId: string,
-		@Param(':id') apartmentId: string,
 	) {
-		return await this.reservationService.create(dto, userId, apartmentId)
+		return await this.reservationService.create(dto, userId)
+	}
+
+	@Auth()
+	@UsePipes(new ValidationPipe())
+	@Delete()
+	async delete(
+		@Body() dto: DeleteReservationDto,
+		@CurrentUser('id') userId: string,
+	) {
+		return await this.reservationService.delete(dto.reservationId, userId)
 	}
 }
