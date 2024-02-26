@@ -27,12 +27,6 @@ export class CreateReservationDto {
 	endDate: Date
 
 	@IsNumber()
-	@Min(10, {
-		message: 'Min price = 10$',
-	})
-	totalPrice: number
-
-	@IsNumber()
 	@Min(1, {
 		message: 'Should be at least one guest',
 	})

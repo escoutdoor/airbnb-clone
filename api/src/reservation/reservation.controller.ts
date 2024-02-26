@@ -12,7 +12,7 @@ import {
 import { ReservationService } from './reservation.service'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { CurrentUser } from 'src/auth/decorators/user.decorator'
-import { CreateReservationDto } from './dto/reservation.dto'
+import { CreateReservationDto } from './dto/create-reservation.dto'
 import { DeleteReservationDto } from './dto/delete-reservation.dto'
 
 @Controller('reservations')
