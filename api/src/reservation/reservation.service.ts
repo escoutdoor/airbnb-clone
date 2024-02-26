@@ -52,11 +52,13 @@ export class ReservationService {
 			)
 		}
 
-		const totalPrice = this.countTotalPrice(
+		const totalPrice = await this.countTotalPrice(
 			dto.startDate,
 			dto.endDate,
 			apartment.price,
 		)
+
+		console.log(totalPrice)
 
 		await this.prisma.reservation.create({
 			data: {
@@ -107,12 +109,13 @@ export class ReservationService {
 		return reservation
 	}
 
-	private countTotalPrice(startDate: Date, endDate: Date, price: number) {
-		const dayDiff = Math.ceil(
-			(Math.abs(endDate.getTime() - startDate.getTime()) / 1000) *
-				3600 *
-				24,
-		)
+	private async countTotalPrice(
+		startDate: Date,
+		endDate: Date,
+		price: number,
+	) {
+		const diff = Math.abs(endDate.getTime() - startDate.getTime())
+		const dayDiff = Math.ceil(diff / (1000 * 3600 * 24))
 
 		const totalPrice = price * dayDiff
 
