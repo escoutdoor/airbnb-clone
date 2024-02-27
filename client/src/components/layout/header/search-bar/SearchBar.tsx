@@ -31,7 +31,7 @@ const SearchBar: FC = () => {
 				}
 			>
 				{apartments?.map(a => (
-					<li className={styles.item}>
+					<li key={a.id} className={styles.item}>
 						<Text>{a.name}</Text>
 					</li>
 				))}

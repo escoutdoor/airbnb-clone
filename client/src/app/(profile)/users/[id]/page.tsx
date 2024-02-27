@@ -1,14 +1,12 @@
-'use client'
-
 import User from '@/components/pages/user/User'
-import { useUser } from '@/hooks/useUser'
+import { UserService } from '@/services/user/user.service'
 
-export default function UserPage({
+export default async function UserPage({
 	params: { id },
 }: {
 	params: { id: string }
 }) {
-	const { user, isLoading, status, error, isError } = useUser(id)
+	const { data: user } = await UserService.getById(id)
 
-	if (user) return <User user={user} />
+	return <User user={user} />
 }

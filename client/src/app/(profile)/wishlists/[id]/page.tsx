@@ -1,17 +1,12 @@
-'use client'
-
 import Wishlist from '@/components/pages/wishlist/Wishlist'
-import { useWishlist } from '@/hooks/useWishlist'
+import { WishlistService } from '@/services/wishlist/wishlist.service'
 
-export default function WishlistPage({
+export default async function WishlistPage({
 	params: { id },
 }: {
 	params: { id: string }
 }) {
-	const { wishlist, error, isError, isLoading, status, isFetching } =
-		useWishlist(id)
+	const { data: wishlist } = await WishlistService.getById(id)
 
-	if (wishlist) {
-		return <Wishlist wishlist={wishlist} />
-	}
+	return <Wishlist wishlist={wishlist} />
 }

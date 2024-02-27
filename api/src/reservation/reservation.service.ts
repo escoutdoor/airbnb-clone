@@ -58,8 +58,6 @@ export class ReservationService {
 			apartment.price,
 		)
 
-		console.log(totalPrice)
-
 		await this.prisma.reservation.create({
 			data: {
 				...dto,

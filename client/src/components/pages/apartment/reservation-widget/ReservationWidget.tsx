@@ -4,6 +4,7 @@ import styles from './reservation-widget.module.scss'
 import { FC } from 'react'
 import { IApartment } from '@/shared/interfaces/apartment.interface'
 import ParagraphHeading from '@/components/ui/headings/paragraph-heading/ParagraphHeading'
+import Link from 'next/link'
 import SmallText from '@/components/ui/small-text/SmallText'
 import { getTotalPrice } from '@/utils/get-total-price'
 import Text from '@/components/ui/text/Text'
@@ -22,7 +23,9 @@ const ReservationWidget: FC<{ apartment: IApartment }> = ({ apartment }) => {
 						<ParagraphHeading>${apartment.price} </ParagraphHeading>
 						<SmallText>night</SmallText>
 					</div>
-					<GradientButton onClick={() => {}}>Reserve</GradientButton>
+					<Link href={`/reservation/${apartment.id}`}>
+						<GradientButton>Reserve</GradientButton>
+					</Link>
 					<p className={styles.charging}>You won't be charged yet</p>
 					{daysDifference ? (
 						<>
